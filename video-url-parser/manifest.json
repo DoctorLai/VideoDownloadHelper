@@ -1,0 +1,36 @@
+{
+  "manifest_version": 2,
+  "name": "Simple Video Download Helper",
+  "short_name": "Video URL Parser",
+  "default_locale": "en",
+  "version": "2.4.9",
+  "browser_action": {
+     "default_icon": "icon.png",
+     "default_title": "Get Video URL 获取视频地址",
+     "default_popup": "main.html"
+  },
+  "offline_enabled": true,  
+  "author": "justyy<dr.zhihua.lai@gmail.com>",
+  "icons": {
+    "16": "images/icon-16.png",
+    "32": "images/icon-32.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },    
+  "update_url":"http://clients2.google.com/service/update2/crx",
+  "description": "Simple Video Download Helper",
+  "web_accessible_resources": [
+  		"js/*", 
+  		"images/*",
+  		"bs/*"
+  ],  
+  "background": {
+    "scripts": ["js/background.js"]
+  },  
+  "permissions": [
+     "activeTab",
+     "storage",
+     "tabs",
+     "<all_urls>"
+   ]
+}
