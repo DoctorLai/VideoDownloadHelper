@@ -1,6 +1,6 @@
 (function() {
-    function IsPorn1(domain) {
-      var sites = ["youtube.com", "youporn.com", "whichav.com", "redtube.com", "beeg.com", "zhiporn.com", "91porn.com", "thisav.com", "pornhub.com", "seqing.world", "wokao.co", "datehub.com", "singlove.com", "javhihi.com"];
+    function ForbiddenDomains(domain) {
+      var sites = ["youtube.com"];
       return sites.indexOf(domain) !== -1;
     }
     function _ValidURL(url) {
@@ -92,7 +92,7 @@
 
     var pageurl = document.location.href;
     var domain = extractDomain1(pageurl).toLowerCase().replace("www.", "");
-    var valid_domain = !IsPorn1(domain);
+    var valid_domain = !ForbiddenDomains(domain);
     var html = document.documentElement.outerHTML;
     var video_url = "";
     var video_dom = null;
