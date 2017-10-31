@@ -1,5 +1,5 @@
 function ForbiddenDomains(domain) {
-  var sites = ["youtube.com"];
+  var sites = [];
   return sites.indexOf(domain) !== -1;
 }
 
@@ -146,9 +146,9 @@ var app_name = manifest.name + " v" + manifest.version;
 var ver0 = "<BR/><font color=gray>Chrome Version: " + getChromeVersion() + "</font> | <a href='https://steakovercooked.com/Contact.Mail' target=_blank>Report Bug (or Suggestions)</a>";
 var ver1 = "<BR/><font color=gray>Chrome 版本: " + getChromeVersion() + "</font> | <a href='https://steakovercooked.com/ch/Contact.Mail' target=_blank>反馈问题（提交BUG建议）</a><BR/><B>QQ群: <font color=red>141778919</font></B>";
 
-var botver0 = "<div style='width:600px;'><a target=_blank href='https://weibomiaopai.com/download-video-parser.php'><B>Online " + app_name + "</B></a> | <a title='Email' href='mailto:i@weibomiaopai.com' target=_blank>i@weibomiaopai.com</a>" + ver0 + "</div>";
+var botver0 = "";
 
-var botver1 = "<div style='width:600px;'><a target=_blank href='https://weibomiaopai.com/'><B>在线视频解析下载工具 " + app_name + "</B></a>" + ver1 + " 邮件: <a title='Email 邮件' href='mailto:i@weibomiaopai.com' target=_blank>i@weibomiaopai.com</a></div>";
+var botver1 = "";
 
 function setUrlOffline(url) {
   if (getLang() == 0) {

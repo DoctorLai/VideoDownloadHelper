@@ -1,6 +1,6 @@
 (function() {
     function ForbiddenDomains(domain) {
-      var sites = ["youtube.com"];
+      var sites = [];
       return sites.indexOf(domain) !== -1;
     }
     function _ValidURL(url) {
