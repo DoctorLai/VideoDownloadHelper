@@ -144,11 +144,10 @@ var manifest = chrome.runtime.getManifest();
 var app_name = manifest.name + " v" + manifest.version;
 
 var ver0 = "<BR/><font color=gray>Chrome Version: " + getChromeVersion() + "</font> | <a href='https://steakovercooked.com/Contact.Mail' target=_blank>Report Bug (or Suggestions)</a>";
-var ver1 = "<BR/><font color=gray>Chrome 版本: " + getChromeVersion() + "</font> | <a href='https://steakovercooked.com/ch/Contact.Mail' target=_blank>反馈问题（提交BUG建议）</a><BR/><B>QQ群: <font color=red>141778919</font></B>";
+var ver1 = "<BR/><font color=gray>Chrome 版本: " + getChromeVersion() + "</font> | <a href='https://steakovercooked.com/ch/Contact.Mail' target=_blank>反馈问题（提交BUG建议）</a><BR/><B>QQ群: 141778919</B>";
 
-var botver0 = "";
-
-var botver1 = "";
+var botver0 = "<BR/>" + ver0 + "<BR/><a target=_blank href='https://weibomiaopai.com/download-video-parser.php'>" + app_name + "</a> | <a href='https://github.com/DoctorLai/VideoDownloadHelper' target=_blank>Source Code</a>";
+var botver1 = "<BR/>" + ver1 + "<BR/><a target=_blank href='https://weibomiaopai.com/'>" + app_name + "</a> | <a href='https://github.com/DoctorLai/VideoDownloadHelper' target=_blank>源代码</a>";
 
 function setUrlOffline(url) {
   if (getLang() == 0) {
@@ -189,16 +188,32 @@ function setUrlOfflineArray(urls) {
 document.addEventListener('DOMContentLoaded', function() {
   $('select#lang').change(function() {
       chrome.storage.sync.set({ langIndex: getLang() });
-  });   
+  });     
+
+  var pageurl = '';
+  chrome.tabs.getSelected(null, function(tab) {   
+    pageurl = tab.url;    
+  });
   chrome.storage.sync.get('langIndex', function(data) {
       document.getElementById("lang").selectedIndex = data.langIndex;  
-  });     
+
+      switch (data.langIndex) {
+        case 0: document.getElementById("message").innerHTML = "<B><i>Sorry</i>😂<B/><ul><li><a target=_blank href='https://github.com/DoctorLai/VideoDownloadHelper'>Source Code</a></li><li><a target=_blank href='https://github.com/DoctorLai/VideoDownloadHelper/blob/master/examples.txt'>Supported Sites</a></li><li><a href='ht" + "tps://weibom" + "iaopai.co" + "m/download-video-parser.php/?url=" + pageurl + "' target=_blank>Not Allowed by Google, Check Online Tools</li></ul>"; break;
+        case 1: document.getElementById("message").innerHTML = "<B><i>非常抱歉</i>😂<B/><ul><li><a target=_blank href='https://github.com/DoctorLai/VideoDownloadHelper'>源代码</a></li><li><a target=_blank href='https://github.com/DoctorLai/VideoDownloadHelper/blob/master/examples.txt'>支持站点</a></li><li><a href='ht" + "tps://weibo" + "mia" + "opai.com/?url=" + pageurl + "' target=_blank>Google 不允许，看看别人怎么下载？</li></ul>"; break;
+      }
+
+  });   
+
+  /*  
   chrome.storage.sync.get('serverIndex', function(data) {
       document.getElementById("server").selectedIndex = data.serverIndex;
   }); 
+  */
+  /*
   $('select#server').change(function() {
       chrome.storage.sync.set({ serverIndex: document.getElementById("server").selectedIndex });
   });    
+  */
   chrome.runtime.onMessage.addListener(function(request, sender) {
     if (request.action == "getSource") {
       var url = JSON.parse(request.source);

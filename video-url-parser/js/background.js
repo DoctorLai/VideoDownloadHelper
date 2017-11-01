@@ -11,9 +11,9 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 chrome.runtime.onInstalled.addListener(function(details){
     if(details.reason == "install"){
         //call a function to handle a first install
-        console.log("onInstalled: Thank you!");
+        console.log("onInstalled: Thank you! https://weibomiaopai.com");
     }else if(details.reason == "update"){
         //call a function to handle an update
-        console.log("new version available.");
+        console.log("new version available: https://weibomiaopai.com");
     }
 });

@@ -447,7 +447,8 @@
         } 
     }
 
-    video_url = video_url.trim();
+    if (video_url != null)
+        video_url = video_url.trim();
 
     if (!valid_domain) {
             chrome.runtime.sendMessage({
