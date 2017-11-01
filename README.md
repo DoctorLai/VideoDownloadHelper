@@ -7,3 +7,4 @@ On 31/Oct/2017, Google has reinstated the extension, which is available at: http
 It is a cut-down version that does not support Youtube download and all other adult sites. *I am sorry*. But you are still able to use the web version:  https://weibomiaopai.com/download-video-parser.php
 
 这个插件不支持 Youtube, 也不支持其它一些成人站点，因为GOOGLE规定不可以。
+但你可以直接在WEB里下载：https://weibomiaopai.com/
