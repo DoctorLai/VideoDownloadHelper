@@ -143,11 +143,11 @@ function getLang() {
 var manifest = chrome.runtime.getManifest();
 var app_name = manifest.name + " v" + manifest.version;
 
-var ver0 = "<BR/><font color=gray>Chrome Version: " + getChromeVersion() + "</font> | <a href='https://steakovercooked.com/Contact.Mail' target=_blank>Report Bug (or Suggestions)</a>";
-var ver1 = "<BR/><font color=gray>Chrome 版本: " + getChromeVersion() + "</font> | <a href='https://steakovercooked.com/ch/Contact.Mail' target=_blank>反馈问题（提交BUG建议）</a><BR/><B>QQ群: 141778919</B>";
+var ver0 = "<font color=gray>Chrome Version: " + getChromeVersion() + "</font> | <a href='https://steakovercooked.com/Contact.Mail' target=_blank>Report Bug (or Suggestions)</a> | <a target=_blank href='https://justyy.com/out/paypal'><B>Paypal Donation, Thank you!</B></a>";
+var ver1 = "<font color=gray>Chrome 版本: " + getChromeVersion() + "</font> | <a href='https://steakovercooked.com/ch/Contact.Mail' target=_blank>反馈问题（提交BUG建议）</a><BR/><B>QQ群: 141778919</B> | <a target=_blank href='https://justyy.com/out/paypal'><B>赞助, 谢谢！</B></a>";
 
-var botver0 = "<BR/>" + ver0 + "<BR/><a target=_blank href='https://weibomiaopai.com/download-video-parser.php'>" + app_name + "</a> | <a href='https://github.com/DoctorLai/VideoDownloadHelper' target=_blank>Source Code</a>";
-var botver1 = "<BR/>" + ver1 + "<BR/><a target=_blank href='https://weibomiaopai.com/'>" + app_name + "</a> | <a href='https://github.com/DoctorLai/VideoDownloadHelper' target=_blank>源代码</a>";
+var botver0 = "<BR/>" + ver0 + "<BR/><a target=_blank href='https://weibomiaopai.com/download-video-parser.php'>" + app_name + "</a> | <a href='https://github.com/DoctorLai/VideoDownloadHelper' target=_blank>Source Code</a> | <a href='https://justyy.com/out/vultr' target=_blank><font color=red>Free $10</font> Vultr VPS</a> | <a href='https://justyy.com/out/linode' target=_blank><font color=red>Free $20</font> Linode VPS</a> (promotion code: <B>podcastinit2017</B>)";
+var botver1 = "<BR/>" + ver1 + "<BR/><a target=_blank href='https://weibomiaopai.com/'>" + app_name + "</a> | <a href='https://github.com/DoctorLai/VideoDownloadHelper' target=_blank>源代码</a> | <a href='https://justyy.com/out/vultr' target=_blank>免费获得<font color=red>10美元</font>Vultr主机</a> | <a href='https://justyy.com/out/linode' target=_blank>免费获得<font color=red>20美元</font>Linode主机</a> (优惠码: <B>podcastinit2017</B>)";
 
 function setUrlOffline(url) {
   if (getLang() == 0) {
@@ -171,17 +171,10 @@ function setUrlOfflineArray(urls) {
     var s = "<h3><B>List of Video(s)</B>: </h3><ol>";  
   } else {
     var s = "<h3><B>视频列表</B>: </h3><ol>";
-  }
-  
+  }  
   for (var i = 0; i < urls_length; ++i) {
     s += "<li><a target=_blank rel=nofollow href='" + urls[i] + "'><B>" + urls[i].trim2(max_url_length) + "</B></a></li>";
-  }
-  if (getLang() == 0) {
-    s += "</ol><font color=gray>via Offline Parser, Click <font color=red>Above Button</font> to Invoke the Server.<BR/>(usually <B>more accurate</B>).</font>" + botver0;
-  } else {
-    s += "</ol><font color=gray>由离线浏览器分析所得，<i>如果不正确</i>，点击<font color=red>上面的红色按钮</font>由服务器获取。</font>" + botver1;
-  }
-  
+  }  
   $('div#down').html(s);  
 }
 
@@ -198,22 +191,12 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById("lang").selectedIndex = data.langIndex;  
 
       switch (data.langIndex) {
-        case 0: document.getElementById("message").innerHTML = "<B><i>Sorry</i>😂<B/><ul><li><a target=_blank href='https://github.com/DoctorLai/VideoDownloadHelper'>Source Code</a></li><li><a target=_blank href='https://github.com/DoctorLai/VideoDownloadHelper/blob/master/examples.txt'>Supported Sites</a></li><li><a href='ht" + "tps://weibom" + "iaopai.co" + "m/download-video-parser.php/?url=" + pageurl + "' target=_blank>Not Allowed by Google, Check Online Tools</li></ul>"; break;
-        case 1: document.getElementById("message").innerHTML = "<B><i>非常抱歉</i>😂<B/><ul><li><a target=_blank href='https://github.com/DoctorLai/VideoDownloadHelper'>源代码</a></li><li><a target=_blank href='https://github.com/DoctorLai/VideoDownloadHelper/blob/master/examples.txt'>支持站点</a></li><li><a href='ht" + "tps://weibo" + "mia" + "opai.com/?url=" + pageurl + "' target=_blank>Google 不允许，看看别人怎么下载？</li></ul>"; break;
+        case 0: document.getElementById("message").innerHTML = "<B><i>Sorry</i>😂<B/><ul><li><a target=_blank href='https://github.com/DoctorLai/VideoDownloadHelper'>Source Code</a></li><li><a target=_blank href='https://github.com/DoctorLai/VideoDownloadHelper/blob/master/examples.txt'>Supported Sites</a></li><li><a href='ht" + "tps://weibom" + "iaopai.co" + "m/download-video-parser.php/?url=" + pageurl + "' target=_blank>Not Allowed by Google, Check Online Tools</li><li><a target=_blank href='https://justyy.com/out/paypal'><B>Paypal Donation, Thank you!</B></a></li><li><a href='https://steakovercooked.com/Contact.Mail?title=" + pageurl + "' target=_blank>Bugs & Suggestion for a new video site</a></li><li><a href='https://justyy.com/out/vultr' target=_blank><font color=red>Free $10</font> Vultr VPS</a></li><li><a href='https://justyy.com/out/linode' target=_blank><font color=red>Free $20</font> Linode VPS</a> (promotion code: <B>podcastinit2017</B>)</li></ul>"; break;
+        case 1: document.getElementById("message").innerHTML = "<B><i>非常抱歉</i>😂<B/><ul><li><a target=_blank href='https://github.com/DoctorLai/VideoDownloadHelper'>源代码</a></li><li><a target=_blank href='https://github.com/DoctorLai/VideoDownloadHelper/blob/master/examples.txt'>支持站点</a></li><li><a href='ht" + "tps://weibo" + "mia" + "opai.com/?url=" + pageurl + "' target=_blank>Google 不允许，看看别人怎么下载？</li><li><a target=_blank href='https://justyy.com/out/paypal'><B>赞助, 谢谢！</B></a></li><li><a href='https://steakovercooked.com/ch/Contact.Mail?title=" + pageurl + "' target=_blank>提建议(视频网站)或BUG</a></li><li><a href='https://justyy.com/out/vultr' target=_blank>免费获得<font color=red>10美元</font>Vultr主机</a></li><li><a href='https://justyy.com/out/linode' target=_blank>免费获得<font color=red>20美元</font>Linode主机</a> (优惠码: <B>podcastinit2017</B>)</li></ul>"; break;
       }
 
   });   
 
-  /*  
-  chrome.storage.sync.get('serverIndex', function(data) {
-      document.getElementById("server").selectedIndex = data.serverIndex;
-  }); 
-  */
-  /*
-  $('select#server').change(function() {
-      chrome.storage.sync.set({ serverIndex: document.getElementById("server").selectedIndex });
-  });    
-  */
   chrome.runtime.onMessage.addListener(function(request, sender) {
     if (request.action == "getSource") {
       var url = JSON.parse(request.source);

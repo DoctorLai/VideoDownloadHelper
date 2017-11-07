@@ -381,6 +381,68 @@
 
     ///////////////////////////////////////////   try something in general /////////////////////////////////////////////////
 
+/*
+    if (!ValidURL(video_url)) {
+        video_dom = document.querySelector("div#player-wrapper>iframe");
+        if (video_dom) {
+            video_url = video_dom.getAttribute("src"); 
+            if (ValidURL(video_url)) {
+                var url1 = video_url;
+                video_url = "";
+                $.ajax({
+                    type: "GET",
+                    dataType: "html",
+                    url: url1,
+                    success: function(data) {
+                        var dom = $(data).find("div#hlsjsvod");
+                        if (dom) {
+                            video_url = dom.attr('data-url240');
+                            if (ValidURL(video_url)) {
+                                video_url = video_url.replace(".m3u8", ".ts");
+                                chrome.runtime.sendMessage({
+                                    action: "getSource",
+                                    source: JSON.stringify(CheckURL(video_url))
+                                });
+                            }                            
+                        }
+                        if (!ValidURL(video_url)) {
+                            var re = /src:\s*\"(.*)\"/i;
+                            var found = re.exec(data);
+                            if (found != null) {
+                                video_url = found[1];
+                                video_url = video_url.replace(".m3u8", ".ts");
+                                chrome.runtime.sendMessage({
+                                    action: "getSource",
+                                    source: JSON.stringify(CheckURL(video_url))
+                                });                                
+                            }
+                        }
+                    },
+                    error: function(request, status, error) {
+                        
+                    },
+                    complete: function(data) {
+
+                    }             
+                });
+            }
+        }
+    } 
+*/    
+
+    if (!ValidURL(video_url)) {
+        video_dom = document.querySelector("video#player-html5");
+        if (video_dom) {
+            var src = video_dom.getAttribute("src"); 
+            if (src.length > 10) {
+                src = decodeURIComponent(src);
+                if (ValidURL(src)) {
+                    video_url = src;                            
+                }
+            }
+        }
+    }     
+
     if ((!domain.includes("dailymotion.com")) && (!domain.includes("youtube.com"))) {
         // instagram
         if (!ValidURL(video_url)) {
