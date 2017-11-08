@@ -9,4 +9,6 @@ It is a cut-down version ([original extension page](https://weibomiaopai.com/chr
 这个[插件](https://weibomiaopai.com/chrome/)不支持 Youtube, 也不支持其它一些成人站点，因为GOOGLE规定不可以。
 但你可以直接在WEB里下载：https://weibomiaopai.com/
 
-
+# Donation 支持一下呗
+Thank you if you want to help this little project. 
+[Paypal](https://justyy.com/out/paypal)
