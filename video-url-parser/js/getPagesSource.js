@@ -381,7 +381,19 @@
 
     ///////////////////////////////////////////   try something in general /////////////////////////////////////////////////
 
-/*
+    if (!ValidURL(video_url)) {
+        video_dom = document.querySelector("video#player-html5");
+        if (video_dom) {
+            var src = video_dom.getAttribute("src"); 
+            if (src.length > 10) {
+                src = decodeURIComponent(src);
+                if (ValidURL(src)) {
+                    video_url = src;                            
+                }
+            }
+        }
+    }     
+    
     if (!ValidURL(video_url)) {
         video_dom = document.querySelector("div#player-wrapper>iframe");
         if (video_dom) {
@@ -417,28 +429,8 @@
                                 });                                
                             }
                         }
-                    },
-                    error: function(request, status, error) {
-                        
-                    },
-                    complete: function(data) {
-
-                    }             
+                    },       
                 });
-            }
-        }
-    } 
-*/    
-
-    if (!ValidURL(video_url)) {
-        video_dom = document.querySelector("video#player-html5");
-        if (video_dom) {
-            var src = video_dom.getAttribute("src"); 
-            if (src.length > 10) {
-                src = decodeURIComponent(src);
-                if (ValidURL(src)) {
-                    video_url = src;                            
-                }
             }
         }
     }     
