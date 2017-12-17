@@ -379,6 +379,35 @@
         }
     }
 
+    // view-source:https://www.ted.com/talks/atul_gawande_want_to_get_great_at_something_get_a_coach?language=en#t-48048
+    if (domain.includes("ted.com")) {
+        if (!ValidURL(video_url)) {
+            var re = /{"uri":"([^"\']+)"/gi;
+            var found = re.exec(html);                        
+            var video_url_arr = [];
+            while (found != null) {
+                var tmp_url = CheckURL(found[1]);
+                if (ValidURL(tmp_url)) {
+                    video_url_arr.push(tmp_url);    
+                }                            
+                found = re.exec(html);
+            }
+            if (valid_domain) {                
+                if (video_url_arr.length > 0) {
+                    chrome.runtime.sendMessage({
+                        action: "getSource",
+                        source: JSON.stringify(video_url_arr)
+                    });                          
+                } else {
+                    chrome.runtime.sendMessage({
+                        action: "getSource",
+                        source: JSON.stringify(CheckURL(video_url))
+                    });                              
+                }
+            }
+        }
+    }    
+
     ///////////////////////////////////////////   try something in general /////////////////////////////////////////////////
 
     if (!ValidURL(video_url)) {
