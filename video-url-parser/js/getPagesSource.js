@@ -437,6 +437,38 @@
         }
     }    
 
+    // https://v.xiaokaxiu.com/v/fhX23JOcSbVEJOQ9LFKtOP2WBkeP1AA-.html
+    if (domain.includes("xiaokaxiu.com")) {
+        if (!ValidURL(video_url)) {
+            // http://gslb.miaopai.com/stream/fhX23JOcSbVEJOQ9LFKtOP2WBkeP1AA-_m.jpg
+            var re = /player.swf\?scid=([^"\'&]+)/gi;
+            var found = re.exec(html);                        
+            var video_url_arr = [];
+            while (found != null) {
+                var tmp_url = "http://gslb.miaopai.com/stream/" + found[1] + ".mp4";
+                var tmp_url = CheckURL(tmp_url);
+                if (ValidURL(tmp_url)) {
+                    video_url_arr.push(tmp_url);    
+                    break;
+                }                            
+                found = re.exec(html);
+            }
+            if (valid_domain) {                
+                if (video_url_arr.length > 0) {
+                    chrome.runtime.sendMessage({
+                        action: "getSource",
+                        source: JSON.stringify(video_url_arr)
+                    });                          
+                } else {
+                    chrome.runtime.sendMessage({
+                        action: "getSource",
+                        source: JSON.stringify(CheckURL(video_url))
+                    });                              
+                }
+            }
+        }
+    }        
+
     ///////////////////////////////////////////   try something in general /////////////////////////////////////////////////
 
     if (!ValidURL(video_url)) {
