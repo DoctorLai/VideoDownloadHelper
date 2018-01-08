@@ -204,6 +204,50 @@ document.addEventListener('DOMContentLoaded', function() {
 
   });   
 
+  function process_m3u8(url) {
+    if (url.endsWith("m3u8") || (url.includes("m3u8?"))) {          
+      var tmp = url.lastIndexOf("/");
+      if (tmp != -1) {
+        var base_url = url.substr(0, tmp + 1);
+        var m3u8 = url;
+        $.ajax({
+           type: "GET",
+           url: m3u8,
+           success: function(data) {
+              var lines = data.trim().split(/\s*[\r\n]+\s*/g);
+              var len = lines.length;
+              var m3u8arr = [];
+              for (var i = 0; i < len; ++ i) {
+                var line = $.trim(lines[i]);
+                if ((line != null) && (line != '') && (line.length > 2) && (line[0] != '#')) {
+                  if ((line.startsWith("http://") || line.startsWith("https://") || line.startsWith("ftp://"))) {
+                    m3u8arr.push(line);  
+                  } else {
+                    var theurl = base_url + line;                            
+                    m3u8arr.push(theurl);
+                  }
+                }                           
+              }
+              if (m3u8arr.length == 1) {
+                setUrlOffline(m3u8arr[0]);
+              } else {
+                setUrlOfflineArray(m3u8arr);
+              }
+           },
+           error: function(request, status, error) {
+           },
+           complete: function(data) {                        
+           }             
+        });                
+      }
+    }
+  }
+
+  $("#m3u8").click(function() {
+    var url = prompt(".m3u8 URL", "https://uploadbeta.com/api/video/test.m3u8");
+    process_m3u8(url);
+  });
+
   chrome.runtime.onMessage.addListener(function(request, sender) {
     if (request.action == "getSource") {
       var url = JSON.parse(request.source);
@@ -221,42 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
             displayError(url);
           } else {
             setUrlOffline(url);
-            if (url.endsWith("m3u8") || (url.includes("m3u8?"))) {          
-              var tmp = url.lastIndexOf("/");
-              if (tmp != -1) {
-                var base_url = url.substr(0, tmp + 1);
-                var m3u8 = url;
-                $.ajax({
-                   type: "GET",
-                   url: m3u8,
-                   success: function(data) {
-                      var lines = data.trim().split(/\s*[\r\n]+\s*/g);
-                      var len = lines.length;
-                      var m3u8arr = [];
-                      for (var i = 0; i < len; ++ i) {
-                        var line = $.trim(lines[i]);
-                        if ((line != null) && (line != '') && (line.length > 2) && (line[0] != '#')) {
-                          if ((line.startsWith("http://") || line.startsWith("https://") || line.startsWith("ftp://"))) {
-                            m3u8arr.push(line);  
-                          } else {
-                            var theurl = base_url + line;                            
-                            m3u8arr.push(theurl);
-                          }
-                        }                           
-                      }
-                      if (m3u8arr.length == 1) {
-                        setUrlOffline(m3u8arr[0]);
-                      } else {
-                        setUrlOfflineArray(m3u8arr);
-                      }
-                   },
-                   error: function(request, status, error) {
-                   },
-                   complete: function(data) {                        
-                   }             
-                });                
-              }
-            }
+            process_m3u8(url);
           }
         }
       }
