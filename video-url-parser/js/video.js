@@ -146,8 +146,8 @@ var app_name = manifest.name + " v" + manifest.version;
 var ver0 = "<font color=gray>Chrome Version: " + getChromeVersion() + "</font> | <a href='https://steakovercooked.com/Contact.Mail' target=_blank>Report Bug (or Suggestions)</a> | <a target=_blank href='https://justyy.com/out/paypal'><B>Paypal Donation, Thank you!</B></a>";
 var ver1 = "<font color=gray>Chrome 版本: " + getChromeVersion() + "</font> | <a href='https://steakovercooked.com/ch/Contact.Mail' target=_blank>反馈问题（提交BUG建议）</a><BR/><B>QQ群: 141778919</B> | <a target=_blank href='https://justyy.com/out/paypal'><B>赞助, 谢谢！</B></a>";
 
-var botver0 = "<BR/>" + ver0 + "<BR/><a target=_blank href='https://weibomiaopai.com/download-video-parser.php'>" + app_name + "</a> | <a href='https://github.com/DoctorLai/VideoDownloadHelper' target=_blank>Source Code</a> | <a href='https://justyy.com/out/vultr' target=_blank><font color=red>Free $10</font> Vultr VPS</a> | <a href='https://justyy.com/out/linode' target=_blank><font color=red>Free $20</font> Linode VPS</a> (promotion code: <B>podcastinit2017</B>)";
-var botver1 = "<BR/>" + ver1 + "<BR/><a target=_blank href='https://weibomiaopai.com/'>" + app_name + "</a> | <a href='https://github.com/DoctorLai/VideoDownloadHelper' target=_blank>源代码</a> | <a href='https://justyy.com/out/vultr' target=_blank>免费获得<font color=red>10美元</font>Vultr主机</a> | <a href='https://justyy.com/out/linode' target=_blank>免费获得<font color=red>20美元</font>Linode主机</a> (优惠码: <B>podcastinit2017</B>)";
+var botver0 = "<BR/>" + ver0 + "<BR/><a target=_blank href='https://weibomiaopai.com/download-video-parser.php'>" + app_name + "</a> | <a href='https://github.com/DoctorLai/VideoDownloadHelper' target=_blank>Source Code</a> | <a href='https://justyy.com/out/vultr' target=_blank><font color=red>Free $10</font> Vultr VPS</a> | <a href='https://justyy.com/out/linode' target=_blank><font color=red>Free $20</font> Linode VPS</a> (promotion code: <B>PodcastInIt2018</B>)";
+var botver1 = "<BR/>" + ver1 + "<BR/><a target=_blank href='https://weibomiaopai.com/'>" + app_name + "</a> | <a href='https://github.com/DoctorLai/VideoDownloadHelper' target=_blank>源代码</a> | <a href='https://justyy.com/out/vultr' target=_blank>免费获得<font color=red>10美元</font>Vultr主机</a> | <a href='https://justyy.com/out/linode' target=_blank>免费获得<font color=red>20美元</font>Linode主机</a> (优惠码: <B>PodcastInIt2018</B>)";
 
 function setUrlOffline(url) {
   if (getLang() == 0) {
@@ -185,23 +185,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var pageurl = '';
   chrome.tabs.getSelected(null, function(tab) {   
-    pageurl = tab.url;    
+    pageurl = tab.url;   
   });
   chrome.storage.sync.get('langIndex', function(data) {
       document.getElementById("lang").selectedIndex = data.langIndex;  
-
       var extra1 = "";
       var extra2 = "";
       if (!pageurl.includes("youtube.com")) {
           extra1 = "<li><a href='ht" + "tps://weibom" + "iaopai.co" + "m/download-video-parser.php/?url=" + pageurl + "' target=_blank>Not Allowed by Google, <i>Check <font color=red>Online Tools</font>!</i></li>";
           extra2 = "<li><a href='ht" + "tps://weibo" + "mia" + "opai.com/?url=" + pageurl + "' target=_blank>Google 不允许，<B>看看别人<font color=red>怎么下载</font>?</B></li>";
       }
-
       switch (data.langIndex) {
-        case 0: document.getElementById("message").innerHTML = "<B><i>Sorry</i>😂<B/><ul><li><a target=_blank href='https://github.com/DoctorLai/VideoDownloadHelper'>Source Code</a></li><li><a target=_blank href='https://github.com/DoctorLai/VideoDownloadHelper/blob/master/examples.txt'>Supported Sites</a></li>" + extra1 + "<li><a target=_blank href='https://justyy.com/out/paypal'><B>Paypal Donation, Thank you!</B></a></li><li><a href='https://steakovercooked.com/Contact.Mail?title=" + pageurl + "' target=_blank>Bugs & Suggestion for a new video site</a></li><li><a href='https://justyy.com/out/vultr' target=_blank><font color=red>Free $10</font> Vultr VPS</a></li><li><a href='https://justyy.com/out/linode' target=_blank><font color=red>Free $20</font> Linode VPS</a> (promotion code: <B>podcastinit2017</B>)</li></ul>"; break;
-        case 1: document.getElementById("message").innerHTML = "<B><i>非常抱歉</i>😂<B/><ul><li><a target=_blank href='https://github.com/DoctorLai/VideoDownloadHelper'>源代码</a></li><li><a target=_blank href='https://github.com/DoctorLai/VideoDownloadHelper/blob/master/examples.txt'>支持站点</a></li>" + extra2 + "<li><a target=_blank href='https://justyy.com/out/paypal'><B>赞助, 谢谢！</B></a></li><li><a href='https://steakovercooked.com/ch/Contact.Mail?title=" + pageurl + "' target=_blank>提建议(视频网站)或BUG</a></li><li><a href='https://justyy.com/out/vultr' target=_blank>免费获得<font color=red>10美元</font>Vultr主机</a></li><li><a href='https://justyy.com/out/linode' target=_blank>免费获得<font color=red>20美元</font>Linode主机</a> (优惠码: <B>podcastinit2017</B>)</li><li>QQ群: 141778919</li></ul>"; break;
+        case 0: document.getElementById("message").innerHTML = "<B><i>Sorry</i>😂<B/><ul><li><a target=_blank href='https://github.com/DoctorLai/VideoDownloadHelper'>Source Code</a></li><li><a target=_blank href='https://github.com/DoctorLai/VideoDownloadHelper/blob/master/examples.txt'>Supported Sites</a></li>" + extra1 + "<li><a target=_blank href='https://justyy.com/out/paypal'><B>Paypal Donation, Thank you!</B></a></li><li><a href='https://steakovercooked.com/Contact.Mail?title=" + pageurl + "' target=_blank>Bugs & Suggestion for a new video site</a></li><li><a href='https://justyy.com/out/vultr' target=_blank><font color=red>Free $10</font> Vultr VPS</a></li><li><a href='https://justyy.com/out/linode' target=_blank><font color=red>Free $20</font> Linode VPS</a> (promotion code: <B>PodcastInIt2018</B>)</li></ul>"; break;
+        case 1: document.getElementById("message").innerHTML = "<B><i>非常抱歉</i>😂<B/><ul><li><a target=_blank href='https://github.com/DoctorLai/VideoDownloadHelper'>源代码</a></li><li><a target=_blank href='https://github.com/DoctorLai/VideoDownloadHelper/blob/master/examples.txt'>支持站点</a></li>" + extra2 + "<li><a target=_blank href='https://justyy.com/out/paypal'><B>赞助, 谢谢！</B></a></li><li><a href='https://steakovercooked.com/ch/Contact.Mail?title=" + pageurl + "' target=_blank>提建议(视频网站)或BUG</a></li><li><a href='https://justyy.com/out/vultr' target=_blank>免费获得<font color=red>10美元</font>Vultr主机</a></li><li><a href='https://justyy.com/out/linode' target=_blank>免费获得<font color=red>20美元</font>Linode主机</a> (优惠码: <B>PodcastInIt2018</B>)</li><li>QQ群: 141778919</li></ul>"; break;
       }
-
   });   
 
   function process_m3u8(url) {
@@ -247,6 +244,57 @@ document.addEventListener('DOMContentLoaded', function() {
     var url = prompt(".m3u8 URL", "https://uploadbeta.com/api/video/test.m3u8");
     process_m3u8(url);
   });
+
+  $("#pic").click(function() {
+      let domain = pageurl.replace('http://','').replace('https://','').replace('www.','').split(/[/?#]/)[0];
+      if (pageurl.startsWith("http://")) {
+        domain = "http://" + domain;
+      } else if (pageurl.startsWith("https://")) {
+        domain = "https://" + domain;
+      }
+      $.ajax({
+         type: "GET",
+         url: pageurl,
+         success: function(data) {
+            var tmp = [];
+            var re = /<img\s[^>]*?src\s*=\s*['\"]([^'\"]*?)['\"][^>]*?>/ig;
+            var found = re.exec(data);
+            while (found != null) {
+                var tmp_url = found[1];
+                if ((tmp_url != null) && (tmp_url.length > 0)) {
+                  if (tmp_url.startsWith("http://") || tmp_url.startsWith("https://")) {
+                    tmp.push(tmp_url);
+                  } else {
+                    if (tmp_url[0] == '/') {
+                      tmp.push(domain + tmp_url);
+                    } else {
+                      tmp.push(domain + '/' + tmp_url);
+                    }
+                  }
+                }
+                found = re.exec(data);
+            }
+            if (tmp.length > 0) {
+              let s;
+              if (document.getElementById("lang").selectedIndex == 0) {
+                s = '<h3>Images List</h3>';
+              } else {
+                s = '<h3>图片列表</h3>';
+              }
+              s += "<ol>";
+              for (let i = 0; i < tmp.length; ++ i) {
+                s += "<li><a target=_blank href='" + tmp[i] + "'>" + tmp[i] + "</a>";
+              }
+              s += "</ol>";
+              $('div#down').html(s);
+            }    
+         },
+         error: function(request, status, error) {
+         },
+         complete: function(data) {                        
+         }             
+      });     
+  });  
 
   chrome.runtime.onMessage.addListener(function(request, sender) {
     if (request.action == "getSource") {
