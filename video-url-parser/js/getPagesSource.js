@@ -1,8 +1,6 @@
+'use strict';
+
 (function() {
-    function ForbiddenDomains(domain) {
-      var sites = [];
-      return sites.indexOf(domain) !== -1;
-    }
     function _ValidURL(url) {
         return /^(https?:|ftp:)?\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(url);
     }
@@ -64,7 +62,7 @@
     }
 
     function extractDomain1(url1) {
-        var domain1;
+        let domain1;
         //find & remove protocol (http, ftp, etc.) and get domain
         if (url1.indexOf("://") > -1) {
             domain1 = url1.split('/')[2];
@@ -79,7 +77,7 @@
 
     function getParameterByName(name, url) {
         name = name.replace(/[\[\]]/g, "\\$&");
-        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
             results = regex.exec(url);
         if (!results) return null;
         if (!results[2]) return '';
@@ -90,12 +88,12 @@
         return (typeof object !=='undefined');
     }
 
-    var pageurl = document.location.href;
-    var domain = extractDomain1(pageurl).toLowerCase().replace("www.", "");
-    var valid_domain = !ForbiddenDomains(domain);
-    var html = document.documentElement.outerHTML;
-    var video_url = "";
-    var video_dom = null;
+    let pageurl = document.location.href;
+    let domain = extractDomain1(pageurl).toLowerCase().replace("www.", "");
+    let valid_domain = true;
+    let html = document.documentElement.outerHTML;
+    let video_url = "";
+    let video_dom = null;
 
     // http://michaelzzz520.tumblr.com/post/156206105600
     if (domain.includes("tumblr.com")) {
@@ -104,14 +102,14 @@
             if (video_dom) {
                 video_url = video_dom.getAttribute("src"); 
                 if (ValidURL(video_url)) {
-                    var url1 = video_url;
+                    let url1 = video_url;
                     video_url = "";
                     $.ajax({
                         type: "GET",
                         dataType: "html",
                         url: url1,
                         success: function(data) {
-                            var dom = $(data).find("source[type='video/mp4']");
+                            let dom = $(data).find("source[type='video/mp4']");
                             if (dom) {
                                 video_url = dom.attr('src');
                                 if (ValidURL(video_url) && valid_domain) {
@@ -148,7 +146,7 @@
         if (!ValidURL(video_url)) {
             video_dom = document.querySelector("div[node-type='common_video_player']");
             if (video_dom) {
-                var src = video_dom.getAttribute("action-data"); 
+                let src = video_dom.getAttribute("action-data"); 
                 if (src.length > 10) {
                     src = getParameterByName("video_src", src);
                     if (src.length > 0) {
@@ -163,10 +161,10 @@
             }
         }
         if (!ValidURL(video_url)) {
-            var re = /video_src=([^&]*)/i;
-            var found = re.exec(html);
+            let re = /video_src=([^&]*)/i;
+            let found = re.exec(html);
             if (found != null) {
-                var tmp = decodeURIComponent(found[1]);
+                let tmp = decodeURIComponent(found[1]);
                 if (ValidURL(tmp)) {
                     video_url = tmp;
                 }
@@ -187,14 +185,14 @@
     //http://m.miaopai.com/show/channel/rjHGk~4TM7hNz~lg81-uZQ__
     if (domain.includes("miaopai.com")) {
         if (!ValidURL(video_url)) {
-            var re = /.*miaopai\.com\/show\/(.*)\.html?$/i;
-            var found = re.exec(pageurl);
+            let re = /.*miaopai\.com\/show\/(.*)\.html?$/i;
+            let found = re.exec(pageurl);
             if (found != null) {
                 video_url = "http://gslb.miaopai.com/stream/" + found[1] + ".mp4";
             } else {
                 video_dom = document.querySelector("meta[property='og:videosrc']");
                 if (video_dom) {
-                    var id = video_dom.replace("http://p.weibo.com/show/", "");
+                    let id = video_dom.replace("http://p.weibo.com/show/", "");
                     id = id.replace(".swf", "");
                     if (id) {
                         video_url = "http://gslb.miaopai.com/stream/" + id + ".mp4";
@@ -209,8 +207,8 @@
     // https:\/\/video-lht6-1.xx.fbcdn.net\/v\/t43.1792-2\/16462856_1831043770510348_1355160244581302272_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InN2ZV9oZCJ9&oh=77bce2793ab8bbb9d67c31fca836cc65&oe=5895F4AC
     if (domain.includes("facebook.com")) {
         if (!ValidURL(video_url)) { 
-            var re = /['"]?hd_src_no_ratelimit['"]?: *(['"])(https?:[^\s'",]+)\1,/ig;
-            var found = re.exec(html);
+            let re = /['"]?hd_src_no_ratelimit['"]?: *(['"])(https?:[^\s'",]+)\1,/ig;
+            let found = re.exec(html);
             while (found != null) {
                 video_url = found[2];
                 if (ValidURL(video_url)) {
@@ -220,8 +218,8 @@
             } 
         }
         if (!ValidURL(video_url)) {
-            var re = /['"]?hd_src['"]?: *(['"])(https?:[^\s'",]+)\1,/ig;
-            var found = re.exec(html);
+            let re = /['"]?hd_src['"]?: *(['"])(https?:[^\s'",]+)\1,/ig;
+            let found = re.exec(html);
             while (found != null) {
                 video_url = found[2];
                 if (ValidURL(video_url)) {
@@ -231,8 +229,8 @@
             }             
         }
         if (!ValidURL(video_url)) { 
-            var re = /['"]?sd_src_no_ratelimit['"]?: *(['"])(https?:[^\s'",]+)\1,/ig;
-            var found = re.exec(html);
+            let re = /['"]?sd_src_no_ratelimit['"]?: *(['"])(https?:[^\s'",]+)\1,/ig;
+            let found = re.exec(html);
             while (found != null) {
                 video_url = found[2];
                 if (ValidURL(video_url)) {
@@ -242,8 +240,8 @@
             }
         }
         if (!ValidURL(video_url)) {
-            var re = /['"]?sd_src['"]?: *(['"])(https?:[^\s'",]+)\1,/ig;
-            var found = re.exec(html);
+            let re = /['"]?sd_src['"]?: *(['"])(https?:[^\s'",]+)\1,/ig;
+            let found = re.exec(html);
             while (found != null) {
                 video_url = found[2];
                 if (ValidURL(video_url)) {
@@ -258,12 +256,12 @@
     // http://www.v1.cn/2017-05-10/2533977.shtml
     if (domain.includes("v1.cn")) {
         if (!ValidURL(video_url)) {
-            video_dom = document.querySelector("param[name='FlashVars']");
+            video_dom = document.querySelector("param[name='Flashlets']");
             if (video_dom) {
-                var tmp = video_dom.getAttribute("value");   
+                let tmp = video_dom.getAttribute("value");   
                 if (tmp.length) {
-                    var re = /videoUrl=(.*)/i;
-                    var found = re.exec(tmp);
+                    let re = /videoUrl=(.*)/i;
+                    let found = re.exec(tmp);
                     if (found != null) {
                         if (ValidURL(found[1])) {
                             video_url = found[1];
@@ -277,7 +275,7 @@
     // http://www.meipai.com/media/596371059
     if (domain.includes("meipai.com")) {
         if (!ValidURL(video_url)) {
-            var tmp = "";
+            let tmp = "";
             video_dom = document.querySelector("meta[property='og:video:secure_url']");
             if (video_dom) {
                 tmp = video_dom.getAttribute("content");
@@ -300,7 +298,7 @@
                 }
 
                 function getDec(param1) {
-                    var loc2 = parseInt(param1, 16) + "";
+                    let loc2 = parseInt(param1, 16) + "";
                     return {
                         'pre': loc2.substring(0, 2).split(''),
                         'tail': loc2.substring(2).split('')
@@ -308,8 +306,8 @@
                 }
 
                 function substr(param1, param2) {
-                    var loc3 = param1.substring(0, parseInt(param2[0]));                    
-                    var loc4 = param1.substring(parseInt(param2[0]), parseInt(param2[0]) + parseInt(param2[1]));
+                    let loc3 = param1.substring(0, parseInt(param2[0]));                    
+                    let loc4 = param1.substring(parseInt(param2[0]), parseInt(param2[0]) + parseInt(param2[1]));
                     return loc3 + param1.substring(parseInt(param2[0])).replace(loc4, "");
                 }
 
@@ -318,13 +316,13 @@
                     return param2;
                 }
 
-                var dict2 = getHex(tmp);
+                let dict2 = getHex(tmp);
 
-                var dict3 = getDec(dict2['hex']);
+                let dict3 = getDec(dict2['hex']);
 
-                var str4 = substr(dict2['str'], dict3['pre']);
+                let str4 = substr(dict2['str'], dict3['pre']);
 
-                var tmp = atob(substr(str4, getPos(str4, dict3['tail'])));
+                let tmp = atob(substr(str4, getPos(str4, dict3['tail'])));
 
                 if (ValidURL(tmp)) {
                     video_url = tmp;
@@ -344,11 +342,11 @@
                     dataType: "html",
                     url: video_url,
                     success: function(data) {
-                        var re = /,"url":"([^"\']+)"/gi;
-                        var found = re.exec(data);                        
-                        var video_url_arr = [];
+                        let re = /,"url":"([^"\']+)"/gi;
+                        let found = re.exec(data);                        
+                        let video_url_arr = [];
                         while (found != null) {
-                            var tmp_url = CheckURL(found[1]);
+                            let tmp_url = CheckURL(found[1]);
                             if (ValidURL(tmp_url)) {
                                 video_url_arr.push(tmp_url);    
                             }                            
@@ -382,11 +380,11 @@
     // view-source:https://www.ted.com/talks/atul_gawande_want_to_get_great_at_something_get_a_coach?language=en#t-48048
     if (domain.includes("ted.com")) {
         if (!ValidURL(video_url)) {
-            var re = /{"uri":"([^"\']+)"/gi;
-            var found = re.exec(html);                        
-            var video_url_arr = [];
+            let re = /{"uri":"([^"\']+)"/gi;
+            let found = re.exec(html);                        
+            let video_url_arr = [];
             while (found != null) {
-                var tmp_url = CheckURL(found[1]);
+                let tmp_url = CheckURL(found[1]);
                 if (ValidURL(tmp_url)) {
                     video_url_arr.push(tmp_url);    
                 }                            
@@ -411,11 +409,11 @@
     // view-source:http://www.pearvideo.com/video_1050733
     if (domain.includes("pearvideo.com")) {
         if (!ValidURL(video_url)) {
-            var re = /srcUrl="([^"\']+)"/gi;
-            var found = re.exec(html);                        
-            var video_url_arr = [];
+            let re = /srcUrl="([^"\']+)"/gi;
+            let found = re.exec(html);                        
+            let video_url_arr = [];
             while (found != null) {
-                var tmp_url = CheckURL(found[1]);
+                let tmp_url = CheckURL(found[1]);
                 if (ValidURL(tmp_url)) {
                     video_url_arr.push(tmp_url);    
                 }                            
@@ -441,12 +439,12 @@
     if (domain.includes("xiaokaxiu.com")) {
         if (!ValidURL(video_url)) {
             // http://gslb.miaopai.com/stream/fhX23JOcSbVEJOQ9LFKtOP2WBkeP1AA-_m.jpg
-            var re = /player.swf\?scid=([^"\'&]+)/gi;
-            var found = re.exec(html);                        
-            var video_url_arr = [];
+            let re = /player.swf\?scid=([^"\'&]+)/gi;
+            let found = re.exec(html);                        
+            let video_url_arr = [];
             while (found != null) {
-                var tmp_url = "http://gslb.miaopai.com/stream/" + found[1] + ".mp4";
-                var tmp_url = CheckURL(tmp_url);
+                let tmp_url = "http://gslb.miaopai.com/stream/" + found[1] + ".mp4";
+                tmp_url = CheckURL(tmp_url);
                 if (ValidURL(tmp_url)) {
                     video_url_arr.push(tmp_url);    
                     break;
@@ -474,7 +472,7 @@
     if (!ValidURL(video_url)) {
         video_dom = document.querySelector("video#player-html5");
         if (video_dom) {
-            var src = video_dom.getAttribute("src"); 
+            let src = video_dom.getAttribute("src"); 
             if (src.length > 10) {
                 src = decodeURIComponent(src);
                 if (ValidURL(src)) {
@@ -489,14 +487,14 @@
         if (video_dom) {
             video_url = video_dom.getAttribute("src"); 
             if (ValidURL(video_url)) {
-                var url1 = video_url;
+                let url1 = video_url;
                 video_url = "";
                 $.ajax({
                     type: "GET",
                     dataType: "html",
                     url: url1,
                     success: function(data) {
-                        var dom = $(data).find("div#hlsjsvod");
+                        let dom = $(data).find("div#hlsjsvod");
                         if (dom) {
                             video_url = dom.attr('data-url240');
                             if (ValidURL(video_url)) {
@@ -508,8 +506,8 @@
                             }                            
                         }
                         if (!ValidURL(video_url)) {
-                            var re = /src:\s*\"(.*)\"/i;
-                            var found = re.exec(data);
+                            let re = /src:\s*\"(.*)\"/i;
+                            let found = re.exec(data);
                             if (found != null) {
                                 video_url = found[1];
                                 video_url = video_url.replace(".m3u8", ".ts");
@@ -572,8 +570,8 @@
         }
 
         if (!ValidURL(video_url)) {
-            var re = /['"]?video_url['"]?: *(['"])(https?:[^\s'",]+)\1/ig;
-            var found = re.exec(html);
+            let re = /['"]?video_url['"]?: *(['"])(https?:[^\s'",]+)\1/ig;
+            let found = re.exec(html);
             while (found != null) {
                 video_url = found[2];
                 if (ValidURL(video_url)) {
@@ -591,8 +589,9 @@
         } 
     }
 
-    if (video_url != null)
+    if (video_url) {
         video_url = video_url.trim();
+    }
 
     if (!valid_domain) {
             chrome.runtime.sendMessage({
@@ -609,11 +608,11 @@
     } else {
         // http://www.pearvideo.com/video_1050733
         if (domain.includes("pearvideo.com")) {
-            var tmp = [];
-            var re = /[hsl]dUrl=[\"\']([^\"\']+)[\'\"]/ig;
-            var found = re.exec(html);
+            let tmp = [];
+            let re = /[hsl]dUrl=[\"\']([^\"\']+)[\'\"]/ig;
+            let found = re.exec(html);
             while (found != null) {
-                var tmp_url = CheckURL(found[1]); 
+                let tmp_url = CheckURL(found[1]); 
                 if (ValidURL(tmp_url)) {
                     tmp.push(tmp_url);
                 }
@@ -629,11 +628,11 @@
 
         // http://www.dailymotion.com/video/x2bu0q2_alejandro-fernandez-tengo-ganas-de-ti-ft-christina-aguilera_music
         if (domain.includes("dailymotion.com")) {
-            var tmp = [];
-            var re = /mp4[\'\"],[\'\"]url[\'\"]:[\'\"]([^\"\']+)[\'\"]/ig;
-            var found = re.exec(html);
+            let tmp = [];
+            let re = /mp4[\'\"],[\'\"]url[\'\"]:[\'\"]([^\"\']+)[\'\"]/ig;
+            let found = re.exec(html);
             while (found != null) {
-                var tmp_url = CheckURL(found[1]); 
+                let tmp_url = CheckURL(found[1]); 
                 if (ValidURL(tmp_url)) {
                     tmp.push(tmp_url);
                 }

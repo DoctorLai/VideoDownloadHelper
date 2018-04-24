@@ -1,24 +1,63 @@
 <!doctype html>
 <html>
-  <head>
-  	<meta charset="UTF-8"/>
-    <title>Video URL Parser</title>
-    <script src="js/jquery.js"></script>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Video Downloader</title>
+    <meta name="author" content="@justyy">
+    <script src="lang/en-us.js"></script>
+    <script src="lang/zh-cn.js"></script>
+    <script src="lang/zh-tw.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/constants.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/MD5.js"></script>
+    <link rel="stylesheet" href="bs/css/bootstrap.min.css">
+    <script src="bs/js/bootstrap.min.js"></script>    
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/translate.js"></script>    
     <script src="js/video.js"></script>
-    <script src="js/popup.js"></script>
-    <link href="bs/css/bootstrap.min.css" rel="stylesheet">
-    <script src="bs/js/bootstrap.min.js"></script>
-  </head>
-  <body>
-    <div style='width:700px'>
-    <select id=lang name=lang class='form-control'>
-      <option value='0' selected>English 英文</option>
-      <option value='1'>中文 Chinese</option>
-    </select>    
-    <button id="m3u8">.m3u8</button>
-    <button id="pic">🖻</button>
-    <div id=down style='word-wrap:break-word;'>    
-      <div id=message style='word-wrap:break-word;'> </div>
+    <script src="js/popup.js"></script>    
+</head>
+
+<body>
+    <div id="tabs" class='ext-window'>
+        <ul>
+            <li><a id="text_video_downloader" href="#tabs-video-downloader">Video Downloader</a></li>
+            <li><a id="text_setting" href="#tabs-setting">Setting</a></li>
+            <li><a id="text_log" href="#tabs-log">Log</a></li>
+        </ul>
+        <div id="tabs-video-downloader">
+            <button id="m3u8">.m3u8</button>
+            <button id="pic">Images</button>
+            <div id=down class="breakword">
+                <div id=message class="breakword"> </div>
+            </div>
+        </div>
+        <div id="tabs-setting">
+            <h4 id="text_ui_language">UI Language</h4>
+            <select class="form-control" id="lang" name="lang">
+                <option value="en-us">English</option>
+                <option value="zh-cn">简体中文</option>
+                <option value="zh-tw">繁體中文</option>
+            </select>
+            <button class="form-control" style='width: 70px' id="setting_save_btn">Save</button>
+        </div>
+        <div id="tabs-log">
+            <h4><span id='proudly_brought_to_you_by'>Proudly brought to you by</span> <a target=_blank href="https://steemit.com/@justyy">@justyy</a> (<a target=_blank id='report_bugs' href="https://steakovercooked.com/Contact.Mail?title=Video+Downloader">Report Bugs</a>)        
+            </h4>
+            <h5>
+               <a target=_blank href="https://github.com/DoctorLai/VideoDownloadHelper"><B><span id='source_code'>Source Code</span></B>: https://github.com/DoctorLai/VideoDownloadHelper</a>
+            </h5>
+            <textarea readonly class='form-control' rows=15 id='about'>
+            </textarea>
+            <BR/>
+            <a target=_blank href='https://www.paypal.me/doctorlai/3'><img src='images/paypal.png' style='height: 70px'></a> &nbsp;
+            <a target=_blank href='https://justyy.com/out/bitcoin'><img src='images/bitcoin.jpg' style='height: 70px'></a>
+        </div>
     </div>
-  </body>
+</body>
+
 </html>

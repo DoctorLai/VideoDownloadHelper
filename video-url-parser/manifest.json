@@ -1,12 +1,12 @@
 {
   "manifest_version": 2,
   "name": "Simple Video Download Helper",
-  "short_name": "Video URL Parser",
+  "short_name": "Video Download Helper",
   "default_locale": "en",
-  "version": "2.5.6",
+  "version": "3.0.0",
   "browser_action": {
      "default_icon": "icon.png",
-     "default_title": "Get Video URL 获取视频地址",
+     "default_title": "Video Download Helper",
      "default_popup": "main.html"
   },
   "offline_enabled": true,  
@@ -17,9 +17,11 @@
     "48": "images/icon-48.png",
     "128": "images/icon-128.png"
   },    
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "update_url":"http://clients2.google.com/service/update2/crx",
-  "description": "Simple Video Download Helper",
+  "description": "Video Download Helper",
   "web_accessible_resources": [
+      "css/*", 
   		"js/*", 
   		"images/*",
   		"bs/*"
