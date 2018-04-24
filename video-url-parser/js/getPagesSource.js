@@ -180,6 +180,12 @@
                 video_url = video_dom.getAttribute("src");
             }
         }
+        if (!ValidURL(video_url)) {
+            video_dom = document.querySelector("meta[name='twitter:player:stream']");
+            if (video_dom) {
+                video_url = video_dom.getAttribute("content");
+            }                    
+        }        
     }
 
     //http://m.miaopai.com/show/channel/rjHGk~4TM7hNz~lg81-uZQ__
@@ -252,7 +258,6 @@
         }        
     }
 
-
     // http://www.v1.cn/2017-05-10/2533977.shtml
     if (domain.includes("v1.cn")) {
         if (!ValidURL(video_url)) {
@@ -322,11 +327,11 @@
 
                 let str4 = substr(dict2['str'], dict3['pre']);
 
-                let tmp = atob(substr(str4, getPos(str4, dict3['tail'])));
+                tmp = atob(substr(str4, getPos(str4, dict3['tail'])));                
 
                 if (ValidURL(tmp)) {
-                    video_url = tmp;
-                }
+                    video_url = tmp;                
+                }                
             }
         }
     }
@@ -377,7 +382,7 @@
         }
     }
 
-    // view-source:https://www.ted.com/talks/atul_gawande_want_to_get_great_at_something_get_a_coach?language=en#t-48048
+    // https://www.ted.com/talks/atul_gawande_want_to_get_great_at_something_get_a_coach?language=en#t-48048
     if (domain.includes("ted.com")) {
         if (!ValidURL(video_url)) {
             let re = /{"uri":"([^"\']+)"/gi;
@@ -406,7 +411,7 @@
         }
     }    
 
-    // view-source:http://www.pearvideo.com/video_1050733
+    // http://www.pearvideo.com/video_1050733
     if (domain.includes("pearvideo.com")) {
         if (!ValidURL(video_url)) {
             let re = /srcUrl="([^"\']+)"/gi;

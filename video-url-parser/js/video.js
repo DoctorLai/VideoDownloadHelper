@@ -20,7 +20,11 @@ const saveSettings = (showMsg = true) => {
 
 // display video url
 function setUrlOffline(url) {
-    $('div#down').html("<h3>" + get_text("videos_list") + "</h3><ul><li><a target=_blank rel=nofollow href='" + url + "'>" + url + "</a></li></ul>");
+    if (url.includes("weibomiaopai.com")) { // alternative 
+        $('div#down').html("<h3>" + get_text("videos_list") + "</h3><ul><li><a target=_blank rel=nofollow href='" + url + "'>" + "<i><font color=gray>" + url + "</font></i></a></li></ul>");
+    } else {
+        $('div#down').html("<h3>" + get_text("videos_list") + "</h3><ul><li><a target=_blank rel=nofollow href='" + url + "'>" + url + "</a></li></ul>");
+    }    
 }
 
 // display more than 1 video urls
@@ -63,67 +67,59 @@ document.addEventListener('DOMContentLoaded', function() {
         saveSettings();
         // translate
         ui_translate();        
-    });
+    });  
 
-    chrome.runtime.onMessage.addListener(function(request, sender) {
-        if (request.action == "getSource") {
-            let url = JSON.parse(request.source);
-            if ((url != null) && (url.constructor == Array)) {
-                if (url.length == 1) {
-                    setUrlOffline(url[0]);
-                } else {
-                    setUrlOfflineArray(url);
-                }
-            } else {
-                let url = $.trim(url);
-                if (url.length > 0) {
-                    let domain1 = extractDomain(url).toLowerCase().replace("www.", "");
-                    setUrlOffline(url);
-                    process_m3u8(url);
-                }
+    // expand m3u8 video list
+    const process_m3u8 = (url) => {
+        if (url.endsWith("m3u8") || (url.includes("m3u8?"))) {
+            let tmp = url.lastIndexOf("/");
+            if (tmp != -1) {
+                let base_url = url.substr(0, tmp + 1);
+                let m3u8 = url;
+                $.ajax({
+                    type: "GET",
+                    url: m3u8,
+                    success: function(data) {
+                        let lines = data.trim().split(/\s*[\r\n]+\s*/g);
+                        let len = lines.length;
+                        let m3u8arr = [];
+                        for (let i = 0; i < len; ++i) {
+                            let line = $.trim(lines[i]);
+                            if ((line != null) && (line != '') && (line.length > 2) && (line[0] != '#')) {
+                                if ((line.startsWith("http://") || line.startsWith("https://") || line.startsWith("ftp://"))) {
+                                    m3u8arr.push(line);
+                                } else {
+                                    let theurl = base_url + line;
+                                    m3u8arr.push(theurl);
+                                }
+                            }
+                        }
+                        if (m3u8arr.length == 1) {
+                            setUrlOffline(m3u8arr[0]);
+                        } else {
+                            setUrlOfflineArray(m3u8arr);
+                        }
+                    },
+                    error: function(request, status, error) {},
+                    complete: function(data) {}
+                });
             }
         }
-    });
+    }
 
     let pageurl = '';
     chrome.tabs.getSelected(null, function(tab) {
         pageurl = tab.url;
 
-        function process_m3u8(url) {
-            if (url.endsWith("m3u8") || (url.includes("m3u8?"))) {
-                let tmp = url.lastIndexOf("/");
-                if (tmp != -1) {
-                    let base_url = url.substr(0, tmp + 1);
-                    let m3u8 = url;
-                    $.ajax({
-                        type: "GET",
-                        url: m3u8,
-                        success: function(data) {
-                            let lines = data.trim().split(/\s*[\r\n]+\s*/g);
-                            let len = lines.length;
-                            let m3u8arr = [];
-                            for (let i = 0; i < len; ++i) {
-                                let line = $.trim(lines[i]);
-                                if ((line != null) && (line != '') && (line.length > 2) && (line[0] != '#')) {
-                                    if ((line.startsWith("http://") || line.startsWith("https://") || line.startsWith("ftp://"))) {
-                                        m3u8arr.push(line);
-                                    } else {
-                                        let theurl = base_url + line;
-                                        m3u8arr.push(theurl);
-                                    }
-                                }
-                            }
-                            if (m3u8arr.length == 1) {
-                                setUrlOffline(m3u8arr[0]);
-                            } else {
-                                setUrlOfflineArray(m3u8arr);
-                            }
-                        },
-                        error: function(request, status, error) {},
-                        complete: function(data) {}
-                    });
-                }
+        let domain = extractDomain(pageurl).toLowerCase();        
+        if (!domain.includes('youtube.com')) {
+            let s;
+            if ($('select#lang').val() == 'en-us') {
+                s = 'https://weibomiaopai.com/?url=' + encodeURIComponent(pageurl);
+            } else {
+                s = 'https://weibomiaopai.com/download-video-parser.php?url=' + encodeURIComponent(pageurl);
             }
+            setUrlOffline(s);
         }
 
         $("#m3u8").click(function() {
@@ -174,5 +170,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 complete: function(data) {}
             });
         });
+    });
+
+    // get video url from getPageSource.js
+    chrome.runtime.onMessage.addListener(function(request, sender) {
+        if (request.action == "getSource") {
+            let url = JSON.parse(request.source);
+            if ((url != null) && (url.constructor == Array)) {
+                if (url.length == 1) {
+                    setUrlOffline(url[0]);
+                } else {
+                    setUrlOfflineArray(url);
+                }
+            } else if (url) {
+                url = $.trim(url);
+                if (url.length > 0) {
+                    let domain1 = extractDomain(url).toLowerCase().replace("www.", "");
+                    setUrlOffline(url);
+                    process_m3u8(url);
+                }
+            }
+        }
     });
 }, false);
