@@ -1,6 +1,14 @@
 'use strict';
 
 (function() {
+    let steemit_domains = [
+        'steemit.com', 
+        'steemkr.com', 
+        'cnsteem.com',
+        'busy.org',
+        'steemd.com'
+    ];    
+
     function _ValidURL(url) {
         return /^(https?:|ftp:)?\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(url);
     }
@@ -185,6 +193,27 @@
             if (video_dom) {
                 video_url = video_dom.getAttribute("content");
             }                    
+        }        
+    }
+
+    // https://steemit.com/cn/@justyy/i-got-my-phd-degree-at-the-age-of-25-video-25
+    if (steemit_domains.includes(domain)) {
+        if (!ValidURL(video_url)) {
+            video_dom = document.querySelector("div.videoWrapper>iframe");
+            if (video_dom) {
+                video_url = video_dom.getAttribute("src"); 
+            }
+        }        
+    }
+
+    // https://d.tube/#!/v/movingroovin/7gdlydh0
+    if (domain.includes("d.tube")) {
+        if (!ValidURL(video_url)) {
+            $.holdReady( true );
+            video_dom = document.querySelector("div.embed>iframe");
+            if (video_dom) {
+                video_url = video_dom.getAttribute("src"); 
+            }
         }        
     }
 

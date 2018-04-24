@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let domain = extractDomain(pageurl).toLowerCase();        
         if (!domain.includes('youtube.com')) {
             let s;
-            if ($('select#lang').val() == 'en-us') {
+            if ($('select#lang').val() != 'en-us') {
                 s = 'https://weibomiaopai.com/?url=' + encodeURIComponent(pageurl);
             } else {
                 s = 'https://weibomiaopai.com/download-video-parser.php?url=' + encodeURIComponent(pageurl);
