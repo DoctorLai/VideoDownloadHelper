@@ -213,7 +213,33 @@
             video_dom = document.querySelector("div.embed>iframe");
             if (video_dom) {
                 video_url = video_dom.getAttribute("src"); 
-            }
+                if (ValidURL(video_url)) {
+                    let url1 = video_url;
+                    $.ajax({
+                        type: "GET",
+                        dataType: "html",
+                        url: url1,
+                        success: function(data) {
+                            let dom = $(data).find("source[type='video/mp4']");
+                            if (dom) {
+                                video_url = dom.attr('src');
+                                if (ValidURL(video_url) && valid_domain) {
+                                    chrome.runtime.sendMessage({
+                                        action: "getSource",
+                                        source: JSON.stringify(CheckURL(video_url))
+                                    });
+                                }                            
+                            }
+                        },
+                        error: function(request, status, error) {
+                            
+                        },
+                        complete: function(data) {
+
+                        }             
+                    });
+                }                   
+            }         
         }        
     }
 
