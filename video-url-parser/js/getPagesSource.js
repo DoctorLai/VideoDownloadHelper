@@ -1,6 +1,6 @@
 'use strict';
 
-(function() {
+(function() {     
     let steemit_domains = [
         'steemit.com', 
         'steemkr.com', 
@@ -704,6 +704,19 @@
                     source: JSON.stringify(tmp)
                 });                
             }
-        }    
+        }   
+
+        // sniffer!
+        chrome.devtools.network.onRequestFinished.addListener( 
+            function(request) {
+                // 100 kb
+                if (request.response.bodySize > 100 * 1024) {
+                    chrome.devtools.inspectedWindow.eval(
+                        'console.log(unescape("' +
+                        escape(request.request.url) + '"))'
+                    );
+                }
+            }
+        );         
     }
 })();
