@@ -707,16 +707,18 @@
         }   
 
         // sniffer!
-        chrome.devtools.network.onRequestFinished.addListener( 
-            function(request) {
-                // 100 kb
-                if (request.response.bodySize > 100 * 1024) {
-                    chrome.devtools.inspectedWindow.eval(
-                        'console.log(unescape("' +
-                        escape(request.request.url) + '"))'
-                    );
+        if (chrome.devtools) { // only available within a devltools page
+            chrome.devtools.network.onRequestFinished.addListener( 
+                function(request) {
+                    // 100 kb
+                    if (request.response.bodySize > 100 * 1024) {
+                        chrome.devtools.inspectedWindow.eval(
+                            'console.log(unescape("' +
+                            escape(request.request.url) + '"))'
+                        );
+                    }
                 }
-            }
-        );         
+            );         
+        }
     }
 })();
