@@ -46,6 +46,7 @@ const bglog = (obj) => {
     }
 }
 
+// extract domain of url
 const extractDomain = (url) => {
     let domain;
     //find & remove protocol (http, ftp, etc.) and get domain
@@ -57,4 +58,22 @@ const extractDomain = (url) => {
     //find & remove port number
     domain = domain.split(':')[0];
     return domain;
+}
+
+// read as text
+const readResponseAsText = (response) => {
+    return response.text();
+}
+
+// read as json
+const readResponseAsJSON = (response) => { 
+    return response.json(); 
+} 
+
+// check if valid response
+const validateResponse = (response) => { 
+    if (!response.ok) { 
+        throw Error(response.statusText); 
+    } 
+    return response; 
 }

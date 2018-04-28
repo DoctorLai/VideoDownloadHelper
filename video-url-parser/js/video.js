@@ -9,6 +9,7 @@ getLocalIPs(function(ips) { // <!-- ips is an array of local IP addresses.
 const saveSettings = (showMsg = true) => {
     let settings = {};
     settings['lang'] = $('select#lang').val();
+    settings['key'] = $('input#key').val().trim();
     chrome.storage.sync.set({ 
         video_downloader_settings: settings
     }, function() {
@@ -18,10 +19,55 @@ const saveSettings = (showMsg = true) => {
     });
 }
 
+// log in the textarea
+const logit = (dom, msg) => {
+    if ((msg == undefined) || (msg == null)) {
+        return;
+    }
+    let d = new Date();
+    let n = d.toLocaleTimeString();    
+    let s = dom.val();
+    dom.val((s + "\n" + n + ": " + msg).trim());
+}
+
+// use server API
+const callAPI = (key, url) => {
+    let api = "https://uploadbeta.com/api/video/?cached&video=" + encodeURIComponent(url) + "&hash=" + key;
+    console.log(api);
+    return new Promise((resolve, reject) => {
+        fetch(api, {mode: 'cors'})
+        .then(validateResponse)
+        .then(readResponseAsJSON)
+        .then(function(result) {
+            if (result["urls"]) {
+                resolve(result["urls"]);
+            } else if (result['url']) {
+                resolve(result['url']);
+            } else {
+                reject("parse error " + key);
+                logit($('textarea#about'), "parse error " + key);
+            }
+        }).catch(function(error) {
+            logit($('textarea#about'), 'key error: ' + key);
+            reject("error " + key);
+        });
+    });     
+}
+
 // display video url
-function setUrlOffline(url) {
+function setUrlOffline(url, url2 = '') {
     if (url.includes("weibomiaopai.com")) { // alternative 
         $('div#down').html("<h3>" + get_text("videos_list") + "</h3><ul><li><a target=_blank rel=nofollow href='" + url + "'>" + "<i><font color=gray>" + url + "</font></i></a></li></ul>");
+        let key = $('input#key').val().trim();
+        if (key) {
+            callAPI(key, url2).then((video) => {
+                if ((video != null) && (video.constructor == Array)) {
+                    setUrlOfflineArray(video);
+                } else {
+                    $('div#down').html("<h3>" + get_text("videos_list") + "</h3><ul><li><a target=_blank rel=nofollow href='" + video + "'>" + video + "</a></li></ul>");
+                }
+            });
+        }
     } else {
         $('div#down').html("<h3>" + get_text("videos_list") + "</h3><ul><li><a target=_blank rel=nofollow href='" + url + "'>" + url + "</a></li></ul>");
     }    
@@ -50,7 +96,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (data && data.video_downloader_settings) {
             let settings = data.video_downloader_settings;
             let lang = settings['lang'];
+            let key = settings['key'];
             $("select#lang").val(lang);
+            if (key) {
+                $("input#key").val(key);
+            }
         } else {
             // first time set default parameters
         }
@@ -119,7 +169,9 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 s = 'https://weibomiaopai.com/download-video-parser.php?url=' + encodeURIComponent(pageurl);
             }
-            setUrlOffline(s);
+            setUrlOffline(s, pageurl);
+        } else {
+            $('div#down').html("<BR/>" + "<blockquote>" + get_text('youtube_notice') + "</blockquote>");
         }
 
         $("#m3u8").click(function() {
@@ -179,13 +231,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if ((url != null) && (url.constructor == Array)) {
                 if (url.length == 1) {
                     setUrlOffline(url[0]);
+                    process_m3u8(url);
                 } else {
                     setUrlOfflineArray(url);
                 }
             } else if (url) {
                 url = $.trim(url);
                 if (url.length > 0) {
-                    let domain1 = extractDomain(url).toLowerCase().replace("www.", "");
                     setUrlOffline(url);
                     process_m3u8(url);
                 }

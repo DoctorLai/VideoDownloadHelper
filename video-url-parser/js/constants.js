@@ -1,3 +1,3 @@
 'use strict';
 
-let max_url_length = 70;
+let max_url_length = 95;

@@ -11,3 +11,6 @@ pre {
 .breakword {
 	word-wrap: break-word;
 }
+.banner {
+	height: 70px;
+}

@@ -30,8 +30,10 @@
             <li><a id="text_log" href="#tabs-log">Log</a></li>
         </ul>
         <div id="tabs-video-downloader">
-            <button id="m3u8">.m3u8</button>
-            <button id="pic">Images</button>
+            <form class='form-inline'>
+                <button type='button' class="form-control" style='width: 70px' id="m3u8">.m3u8</button>
+                <button type='button' class="form-control" style='width: 70px' id="pic">Images</button>
+            </form>
             <div id=down class="breakword">
                 <div id=message class="breakword"> </div>
             </div>
@@ -43,7 +45,10 @@
                 <option value="zh-cn">简体中文</option>
                 <option value="zh-tw">繁體中文</option>
             </select>
-            <button class="form-control" style='width: 70px' id="setting_save_btn">Save</button>
+            <h4 id="text_vip_server_api_key">VIP Server API Key</h4>
+            <input type='password' id='key' name='key' class="form-control">
+            <div id="vip_desc" style='font-style:italic'>VIP allows using remote server video parser API.</div>
+            <button class="form-control" style='width: 70px' id="setting_save_btn">Save</button>            
         </div>
         <div id="tabs-log">
             <h4><span id='proudly_brought_to_you_by'>Proudly brought to you by</span> <a target=_blank href="https://steemit.com/@justyy">@justyy</a> (<a target=_blank id='report_bugs' href="https://steakovercooked.com/Contact.Mail?title=Video+Downloader">Report Bugs</a>)        
@@ -54,8 +59,12 @@
             <textarea readonly class='form-control' rows=15 id='about'>
             </textarea>
             <BR/>
-            <a target=_blank href='https://www.paypal.me/doctorlai/3'><img src='images/paypal.png' style='height: 70px'></a> &nbsp;
-            <a target=_blank href='https://justyy.com/out/bitcoin'><img src='images/bitcoin.jpg' style='height: 70px'></a>
+            <a target=_blank href='https://www.paypal.me/doctorlai/3'><img src='images/paypal.png' class='banner'></a> &nbsp;
+            <a target=_blank href='https://justyy.com/out/bitcoin'><img src='images/bitcoin.jpg' class='banner'></a>
+            &nbsp;
+            <a target=_blank href='https://justyy.com/out/vultr2'><img title='Free $10 VPS' src='images/vultr.jpg' class='banner'></a>
+            &nbsp;
+            <a target=_blank href='https://justyy.com/out/linode'><img title='Free $20 VPS' src='images/linode.jpg' class='banner'></a>            
         </div>
     </div>
 </body>

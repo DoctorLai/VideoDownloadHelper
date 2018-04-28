@@ -14,6 +14,8 @@ const translation = (lang) => {
     translate_text($('a#text_log'), lang, 'log');
     translate_text($('h4#text_ui_language'), lang, 'ui_language');
     translate_text($('h4#text_logs'), lang, 'text_logs');
+    translate_text($('h4#text_vip_server_api_key'), lang, 'text_vip_server_api_key');
+    translate_text($('div#vip_desc'), lang, 'vip_desc');
     translate_text($('span#source_code'), lang, 'source_code');
     translate_text($('a#report_bugs'), lang, 'report_bugs');
     translate_text($('button#setting_save_btn'), lang, 'save');

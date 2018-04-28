@@ -1,6 +1,9 @@
 'use strict';
 
 let translation_english = {
+	'text_vip_server_api_key': 'VIP Server API Key',
+	'vip_desc': 'VIP allows using remote server video parser API.',
+	'youtube_notice': 'Please note (NO YOUTUBE): Google does not allow any behavior that supports or encourages downloading youtube videos and therefore this plugin does not support youtube anymore.',
 	'video_downloader': 'Video Downloader',
 	'images': 'Images',
 	'images_list': 'Images List',

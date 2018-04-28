@@ -209,7 +209,6 @@
     // https://d.tube/#!/v/movingroovin/7gdlydh0
     if (domain.includes("d.tube")) {
         if (!ValidURL(video_url)) {
-            $.holdReady( true );
             video_dom = document.querySelector("div.embed>iframe");
             if (video_dom) {
                 video_url = video_dom.getAttribute("src"); 
