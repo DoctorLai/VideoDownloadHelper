@@ -21,5 +21,6 @@ let translation_traditional_chinese = {
 	'chrome_version': '瀏覽器版本',
 	'api_finished': 'API完成',
 	'calling': '正在調用',	
-	'proudly_brought_to_you_by': '開發：'
+	'proudly_brought_to_you_by': '開發：',
+	'freevps': '雲VPS促銷活動'
 }

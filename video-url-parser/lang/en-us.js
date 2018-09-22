@@ -21,5 +21,6 @@ let translation_english = {
 	'chrome_version': 'Chrome Version',
 	'api_finished': 'API Finished',
 	'calling': 'Calling',	
-	'proudly_brought_to_you_by': 'Developed By'
+	'proudly_brought_to_you_by': 'Developed By',
+	'freevps': 'Cloud VPS Promotions'
 }

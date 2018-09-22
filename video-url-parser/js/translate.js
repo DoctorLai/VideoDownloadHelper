@@ -20,6 +20,7 @@ const translation = (lang) => {
     translate_text($('a#report_bugs'), lang, 'report_bugs');
     translate_text($('button#setting_save_btn'), lang, 'save');
 	translate_text($('span#proudly_brought_to_you_by'), lang, 'proudly_brought_to_you_by');
+    translate_text($('span#vpspromotion'), lang, 'freevps');
     translate_text($('a#text_video_downloader'), lang, 'video_downloader');
     translate_text($('button#pic'), lang, 'images');
 }

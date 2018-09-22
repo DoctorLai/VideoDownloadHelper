@@ -20,14 +20,18 @@ const saveSettings = (showMsg = true) => {
 }
 
 // log in the textarea
-const logit = (dom, msg) => {
+const logit = (dom, msg, showtime = true) => {
     if ((msg == undefined) || (msg == null)) {
         return;
     }
-    let d = new Date();
-    let n = d.toLocaleTimeString();    
     let s = dom.val();
-    dom.val((s + "\n" + n + ": " + msg).trim());
+    if (showtime) {
+        let d = new Date();
+        let n = d.toLocaleTimeString();            
+        dom.val((s + "\n" + n + ": " + msg).trim());
+    } else {
+        dom.val((s + "\n" + msg).trim());
+    }
 }
 
 // use server API
@@ -91,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
         $( "#tabs" ).tabs();
     });
 
+
     // load settings
     chrome.storage.sync.get('video_downloader_settings', function(data) {
         if (data && data.video_downloader_settings) {
@@ -109,6 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let app_name = manifest.name + " v" + manifest.version;
         // version number
         $('textarea#about').val(get_text('application') + ': ' + app_name + '\n' + get_text('chrome_version') + ': ' + getChromeVersion());
+
         // translate
         ui_translate();
     });

@@ -21,5 +21,6 @@ let translation_simplified_chinese = {
 	'chrome_version': '浏览器版本',
 	'api_finished': 'API完成',
 	'calling': '正在调用',	
-	'proudly_brought_to_you_by': '开发：'
+	'proudly_brought_to_you_by': '开发：',
+	'freevps': '云VPS促销活动'
 }
