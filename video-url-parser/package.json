@@ -1,0 +1,33 @@
+{
+  "name": "SimpleVideoDownloader",
+  "version": "3.0.4",
+  "description": "Video Downloader",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "chai": "^4.2.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.0.4"
+  },
+  "scripts": {
+    "test": "mocha || true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DoctorLai/VideoDownloadHelper"
+  },
+  "keywords": [
+    "video",
+    "download video",
+    "video url",
+    "save video"
+  ],
+  "author": "justyy <dr.zhihua.lai@gmail.com> (https://helloacm.com)",
+  "license": "GPL",
+  "bugs": {
+    "url": "https://github.com/DoctorLai/VideoDownloadHelper/issues"
+  },
+  "homepage": "https://chrome.google.com/webstore/detail/simple-video-download-hel/ilcdiicigjaccgipndigcenjieedjohj"
+}
