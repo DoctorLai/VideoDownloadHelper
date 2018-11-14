@@ -1,5 +1,6 @@
 /* jshint -W097 *//* jshint -W097 */
-/* jshint -W117 */'use strict';
+/* jshint -W117 */
+"use strict";
 
 const { assert } = require("chai");
 let { ParseVideo } = require('../js/parsevideo');
