@@ -1,12 +1,27 @@
+const { steemit_domains, max_url_length } = require( '../js/constants' ) ;
+const { extractDomain, FixURL, ValidURL, getParameterByName } = require( '../js/functions' )  ;
+const { ParseVideo } = require( '../js/parsevideo' ) ;
+
 (function() {     
     "use strict";
-
+    
     let pageurl = document.location.href;
     let domain = extractDomain(pageurl);
     let valid_domain = true;
     let html = document.documentElement.outerHTML;
     let video_url = "";
     let video_dom = null;
+
+    // Simple Video Parser
+    let SimpleVidoeParser = new ParseVideo(pageurl, html);
+    video_url = SimpleVidoeParser.Parse();
+    if (ValidURL(video_url)) {        
+        chrome.runtime.sendMessage({
+            action: "getSource",
+            source: JSON.stringify(video_url)
+        });
+        return;
+    }
 
     // http://michaelzzz520.tumblr.com/post/156206105600
     if (domain.includes("tumblr.com")) {
@@ -47,13 +62,10 @@
 
     // http://us.sinaimg.cn/0032P9gCjx076OXbakmk01040100jIoS0k01.mp4?KID=unistore,video&ssig=7T1tFK2CkX&Expires=1485650329
     // http://weibo.com/tv/v/EtfrDlfUw?from=vhot
-    /*
-        http://www.jianshu.com/p/5b6b4b2aa5c7
-
-        http://weibo.com/p/230444897a6a26db6d0226093f2d5819cf1e90
-        http://weibo.com/tv/v/EgaAp1dcM
-        http://weibo.com/2142058927/Eg0OBB5A5
-    */
+    // http://www.jianshu.com/p/5b6b4b2aa5c7
+    // http://weibo.com/p/230444897a6a26db6d0226093f2d5819cf1e90
+    // http://weibo.com/tv/v/EgaAp1dcM
+    // http://weibo.com/2142058927/Eg0OBB5A5
     if ((domain.includes("weibo.com"))||(domain.includes("video.sina.com.cn"))) {
         if (!ValidURL(video_url)) {
             video_dom = document.querySelector("div[node-type='common_video_player']");
@@ -146,7 +158,7 @@
         }        
     }
 
-    //http://m.miaopai.com/show/channel/rjHGk~4TM7hNz~lg81-uZQ__
+    // http://m.miaopai.com/show/channel/rjHGk~4TM7hNz~lg81-uZQ__
     if (domain.includes("miaopai.com")) {
         if (!ValidURL(video_url)) {
             let re = /.*miaopai\.com\/show\/(.*)\.html?$/i;

@@ -16,11 +16,9 @@ window.onload = () => {
 		if (callback !== null) {
 			callback();
 		}
-	}
+	};
     executeScripts(null, [ 
-		{ file: "js/constants.js" }, 
-		{ file: "js/functions.js" }, 
-		{ file: "js/jquery-3.2.1.min.js" }, 
-        { file: "js/getPagesSource.js" }
+		{ file: "js/jquery-3.3.1.min.js" },
+		{ file: "dist/dist.min.js" }
     ]);	
 }; 

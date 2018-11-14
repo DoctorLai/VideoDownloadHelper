@@ -22,7 +22,8 @@
   "description": "Simple Video Download Helper",
   "web_accessible_resources": [
       "css/*", 
-  		"js/*", 
+      "js/*", 
+      "dist/*", 
   		"images/*",
   		"bs/*"
   ],  
