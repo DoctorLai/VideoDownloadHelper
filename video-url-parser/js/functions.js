@@ -82,6 +82,16 @@ const validateResponse = (response) => {
 };
 
 const ValidURL = (url) => {
+    // if parameter is array, then we check all its elements
+    if (url instanceof Array) {
+        for (let i = 0; i < url.length; ++ i) {
+            // recursion call
+            if (!ValidURL(url[i])) { // arguments.callee - strict mode
+                return false;
+            }
+        }
+        return true;
+    }
     if (url == null) {
         return false;
     }        

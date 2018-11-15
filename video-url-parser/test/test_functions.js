@@ -47,6 +47,21 @@ describe('ValidURL', function() {
     });        
 });
 
+describe('ValidURL (Array)', function() {
+    it('https://helloacm.com/', function() {
+        assert.isTrue(ValidURL(["https://helloacm.com/", "https://helloacm.com/"]));
+    });   
+    it('aa://helloacm.com/', function() {
+        assert.isFalse(ValidURL(["aa://helloacm.com/", "https://helloacm.com/"]));
+    });   
+    it('', function() {
+        assert.isFalse(ValidURL(["", null]));
+    });    
+    it('https://helloacm.com/?a=b&c=d&w134', function() {
+        assert.isTrue(ValidURL(["https://helloacm.com/?a=b&c=d&w134", "https://www.google.com"]));
+    });        
+});
+
 describe('extractDomain', function() {
     it('https://devhints.io/chai', function() {
         assert.equal("devhints.io", extractDomain("https://devhints.io/chai"));

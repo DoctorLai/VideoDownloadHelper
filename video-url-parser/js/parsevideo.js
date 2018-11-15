@@ -52,50 +52,50 @@ class ParseVideo {
 
     // extract all video_url in html e.g. "video_url": "https://aaaabbb.com/"
     static extract_all_video_urls(url, html) {
-        let re = /['"]?video_url['"]?: *(['"])(https?:[^\s'",]+)\1/ig;
+        let re = /['"]?video_url['"]?:\s*(['"])(https?:[^\s'",]+)\1/ig;
         let found = re.exec(html);
         let video_url = [];
-        while (found != null) {  
+        while (found !== null) {  
             let url = FixURL(found[2]);
             if (ValidURL(url)) {
                 video_url.push(url);
             }
             found = re.exec(html);
         }
-        return (video_url.length == 0) ? null :
-               ( (video_url.length == 1) ? video_url[0] : video_url);
+        return (video_url.length === 0) ? null :
+               ( (video_url.length === 1) ? video_url[0] : video_url);
     }
 
     // parse pearvideo.com e.g. http://www.pearvideo.com/video_1050733
     static parse_pearvideo_com(url, html) {
         let video_url = [];
-        let re = /[hsl]dUrl=[\"\']([^\"\']+)[\'\"]/ig;
+        let re = /([hsl]d|src)Url\s*=\s*[\"\']([^\"\']+)[\'\"]/ig;
         let found = re.exec(html);
-        while (found != null) {
-            let tmp_url = FixURL(found[1]); 
+        while (found !== null) {
+            let tmp_url = FixURL(found[2]); 
             if (ValidURL(tmp_url)) {
                 video_url.push(tmp_url);
             }
             found = re.exec(html);
         }        
-        return (video_url.length == 0) ? null :
-               ( (video_url.length == 1) ? video_url[0] : video_url);        
+        return (video_url.length === 0) ? null :
+               ( (video_url.length === 1) ? video_url[0] : video_url);        
     }
 
-    // extract all MP4 in html e.g. mp4","url":"https://aabb.com"
+    // extract all MP4 in html e.g. "mp4","url":"https://aabb.com"
     static extract_all_mp4_urls(url, html) {
-        let re = /mp4[\'\"],[\'\"]url[\'\"]:[\'\"]([^\"\']+)[\'\"]/ig;
+        let re = /mp4[\'\"]\s*,\s*[\'\"]url[\'\"]\s*:\s*[\'\"]([^\"\']+)[\'\"]/ig;
         let found = re.exec(html);
         let video_url = [];
-        while (found != null) {  
+        while (found !== null) {  
             let url = FixURL(found[1]);
             if (ValidURL(url)) {
                 video_url.push(url);
             }
             found = re.exec(html);
         }
-        return (video_url.length == 0) ? null :
-               ( (video_url.length == 1) ? video_url[0] : video_url);
+        return (video_url.length === 0) ? null :
+               ( (video_url.length === 1) ? video_url[0] : video_url);
     }
 }
 
