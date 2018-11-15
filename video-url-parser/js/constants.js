@@ -1,3 +1,22 @@
-'use strict';
+/* jshint -W097 */
+"use strict";
 
-let max_url_length = 95;
+const max_url_length = 95;
+const steemit_domains = [
+    'steemit.com', 
+    'steemkr.com', 
+    'cnsteem.com',
+    'utopian.io',
+    'staging.busy.org',
+    'steemhunt.com',
+    'mspsteem.com',
+    'steemdb.com',
+    'busy.org',
+    'steemd.com'
+];   
+
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+	module.exports = {
+		max_url_length, steemit_domains
+	};
+}

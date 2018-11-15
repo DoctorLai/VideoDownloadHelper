@@ -1,107 +1,26 @@
-'use strict';
+const { steemit_domains, max_url_length } = require( '../js/constants' ) ;
+const { extractDomain, FixURL, ValidURL, getParameterByName } = require( '../js/functions' )  ;
+const { ParseVideo } = require( '../js/parsevideo' ) ;
 
 (function() {     
-    let steemit_domains = [
-        'steemit.com', 
-        'steemkr.com', 
-        'cnsteem.com',
-        'busy.org',
-        'steemd.com'
-    ];    
-
-    function _ValidURL(url) {
-        return /^(https?:|ftp:)?\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/{1,2}((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(url);
-    }
-
-    function ValidURL(url){
-        if (url == null) {
-            return false;
-        }        
-        if (url == "") {
-            return false;
-        }
-        if (url.length <= 7) {
-            return false;
-        }
-        if (_ValidURL(url)) {
-            return true;
-        }
-        if (url.length > 5) {            
-            if (url.startsWith("http:\\/\\/") || url.startsWith("https:\\/\\/")) {
-                return _ValidURL(url.replace(/\\\//g, "/"));
-            }
-        }
-        return false;
-    }    
-
-    function ValidURL2(url){
-        if (url == null) {
-            return false;
-        }        
-        if (url == "") {
-            return false;
-        }
-        if (url.length <= 7) {
-            return false;
-        }
-        if (_ValidURL(url)) {
-            return true;
-        }
-        if (url.length > 5) {            
-            if (url.startsWith("http://") || url.startsWith("https://")) {
-                return true;
-            }
-        }
-        return false;
-    }      
-
-    function CheckURL(url) {        
-        if (url.length > 5) {
-            if (url.startsWith("http:\\/\\/") || url.startsWith("https:\\/\\/")) {
-                return url.replace(/\\\//g, "/");
-            }
-        }        
-        if (url.length > 5) {
-            if ((url.charAt(0) == '/') && (url.charAt(1) == '/')) {
-                return "http:" + url;
-            }
-        }
-        return url;
-    }
-
-    function extractDomain1(url1) {
-        let domain1;
-        //find & remove protocol (http, ftp, etc.) and get domain
-        if (url1.indexOf("://") > -1) {
-            domain1 = url1.split('/')[2];
-        }
-        else {
-            domain1 = url1.split('/')[0];
-        }
-        //find & remove port number
-        domain1 = domain1.split(':')[0];
-        return domain1;
-    }
-
-    function getParameterByName(name, url) {
-        name = name.replace(/[\[\]]/g, "\\$&");
-        let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, " "));
-    }    
-
-    function isset(object){
-        return (typeof object !=='undefined');
-    }
-
+    "use strict";
+    
     let pageurl = document.location.href;
-    let domain = extractDomain1(pageurl).toLowerCase().replace("www.", "");
-    let valid_domain = true;
+    let domain = extractDomain(pageurl);
     let html = document.documentElement.outerHTML;
     let video_url = "";
     let video_dom = null;
+
+    // Simple Video Parser
+    let SimpleVidoeParser = new ParseVideo(pageurl, html);
+    video_url = SimpleVidoeParser.Parse();
+    if (ValidURL(video_url)) {        
+        chrome.runtime.sendMessage({
+            action: "getSource",
+            source: JSON.stringify(video_url)
+        });
+        return;
+    }
 
     // http://michaelzzz520.tumblr.com/post/156206105600
     if (domain.includes("tumblr.com")) {
@@ -120,10 +39,10 @@
                             let dom = $(data).find("source[type='video/mp4']");
                             if (dom) {
                                 video_url = dom.attr('src');
-                                if (ValidURL(video_url) && valid_domain) {
+                                if (ValidURL(video_url)) {
                                     chrome.runtime.sendMessage({
                                         action: "getSource",
-                                        source: JSON.stringify(CheckURL(video_url))
+                                        source: JSON.stringify(FixURL(video_url))
                                     });
                                 }                            
                             }
@@ -140,16 +59,12 @@
         }
     }
 
-    // http://weibo.com/tv/v/56cf9418a34dfb34292c0ede3a4ea9a5?fid=1034:56cf9418a34dfb34292c0ede3a4ea9a5
     // http://us.sinaimg.cn/0032P9gCjx076OXbakmk01040100jIoS0k01.mp4?KID=unistore,video&ssig=7T1tFK2CkX&Expires=1485650329
     // http://weibo.com/tv/v/EtfrDlfUw?from=vhot
-    /*
-        http://www.jianshu.com/p/5b6b4b2aa5c7
-
-        http://weibo.com/p/230444897a6a26db6d0226093f2d5819cf1e90
-        http://weibo.com/tv/v/EgaAp1dcM
-        http://weibo.com/2142058927/Eg0OBB5A5
-    */
+    // http://www.jianshu.com/p/5b6b4b2aa5c7
+    // http://weibo.com/p/230444897a6a26db6d0226093f2d5819cf1e90
+    // http://weibo.com/tv/v/EgaAp1dcM
+    // http://weibo.com/2142058927/Eg0OBB5A5
     if ((domain.includes("weibo.com"))||(domain.includes("video.sina.com.cn"))) {
         if (!ValidURL(video_url)) {
             video_dom = document.querySelector("div[node-type='common_video_player']");
@@ -222,10 +137,10 @@
                             let dom = $(data).find("source[type='video/mp4']");
                             if (dom) {
                                 video_url = dom.attr('src');
-                                if (ValidURL(video_url) && valid_domain) {
+                                if (ValidURL(video_url)) {
                                     chrome.runtime.sendMessage({
                                         action: "getSource",
-                                        source: JSON.stringify(CheckURL(video_url))
+                                        source: JSON.stringify(FixURL(video_url))
                                     });
                                 }                            
                             }
@@ -242,7 +157,7 @@
         }        
     }
 
-    //http://m.miaopai.com/show/channel/rjHGk~4TM7hNz~lg81-uZQ__
+    // http://m.miaopai.com/show/channel/rjHGk~4TM7hNz~lg81-uZQ__
     if (domain.includes("miaopai.com")) {
         if (!ValidURL(video_url)) {
             let re = /.*miaopai\.com\/show\/(.*)\.html?$/i;
@@ -405,24 +320,22 @@
                         let found = re.exec(data);                        
                         let video_url_arr = [];
                         while (found != null) {
-                            let tmp_url = CheckURL(found[1]);
+                            let tmp_url = FixURL(found[1]);
                             if (ValidURL(tmp_url)) {
                                 video_url_arr.push(tmp_url);    
                             }                            
                             found = re.exec(data);
                         }
-                        if (valid_domain) {
-                            if (video_url_arr.length > 0) {
-                                chrome.runtime.sendMessage({
-                                    action: "getSource",
-                                    source: JSON.stringify(video_url_arr)
-                                });                          
-                            } else {
-                                chrome.runtime.sendMessage({
-                                    action: "getSource",
-                                    source: JSON.stringify(CheckURL(video_url))
-                                });                              
-                            }
+                        if (video_url_arr.length > 0) {
+                            chrome.runtime.sendMessage({
+                                action: "getSource",
+                                source: JSON.stringify(video_url_arr)
+                            });                          
+                        } else {
+                            chrome.runtime.sendMessage({
+                                action: "getSource",
+                                source: JSON.stringify(FixURL(video_url))
+                            });                              
                         }
                     },                    
                     error: function(request, status, error) {
@@ -443,24 +356,22 @@
             let found = re.exec(html);                        
             let video_url_arr = [];
             while (found != null) {
-                let tmp_url = CheckURL(found[1]);
+                let tmp_url = FixURL(found[1]);
                 if (ValidURL(tmp_url)) {
                     video_url_arr.push(tmp_url);    
                 }                            
                 found = re.exec(html);
             }
-            if (valid_domain) {                
-                if (video_url_arr.length > 0) {
-                    chrome.runtime.sendMessage({
-                        action: "getSource",
-                        source: JSON.stringify(video_url_arr)
-                    });                          
-                } else {
-                    chrome.runtime.sendMessage({
-                        action: "getSource",
-                        source: JSON.stringify(CheckURL(video_url))
-                    });                              
-                }
+            if (video_url_arr.length > 0) {
+                chrome.runtime.sendMessage({
+                    action: "getSource",
+                    source: JSON.stringify(video_url_arr)
+                });                          
+            } else {
+                chrome.runtime.sendMessage({
+                    action: "getSource",
+                    source: JSON.stringify(FixURL(video_url))
+                });                              
             }
         }
     }    
@@ -472,24 +383,22 @@
             let found = re.exec(html);                        
             let video_url_arr = [];
             while (found != null) {
-                let tmp_url = CheckURL(found[1]);
+                let tmp_url = FixURL(found[1]);
                 if (ValidURL(tmp_url)) {
                     video_url_arr.push(tmp_url);    
                 }                            
                 found = re.exec(html);
             }
-            if (valid_domain) {                
-                if (video_url_arr.length > 0) {
-                    chrome.runtime.sendMessage({
-                        action: "getSource",
-                        source: JSON.stringify(video_url_arr)
-                    });                          
-                } else {
-                    chrome.runtime.sendMessage({
-                        action: "getSource",
-                        source: JSON.stringify(CheckURL(video_url))
-                    });                              
-                }
+            if (video_url_arr.length > 0) {
+                chrome.runtime.sendMessage({
+                    action: "getSource",
+                    source: JSON.stringify(video_url_arr)
+                });                          
+            } else {
+                chrome.runtime.sendMessage({
+                    action: "getSource",
+                    source: JSON.stringify(FixURL(video_url))
+                });                              
             }
         }
     }    
@@ -503,25 +412,23 @@
             let video_url_arr = [];
             while (found != null) {
                 let tmp_url = "http://gslb.miaopai.com/stream/" + found[1] + ".mp4";
-                tmp_url = CheckURL(tmp_url);
+                tmp_url = FixURL(tmp_url);
                 if (ValidURL(tmp_url)) {
                     video_url_arr.push(tmp_url);    
                     break;
                 }                            
                 found = re.exec(html);
             }
-            if (valid_domain) {                
-                if (video_url_arr.length > 0) {
-                    chrome.runtime.sendMessage({
-                        action: "getSource",
-                        source: JSON.stringify(video_url_arr)
-                    });                          
-                } else {
-                    chrome.runtime.sendMessage({
-                        action: "getSource",
-                        source: JSON.stringify(CheckURL(video_url))
-                    });                              
-                }
+            if (video_url_arr.length > 0) {
+                chrome.runtime.sendMessage({
+                    action: "getSource",
+                    source: JSON.stringify(video_url_arr)
+                });                          
+            } else {
+                chrome.runtime.sendMessage({
+                    action: "getSource",
+                    source: JSON.stringify(FixURL(video_url))
+                });                              
             }
         }
     }        
@@ -560,7 +467,7 @@
                                 video_url = video_url.replace(".m3u8", ".ts");
                                 chrome.runtime.sendMessage({
                                     action: "getSource",
-                                    source: JSON.stringify(CheckURL(video_url))
+                                    source: JSON.stringify(FixURL(video_url))
                                 });
                             }                            
                         }
@@ -572,7 +479,7 @@
                                 video_url = video_url.replace(".m3u8", ".ts");
                                 chrome.runtime.sendMessage({
                                     action: "getSource",
-                                    source: JSON.stringify(CheckURL(video_url))
+                                    source: JSON.stringify(FixURL(video_url))
                                 });                                
                             }
                         }
@@ -660,17 +567,10 @@
         video_url = video_url.trim();
     }
 
-    if (!valid_domain) {
-            chrome.runtime.sendMessage({
-            action: "getSource",
-            source: JSON.stringify(pageurl) // send signal to disallow
-        });         
-    }
-
-    if (ValidURL(video_url) && valid_domain) {
+    if (ValidURL(video_url)) {
         chrome.runtime.sendMessage({
             action: "getSource",
-            source: JSON.stringify(CheckURL(video_url))
+            source: JSON.stringify(FixURL(video_url))
         });
     } else {
         // http://www.pearvideo.com/video_1050733
@@ -679,13 +579,13 @@
             let re = /[hsl]dUrl=[\"\']([^\"\']+)[\'\"]/ig;
             let found = re.exec(html);
             while (found != null) {
-                let tmp_url = CheckURL(found[1]); 
+                let tmp_url = FixURL(found[1]); 
                 if (ValidURL(tmp_url)) {
                     tmp.push(tmp_url);
                 }
                 found = re.exec(html);
             }
-            if ((tmp.length > 0) && (valid_domain)) {
+            if ((tmp.length > 0)) {
                 chrome.runtime.sendMessage({
                     action: "getSource",
                     source: JSON.stringify(tmp)
@@ -699,13 +599,13 @@
             let re = /mp4[\'\"],[\'\"]url[\'\"]:[\'\"]([^\"\']+)[\'\"]/ig;
             let found = re.exec(html);
             while (found != null) {
-                let tmp_url = CheckURL(found[1]); 
+                let tmp_url = FixURL(found[1]); 
                 if (ValidURL(tmp_url)) {
                     tmp.push(tmp_url);
                 }
                 found = re.exec(html);
             }
-            if ((tmp.length > 0) && valid_domain) {
+            if ((tmp.length > 0)) {
                 chrome.runtime.sendMessage({
                     action: "getSource",
                     source: JSON.stringify(tmp)

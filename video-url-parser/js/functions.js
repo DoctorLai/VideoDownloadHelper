@@ -1,13 +1,16 @@
-'use strict';
+/* jshint -W097 */
+/* jshint -W117 */
+"use strict";
 
+// truncate the long URLs.
 String.prototype.trim2 = function (length) {
 	return this.length > length ? this.substring(0, length) + "..." : this;
-}
+};
 
 const getChromeVersion = () => {     
 	let raw = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./);
 	return raw ? parseInt(raw[2], 10) : false;
-}
+};
 
 const getLocalIPs = (callback) => {
     let ips = [];
@@ -37,14 +40,14 @@ const getLocalIPs = (callback) => {
     pc.createOffer(function(sdp) {
         pc.setLocalDescription(sdp);
     }, function onerror() {});
-}
+};
 
 // console.log in the background page
 const bglog = (obj) => {
     if (chrome && chrome.runtime) {
         chrome.runtime.sendMessage({type: "bglog", obj: obj});
     }
-}
+};
 
 // extract domain of url
 const extractDomain = (url) => {
@@ -57,18 +60,18 @@ const extractDomain = (url) => {
     }
     //find & remove port number
     domain = domain.split(':')[0];
-    return domain;
-}
+    return domain.toLowerCase().replace("www.", "");
+};
 
 // read as text
 const readResponseAsText = (response) => {
     return response.text();
-}
+};
 
 // read as json
 const readResponseAsJSON = (response) => { 
     return response.json(); 
-} 
+};
 
 // check if valid response
 const validateResponse = (response) => { 
@@ -76,4 +79,67 @@ const validateResponse = (response) => {
         throw Error(response.statusText); 
     } 
     return response; 
+};
+
+const ValidURL = (url) => {
+    // if parameter is array, then we check all its elements
+    if (url instanceof Array) {
+        for (let i = 0; i < url.length; ++ i) {
+            // recursion call
+            if (!ValidURL(url[i])) { // arguments.callee - strict mode
+                return false;
+            }
+        }
+        return true;
+    }
+    if (url == null) {
+        return false;
+    }        
+    if (url == "") {
+        return false;
+    }
+    if (url.length <= 7) {
+        return false;
+    }
+    function _ValidURL(url) {
+        return /^(https?:)?\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/{1,2}((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(url);
+    }    
+    if (_ValidURL(url)) {
+        return true;
+    }
+    if (url.length > 5) {            
+        if (url.startsWith("http:\\/\\/") || url.startsWith("https:\\/\\/")) {
+            return _ValidURL(url.replace(/\\\//g, "/"));
+        }
+    }
+    return false;
+};    
+
+function FixURL(url) {        
+    if (url.length > 5) {
+        if (url.startsWith("http:\\/\\/") || url.startsWith("https:\\/\\/")) {
+            return url.replace(/\\\//g, "/");
+        }
+    }        
+    if (url.length > 5) {
+        if ((url.charAt(0) == '/') && (url.charAt(1) == '/')) {
+            return "http:" + url;
+        }
+    }
+    return url;
+}
+
+function getParameterByName(name, url) {
+    name = name.replace(/[\[\]]/g, "\\$&");
+    let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+	module.exports = {
+		getParameterByName, FixURL, extractDomain, ValidURL
+	};
 }
