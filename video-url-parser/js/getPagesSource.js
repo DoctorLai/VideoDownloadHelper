@@ -7,7 +7,6 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
     
     let pageurl = document.location.href;
     let domain = extractDomain(pageurl);
-    let valid_domain = true;
     let html = document.documentElement.outerHTML;
     let video_url = "";
     let video_dom = null;
@@ -40,7 +39,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                             let dom = $(data).find("source[type='video/mp4']");
                             if (dom) {
                                 video_url = dom.attr('src');
-                                if (ValidURL(video_url) && valid_domain) {
+                                if (ValidURL(video_url)) {
                                     chrome.runtime.sendMessage({
                                         action: "getSource",
                                         source: JSON.stringify(FixURL(video_url))
@@ -138,7 +137,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                             let dom = $(data).find("source[type='video/mp4']");
                             if (dom) {
                                 video_url = dom.attr('src');
-                                if (ValidURL(video_url) && valid_domain) {
+                                if (ValidURL(video_url)) {
                                     chrome.runtime.sendMessage({
                                         action: "getSource",
                                         source: JSON.stringify(FixURL(video_url))
@@ -327,18 +326,16 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                             }                            
                             found = re.exec(data);
                         }
-                        if (valid_domain) {
-                            if (video_url_arr.length > 0) {
-                                chrome.runtime.sendMessage({
-                                    action: "getSource",
-                                    source: JSON.stringify(video_url_arr)
-                                });                          
-                            } else {
-                                chrome.runtime.sendMessage({
-                                    action: "getSource",
-                                    source: JSON.stringify(FixURL(video_url))
-                                });                              
-                            }
+                        if (video_url_arr.length > 0) {
+                            chrome.runtime.sendMessage({
+                                action: "getSource",
+                                source: JSON.stringify(video_url_arr)
+                            });                          
+                        } else {
+                            chrome.runtime.sendMessage({
+                                action: "getSource",
+                                source: JSON.stringify(FixURL(video_url))
+                            });                              
                         }
                     },                    
                     error: function(request, status, error) {
@@ -365,18 +362,16 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                 }                            
                 found = re.exec(html);
             }
-            if (valid_domain) {                
-                if (video_url_arr.length > 0) {
-                    chrome.runtime.sendMessage({
-                        action: "getSource",
-                        source: JSON.stringify(video_url_arr)
-                    });                          
-                } else {
-                    chrome.runtime.sendMessage({
-                        action: "getSource",
-                        source: JSON.stringify(FixURL(video_url))
-                    });                              
-                }
+            if (video_url_arr.length > 0) {
+                chrome.runtime.sendMessage({
+                    action: "getSource",
+                    source: JSON.stringify(video_url_arr)
+                });                          
+            } else {
+                chrome.runtime.sendMessage({
+                    action: "getSource",
+                    source: JSON.stringify(FixURL(video_url))
+                });                              
             }
         }
     }    
@@ -394,18 +389,16 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                 }                            
                 found = re.exec(html);
             }
-            if (valid_domain) {                
-                if (video_url_arr.length > 0) {
-                    chrome.runtime.sendMessage({
-                        action: "getSource",
-                        source: JSON.stringify(video_url_arr)
-                    });                          
-                } else {
-                    chrome.runtime.sendMessage({
-                        action: "getSource",
-                        source: JSON.stringify(FixURL(video_url))
-                    });                              
-                }
+            if (video_url_arr.length > 0) {
+                chrome.runtime.sendMessage({
+                    action: "getSource",
+                    source: JSON.stringify(video_url_arr)
+                });                          
+            } else {
+                chrome.runtime.sendMessage({
+                    action: "getSource",
+                    source: JSON.stringify(FixURL(video_url))
+                });                              
             }
         }
     }    
@@ -426,18 +419,16 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                 }                            
                 found = re.exec(html);
             }
-            if (valid_domain) {                
-                if (video_url_arr.length > 0) {
-                    chrome.runtime.sendMessage({
-                        action: "getSource",
-                        source: JSON.stringify(video_url_arr)
-                    });                          
-                } else {
-                    chrome.runtime.sendMessage({
-                        action: "getSource",
-                        source: JSON.stringify(FixURL(video_url))
-                    });                              
-                }
+            if (video_url_arr.length > 0) {
+                chrome.runtime.sendMessage({
+                    action: "getSource",
+                    source: JSON.stringify(video_url_arr)
+                });                          
+            } else {
+                chrome.runtime.sendMessage({
+                    action: "getSource",
+                    source: JSON.stringify(FixURL(video_url))
+                });                              
             }
         }
     }        
@@ -576,14 +567,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
         video_url = video_url.trim();
     }
 
-    if (!valid_domain) {
-            chrome.runtime.sendMessage({
-            action: "getSource",
-            source: JSON.stringify(pageurl) // send signal to disallow
-        });         
-    }
-
-    if (ValidURL(video_url) && valid_domain) {
+    if (ValidURL(video_url)) {
         chrome.runtime.sendMessage({
             action: "getSource",
             source: JSON.stringify(FixURL(video_url))
@@ -601,7 +585,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                 }
                 found = re.exec(html);
             }
-            if ((tmp.length > 0) && (valid_domain)) {
+            if ((tmp.length > 0)) {
                 chrome.runtime.sendMessage({
                     action: "getSource",
                     source: JSON.stringify(tmp)
@@ -621,7 +605,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                 }
                 found = re.exec(html);
             }
-            if ((tmp.length > 0) && valid_domain) {
+            if ((tmp.length > 0)) {
                 chrome.runtime.sendMessage({
                     action: "getSource",
                     source: JSON.stringify(tmp)
