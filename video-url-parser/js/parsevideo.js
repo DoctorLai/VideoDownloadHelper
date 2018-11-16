@@ -28,6 +28,12 @@ class ParseVideo {
                 return video_url;
             }            
         }
+        if (domain.includes("ted.com")) {
+            video_url = ParseVideo.parse_ted_com(this.url, this.html);
+            if (ValidURL(video_url)) {
+                return video_url;
+            }            
+        }
         video_url = ParseVideo.extract_all_video_urls(this.url, this.html);
         if (video_url !== null) {
             return video_url;
@@ -37,6 +43,22 @@ class ParseVideo {
             return video_url;
         }
         return null;
+    }
+
+    // parse ted.com video e.g. https://www.ted.com/talks/atul_gawande_want_to_get_great_at_something_get_a_coach?language=en#t-48048
+    static parse_ted_com(url, html) {
+        let re = /(['"])?(low|high|file|medium)\1?:\s*(['"])(https?:[^\s'",]+)/ig;
+        let found = re.exec(html);
+        let video_url = [];
+        while (found !== null) {  
+            let url = FixURL(found[4]);
+            if (ValidURL(url)) {
+                video_url.push(url);
+            }
+            found = re.exec(html);
+        }
+        return (video_url.length === 0) ? null :
+               ( (video_url.length === 1) ? video_url[0] : video_url);        
     }
 
     // parse miaopai.com video e.g. https://miaopai.com/show/abcde.html
