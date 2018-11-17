@@ -1,0 +1,1335 @@
+
+<!DOCTYPE html>
+<html class="no-js descriptionEmbedFormat_description" dir="ltr" lang="en">
+	<head>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>What's new for .NET Core and Visual Studio 2017 &#124; Visual Studio 2017 Launch &#124; Channel 9</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<meta name="application-name" content="Channel 9">
+		<meta name="msapplication-TileImage" content="/mstile-70x70.png">
+		<meta name="msapplication-TileColor" content="#D2730D">
+		<meta name="msapplication-config" content="/browserconfig.xml">
+		<meta name="msapplication-task" content="name=Browse All Content;action-uri=/Browse;icon-uri=/favicon.ico">
+		<meta name="msapplication-task" content="name=Shows;action-uri=/Browse/Shows;icon-uri=/favicon.ico">
+		<link rel="manifest" href="/manifest.json">
+
+
+		<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
+		<link rel="apple-touch-icon" href="/favicon-129x129.png">
+		
+
+		<link rel="videothumbnail" type="image/jpeg" href="https://f.ch9.ms/thumbnail/736f4acd-ea35-47e2-bf9d-62b8962ce94c.png"/>
+		<link rel="image_src" href="https://f.ch9.ms/thumbnail/736f4acd-ea35-47e2-bf9d-62b8962ce94c.png"/>
+	<link rel="canonical" href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108"/>
+	<link rel="alternate" type="application/rss+xml" href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/rss" title="What&#39;s new for .NET Core and Visual Studio 2017 Feed (Comments) - Channel 9"/>
+	<meta name="description" content="Announcing .NET Core tools are 1.0! Check out the changes in .NET Core tooling such as csproj and the new dotnet commands. Get a recap of recent .NET Core news. Refresh your knowledge of LTS and Curre"/>
+	<meta name="keywords" content="ASP.NET,.NET,.NET Core"/>
+	<meta name="CommentCount" content="10"/>
+	<meta property="og:title" content="What&#39;s new for .NET Core and Visual Studio 2017"/>
+	<meta property="og:description" content="Announcing .NET Core tools are 1.0! Check out the changes in .NET Core tooling such as csproj and the new dotnet commands. Get a recap of recent .NET Core news. Refresh your knowledge of LTS and Curre"/>
+	<meta property="og:type" content="video"/>
+	<meta property="og:image" content="https://f.ch9.ms/thumbnail/5bb65537-1159-4155-b9e0-13b3596d1de8.png"/>
+	<meta property="og:image:secure_url" content="https://f.ch9.ms/thumbnail/5bb65537-1159-4155-b9e0-13b3596d1de8.png"/>
+	<meta property="og:url" content="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108"/>
+	<meta property="og:site_name" content="Channel 9"/>
+		<meta property="og:video" content="https://sec.ch9.ms/ch9/e38e/55fb9c4b-33b1-4742-9fda-225eb92ee38e/VS2017LaunchT108_mid.mp4"/>
+		<meta property="og:video:secure_url" content="https://sec.ch9.ms/ch9/e38e/55fb9c4b-33b1-4742-9fda-225eb92ee38e/VS2017LaunchT108_mid.mp4"/>
+		<meta property="og:video:type" content="video/mp4"/>
+		<meta property="og:video:width" content="512"/>
+		<meta property="og:video:height" content="288"/>
+		<meta name="twitter:card" content="player"/>
+		<meta name="twitter:site" content="@ch9"/>
+		<meta name="twitter:title" content="What&#39;s new for .NET Core and Visual Studio 2017"/>
+		<meta name="twitter:description" content="Announcing .NET Core tools are 1.0! Check out the changes in .NET Core tooling such as csproj and the new dotnet commands. Get a recap of recent .NET Core news. Refresh your knowledge of LTS and Curre"/>
+			<meta name="twitter:image:src" content="https://f.ch9.ms/thumbnail/736f4acd-ea35-47e2-bf9d-62b8962ce94c.png"/>
+		<meta name="twitter:player" content="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/player"/>
+		<meta name="twitter:player:stream" content="https://sec.ch9.ms/ch9/e38e/55fb9c4b-33b1-4742-9fda-225eb92ee38e/VS2017LaunchT108_mid.mp4"/>
+		<meta name="twitter:player:stream:content_type" content="video/mp4"/>
+		<meta name="twitter:player:height" content="288"/>
+		<meta name="twitter:player:width" content="512"/>
+	<script type="application/ld+json">{"@context":"http://schema.org","@type":"VideoObject","name":"What's new for .NET Core and Visual Studio 2017","description":"Announcing .NET Core tools are 1.0! Check out the changes in .NET Core tooling such as csproj and the new dotnet commands. Get a recap&#160;of&#8230;","thumbnailUrl":"https://f.ch9.ms/thumbnail/5bb65537-1159-4155-b9e0-13b3596d1de8.png","uploadDate":"2017-03-07T15:30:00.0000000+00:00","duration":"PT00H08M20S","contentUrl":"https://sec.ch9.ms/ch9/e38e/55fb9c4b-33b1-4742-9fda-225eb92ee38e/VS2017LaunchT108_mid.mp4","embedUrl":"https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/player"}</script>
+
+
+		<link href="https://s.ch9.ms/c/global.css?v=xKLaRWzzTe4d9zPKOf-01OJ8Xes8baXiLRdRoXXGiZo1" rel="stylesheet" type="text/css"/>
+	<link href="https://s.ch9.ms/c/series.css?v=lcHLk2-vLzHjKxVqUn2qTlnkey0uVWFiWdhvCDAGZmw1" rel="stylesheet" type="text/css"/>
+
+
+
+
+		<script>
+			var ch9 = ch9 || {data:{},functions:{},value:{}};
+			ch9.value.CDNRoot='https://s.ch9.ms/';
+		</script>
+
+			<!--[if lt IE 9]>
+				<script src="https://s.ch9.ms/j/ie8.js?v=8EwjwTmTL0-jc8hoKqU8RfJ_iLJ6Ss4xiXoSppqiHas1"></script>
+				<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.12.0.min.js"></script>
+			<![endif]-->
+			<!--[if gte IE 9]><!-->
+				<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.1.0.min.js"></script>
+			<!--<![endif]-->
+
+		<script>
+			window.jQuery || document.write('<script src="/js/jquery/jquery-1.12.0.js"><\/script>')
+		</script>
+<script>
+	if(!ch9){
+		var ch9={data:{},functions:{},value:{}};
+	}
+	ch9.value.CDNRoot='https://s.ch9.ms/';
+	ch9.value.rnd='CfDJ8PaHJsX7-ClJknA69Rnbfr8W6jd1og88OLW_y64Myt4CW6sV38y3CB6ClEOZWKyn1YQ6c3y5zyV80n7-nW_ooIEVvPCWc89gdnxC1K_-fOO6eimMw5214nSl6hhfcb3SAIDJfcGYcM-h7qeSWUC3FudmkpcFndyZJ9dpEiyG4fKO0';
+	ch9.data.culture = "en";
+</script>
+<!--[if lte IE 8]><script src="https://s.ch9.ms/js/global/iso8601parse.js?v=CfDJ8PaHJsX7-ClJknA69Rnbfr8XX5XIEuAFmB_JK-N-DocIIS4t6GXn9vDOI_iY1n40oZJzmoO4HY0uWKfzOq0znZWPJaVWMz-gVkzRspNvTpEXc8WBDaPy3hkSxeTpzHapzec-DfwK5nkw2Hoa0wnZJb2J8PlWs4q5vxUe7MqWO3FY0"></script><![endif]-->
+
+
+		
+		<!--[if lt IE 7]><script>ch9.data.isIE6=true;</script><![endif]-->
+		<script src="https://s.ch9.ms/j/global_en.js?v=CfDJ8PaHJsX7-ClJknA69Rnbfr8XX5XIEuAFmB_JK-N-DocIIS4t6GXn9vDOI_iY1n40oZJzmoO4HY0uWKfzOq0znZWPJaVWMz-gVkzRspNvTpEXc8WBDaPy3hkSxeTpzHapzec-DfwK5nkw2Hoa0wnZJb2J8PlWs4q5vxUe7MqWO3FY0"></script>
+		<script src="https://s.ch9.ms/j/strings/Js/en?callback=ch9.functions.Resources.ch9ResourcesCallback&v=CfDJ8PaHJsX7-ClJknA69Rnbfr8W6jd1og88OLW_y64Myt4CW6sV38y3CB6ClEOZWKyn1YQ6c3y5zyV80n7-nW_ooIEVvPCWc89gdnxC1K_-fOO6eimMw5214nSl6hhfcb3SAIDJfcGYcM-h7qeSWUC3FudmkpcFndyZJ9dpEiyG4fKO0" type="text/javascript"></script>
+	<script src="https://s.ch9.ms/j/series.js?v=ZuuminmAOCMkUf3uSPfx8hWgPzuvRs6b-nR3GAJpFso1"></script>
+			 		<script src="https://uhf.microsoft.com/mscc/statics/mscc-0.4.1.min.js"></script>
+			 		<link rel="stylesheet" type="text/css" href="https://uhf.microsoft.com/mscc/statics/mscc-0.4.1.min.css">
+				<div id='msccBanner' dir='ltr' data-site-name='channel9.msdn.com' data-mscc-version='0.4.1' data-nver='aspnet-3.0.1' data-sver='0.1.2' class='cc-banner' role='alert' aria-labelledby='msccMessage'><div class='cc-container'><svg class='cc-icon cc-v-center' x='0px' y='0px' viewBox='0 0 44 44' height='30px' fill='none' stroke='currentColor'><circle cx='22' cy='22' r='20' stroke-width='2'></circle><line x1='22' x2='22' y1='18' y2='33' stroke-width='3'></line><line x1='22' x2='22' y1='12' y2='15' stroke-width='3'></line></svg> <span id='msccMessage' class='cc-v-center cc-text' tabindex='0'>This site uses cookies for analytics, personalized content and ads. By continuing to browse this site, you agree to this use.</span> <a href='https://go.microsoft.com/fwlink/?linkid=845480' target='_top' aria-label='Learn more about Microsoft&#39;s Cookie Policy' id='msccLearnMore' class='cc-link cc-v-center cc-float-right' data-mscc-ic='false'>Learn more</a></div></div>
+
+	</head>
+
+	<body class="episode hasVideo" dir="ltr" data-guid="89670a30-1512-4441-9347-a72e015d9bd6" data-episodetitle="What&#39;s new for .NET Core and Visual Studio 2017" lang="en">
+			
+
+<header role="banner">
+	<a tabindex="0" class="screenReader" href="#mainContent">Skip Navigation</a>
+	<div class="navHolder holder">
+		<nav class="container" role="navigation" aria-label="Main Navigation">
+			<h1 class="screenReader">Primary Navigation</h1>
+
+			<div class="brand">
+					<a href="/" class="ch9Logo">
+						<span class="ch9Name">Channel 9 Home</span>
+					</a>
+			</div>
+
+				<button class="navigationToggle buttonTog" aria-pressed="false" aria-label="Toggle main navigation visibility">
+					<span class="screenReader">
+						Site Navigation
+					</span>
+				</button>
+
+				<ul role="navigation" aria-setsize="3" aria-posinset="position" class="mainNavigation">
+					<li>
+						<a href="/Browse/AllContent">All Content</a>
+					</li>
+					<li>
+						<a href="/Browse/AllShows">Shows</a>
+					</li>
+					<li>
+						<a href="/Browse/Events">Events</a>
+					</li>
+				</ul>
+
+				<button class="searchToggle buttonTog" aria-pressed="false" aria-label="Toggle search form visibility">
+					<span class="screenReader">
+						Toggle Search
+					</span>
+				</button>
+
+				<div class="siteSearch" role="complementary">
+					<form class="bypassDirty" autocomplete="off" action="/Search" role="form">
+						<label for="siteSearchText" class="screenReader">Search Channel 9</label>
+							<input id="siteSearchText" type="text" name="term" placeholder="Search Channel 9" role="search"/>
+						<label id="siteSearchButtonLabel" for="siteSearchButton">Search</label>
+						<input id="siteSearchButton" type="submit" value="Search"/>
+					</form>
+				</div>
+
+				<div class="userHolder">
+						<a class="signInOut signIn buttonPri" href="https://login.live.com/login.srf?wa=wsignin1.0&amp;rpsnv=13&amp;ct=1542401461&amp;rver=6.6.6577.0&amp;wp=MBI_SSL&amp;wreply=https:%2F%2Fchannel9.msdn.com%2FEvents%2FVisual-Studio%2FVisual-Studio-2017-Launch%2FT108&amp;id=47159">Sign In</a>
+				</div>
+
+		</nav>
+	</div>
+</header>
+
+
+<a class="screenReader" id="mainContent"></a>
+
+
+	
+
+<main role="main">
+	<div class="itemHead holder" dir="ltr" lang="en">
+		<div class="container">
+
+			<div class="adminLinks">
+			</div>
+
+      <div class="seriesTitle">
+          <a href="/Events/Visual-Studio/Visual-Studio-2017-Launch">Visual Studio 2017&#160;Launch</a>
+      </div>
+      <h1>What's new for .NET Core and Visual Studio&#160;2017</h1>
+      <ul class="metaData">
+        <li class="episode group">
+          <div class="releaseDate">
+              Mar 07, 2017 at 7:30AM
+          </div>
+          <div class="authors">
+            by <a href="/Events/Speakers/kendra-havens">Kendra Havens</a>
+          </div>
+        </li>
+        <li class="community group">
+          <div class="rating">
+
+<div class="ratingHolder" role="complementary">
+
+
+
+		<a href="#" class="averageRating" title="Average of 5 out of 5 stars">
+			<span style="width: 100%" itemtype="http://schema.org/AggregateRating" itemprop="aggregateRating">
+				<span class="screenReader">
+					Average of 5 out of 5 stars
+				</span>
+			</span>
+		</a><span class="count">17</span> ratings
+
+		<div class="signInToRate holder hidden">
+			<div class="container">
+				<a class="buttonSec" href="https://login.live.com/login.srf?wa=wsignin1.0&amp;rpsnv=13&amp;ct=1542401461&amp;rver=6.6.6577.0&amp;wp=MBI_SSL&amp;wreply=https:%2F%2Fchannel9.msdn.com%2FEvents%2FVisual-Studio%2FVisual-Studio-2017-Launch%2FT108&amp;id=47159">Sign in to rate</a>
+				<button class="close">
+					<span class="screenReader">
+						Close
+					</span>
+				</button>
+			</div>
+		</div>
+
+
+</div>
+          </div>
+            <div class="comments">
+              <a href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108#comments"><span class="count">11</span> comments
+              </a>
+            </div>
+        </li>
+      </ul>
+      </div>
+	</div>
+
+	<div class="itemBody holder">
+		<div class="container">
+			
+
+
+
+
+
+<style>
+/* Video player
+-------------------------------------------------- */
+
+html.embedded {
+	overflow: hidden;
+}
+
+html.embedded body.hasVideo {
+	height: 100%;
+	width: 100%;
+}
+
+.playerContainer {
+	clear: both;
+	font-family: segoe-ui_normal, 'Segoe UI', Segoe, 'Segoe WP', Tahoma, Verdana, Arial, sans-serif;
+	height: 100%;
+	position: relative;
+	width: 100%;
+}
+
+html.embedded .playerContainer {
+	max-width: 100%;
+	max-height: 100%;
+	height: calc(100vw * .5625);
+	width: calc(100vh / .5625);
+	margin: 0 auto;
+}
+
+.playerContainer a.playButton {
+	background-color: #000;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	display: block;
+	height: 100%;
+	position: relative;
+	width: 100%;
+}
+
+.playerContainer a.playButton:before {
+	content: "";
+	display: block;
+	padding-top: 56.25%;
+}
+
+.playerContainer a.playButton:active,
+.playerContainer a.playButton:hover {
+	text-decoration: none;
+}
+
+.playerContainer a.playButton .caption {
+	background-color: rgba(0, 0, 0, .75);
+	bottom: 0;
+	color: #fff;
+	display: block;
+	font-size: 1.1rem;
+	padding: 2% 4%;
+	position: absolute;
+}
+
+body[dir=ltr] .playerContainer a.playButton .caption {
+	left: 0;
+}
+
+body[dir=rtl] .playerContainer a.playButton .caption {
+	right: 0;
+}
+
+.playerContainer > .playButton > .play {
+	display: block;
+	font-size: 0;
+	overflow: hidden;
+	padding-top: 56.25%;
+	position: absolute;
+	text-indent: -9999px;
+	top: 0;
+	width: 100% !important;
+	z-index: 9;
+}
+
+.playerContainer > .playButton > .play:before {
+	background-color: rgba(0, 0, 0, .5);
+	border: 2px solid rgba(0, 0, 0, .2);
+	border-radius: 8px;
+	bottom: 0;
+	color: transparent;
+	content: "";
+	cursor: pointer;
+	display: inline-block;
+	height: 16%;
+	left: 0;
+	margin: auto;
+	position: absolute;
+	right: 0;
+	text-indent: -9999px;
+	top: 0;
+	transition: background-color 200ms ease 0s;
+	width: 9%;
+	z-index: 10;
+}
+
+.playerContainer > .playButton:focus > .play:before {
+	outline: 2px solid #004e8e;
+}
+
+.playerContainer > .playButton > .play:after {
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABjCAYAAABkDAWWAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAv5JREFUeNrsnUFHRFEUx1+j79KqVUTMZ6hVHyNaRbSKaBURwxCpbZtapZZFm2ZTq2jVKiIihsh0nrlHw9Q0b+bdc+655//jr1TE/c315v3f3Htner1eQdxRNilXBRClEb4uUC4p15QmhkVeANMMEs4o8xgeeQHMMuWeckyZwzDFYyZcA3oj/uaLckTZpjxjyOQFMJ+UNmWH8oKhkxfAdCkHlF3KG4ZQXgDzTtmn7IXvgbAA5i3MhhblA0MqL4B5DRfqdrheAGEBzHO4UB+Gd1BAWADzFGbECYZZRwDzEEScYrh1BDDnlK0gBPxTRcQA9YbyDBgE9YayAMZ9vaEtgHFbb6QigHFXb6QmgHFTb6QqgMm+3khdAJNtvWFFAJNdvWFNAJNNvWFVAGO+3mgYfwGZrzesz4BBTNYbOQlgTNUbOQpgTNQbOQtgkq43PAhgkqw3PAlgkqo3PApgkqg3PAtgVOsNCPhBpd6AgGFE640GxnsI0XoDM2A00esNCBiPaPUGBFSj9noDAiajtnoDAqZj6noDAuph4noDAuqlcr0BAXEYu96AgLj8W29AgAydol9vXECALreUDcoN/wBdkCxLRX83mnJroEXMAH1amAE6lH3SGmV9FmOhcsNW3ieUvVIBAXIDz5VFd/AXECBzH1C+/fy1K4IA5TthCKiXyl0QBNR7ca3chkLAdEz9PAACJqO2J2IQUI3anwlDwHhE+1QEBIwm+ueCIOBvTsIr/jHmP4GAYfDZUMXaYJWyUgiuO8YMUF4f4FlAEitkPApIao2YJwFJrpL0ICDpdcI5CzCxUj5HAab2ishJgMndUnIRIFIbQIBybYAqQrk2wAzIcNdEKwKy3Tc0dQHZ75ybqgA3e0enJsDd7umpCHB7foC2APcnaGgJwBkyigLM1gbWBeAcMaUqIpvawNoMwFmSSgJwmqqSAJwnrCQAJ2orCcCZ8koC3NYG2gLc1wZaAlAbKApAbaAkALWBkoByJ6fNYmBHJyAjoBMG/gpDIsu3AAMA8Y+rQ0L9JYAAAAAASUVORK5CYII=');
+}
+
+.playerContainer > .playButton > .play:after {
+	background-position: right center;
+	background-repeat: no-repeat;
+	bottom: 0;
+	content: "";
+	display: inline-block;
+	left: 1.3%;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 4.5%;
+	height: 16.215%;
+	margin: auto;
+	z-index: 11;
+}
+
+.playerContainer.noVideo > .playButton > .play:before,
+.playerContainer.noVideo > .playButton > .play:after {
+	display: none;
+}
+
+.playerContainer > .playButton > .play:hover:before {
+	background-color: rgba(0, 0, 0, 0.9);
+	color: transparent;
+}
+
+.playerContainer .progress.circles {
+	background-color: transparent;
+	border: none;
+}
+
+.playerContainer .videoContainer {
+	background-color: #000;
+	display: none;
+	height: 100%;
+	width: 100%;
+}
+
+.playerContainer video.Player {
+	height: 100%;
+	width: 100%;
+}
+
+.playerContainer .videoContainer.fullscreen {
+	height: 100%;
+	left: 0;
+	overflow: hidden;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 9999;
+}
+
+.playerContainer ul.mediaformat,
+.playerContainer ul.mediacaptions {
+	display: none;
+}
+
+.playerContainer .videoContainer .error {
+	background-color: #464646;
+	color: #fff;
+	padding: 40px;
+	vertical-align: middle;
+}
+
+.playerContainer .videoContainer .error a,
+.playerContainer .videoContainer .error a:hover,
+.playerContainer .videoContainer .error a:focus {
+	color: #ffb20b;
+}
+
+.playerContainer .error h3 {
+	font-size: 120%;
+	margin-top: 1.13rem;
+}
+
+
+.playerContainer .iframeContainer {
+    background-color: #ddd;
+	clear: both;
+	padding-bottom: 56.25%;
+	position: relative;
+}
+
+.playerContainer .iframeContainer:before {
+    background-image: url('/assets/images/ch9Icons.png?v=6');
+    background-position: -138px -251px;
+    content: '';
+    display: block;
+    height: 35px;
+    left: calc(50% - 18px);
+    opacity: .7;
+    position: absolute;
+    top: calc(50% - 18px);
+    width: 35px;
+
+    -webkit-animation: spin 1.5s linear infinite;
+    -moz-animation: spin 1.5s linear infinite;
+    animation: spin 1.5s linear infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.playerContainer .iframeContainer .playerIframe {
+	height: 100%;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+
+.playerContainer .noVideo_region {
+	background-color: #ddd;
+	padding: 65px 40px;
+}
+</style>
+<style>
+	body {
+		margin: 0;
+		padding: 0;
+	}
+</style>
+
+	<div class="playerContainer" style="" dir="ltr" lang="en">
+
+				<a class="playButton" style="background-image:url(https://f.ch9.ms/thumbnail/5bb65537-1159-4155-b9e0-13b3596d1de8.png);" href="https://sec.ch9.ms/ch9/e38e/55fb9c4b-33b1-4742-9fda-225eb92ee38e/VS2017LaunchT108_high.mp4" title="Play" data-user='{
+						"isLoggedIn": "False",
+						"c9Id": "",
+						"mrcId": "",
+						"progress": ""
+					}' data-player='{
+						"playerPreference": "auto",
+						"language": "en",
+						"isSecure": "True"
+					}' data-episode='{
+						"contentId": "89670a30-1512-4441-9347-a72e015d9bd6",
+						"length": "00:08:20",
+						"api": "/Sessions(guid&#39;89670a30-1512-4441-9347-a72e015d9bd6&#39;)/",
+						"relatedApi": "/Related?id=89670a30-1512-4441-9347-a72e015d9bd6",
+						"isMVA": "False"
+					}'>
+					<div class="play">Play What&#39;s new for .NET Core and Visual Studio 2017</div>
+					<time class="caption" datetime="00:08:20">08:20</time>
+				</a>
+				<div class="videoContainer"></div>
+
+				<ul class="progressive mediaformat">
+					
+	<li>
+		<a rel="Mp4Med" href="https://sec.ch9.ms/ch9/e38e/55fb9c4b-33b1-4742-9fda-225eb92ee38e/VS2017LaunchT108_mid.mp4"></a>
+	</li>
+				</ul>
+				<ul class="html5 mediaformat">
+					
+	<li>
+		<a rel="Mp4" href="https://sec.ch9.ms/ch9/e38e/55fb9c4b-33b1-4742-9fda-225eb92ee38e/VS2017LaunchT108.mp4"></a>
+	</li>
+	<li>
+		<a rel="Mp4High" href="https://sec.ch9.ms/ch9/e38e/55fb9c4b-33b1-4742-9fda-225eb92ee38e/VS2017LaunchT108_high.mp4"></a>
+	</li>
+	<li>
+		<a rel="Mp4Med" href="https://sec.ch9.ms/ch9/e38e/55fb9c4b-33b1-4742-9fda-225eb92ee38e/VS2017LaunchT108_mid.mp4"></a>
+	</li>
+				</ul>
+
+				<ul class="mediacaptions">
+					<li class="default">
+						
+	<a rel="webvtt" href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=ru" data-language="ru" data-label="Русский" data-isdefault="false"></a>
+					</li>
+						<li class="additional">
+							
+	<a rel="webvtt" href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=cs" data-language="cs" data-label="Česky" data-isdefault="false"></a>
+						</li>
+						<li class="additional">
+							
+	<a rel="webvtt" href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=de" data-language="de" data-label="Deutsch" data-isdefault="false"></a>
+						</li>
+						<li class="additional">
+							
+	<a rel="webvtt" href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=en" data-language="en" data-label="English" data-isdefault="false"></a>
+						</li>
+						<li class="additional">
+							
+	<a rel="webvtt" href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=es" data-language="es" data-label="Espa&#241;ol" data-isdefault="false"></a>
+						</li>
+						<li class="additional">
+							
+	<a rel="webvtt" href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=fr" data-language="fr" data-label="Fran&#231;ais" data-isdefault="false"></a>
+						</li>
+						<li class="additional">
+							
+	<a rel="webvtt" href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=it" data-language="it" data-label="Italiano" data-isdefault="false"></a>
+						</li>
+						<li class="additional">
+							
+	<a rel="webvtt" href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=ja" data-language="ja" data-label="日本語" data-isdefault="false"></a>
+						</li>
+						<li class="additional">
+							
+	<a rel="webvtt" href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=ko" data-language="ko" data-label="한국어" data-isdefault="false"></a>
+						</li>
+						<li class="additional">
+							
+	<a rel="webvtt" href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=pl" data-language="pl" data-label="Polski" data-isdefault="false"></a>
+						</li>
+						<li class="additional">
+							
+	<a rel="webvtt" href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=pt" data-language="pt" data-label="Portugu&#234;s" data-isdefault="false"></a>
+						</li>
+						<li class="additional">
+							
+	<a rel="webvtt" href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=tr" data-language="tr" data-label="T&#252;rk&#231;e" data-isdefault="false"></a>
+						</li>
+						<li class="additional">
+							
+	<a rel="webvtt" href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=zh-cn" data-language="zh-cn" data-label="简体中文" data-isdefault="false"></a>
+						</li>
+						<li class="additional">
+							
+	<a rel="webvtt" href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=zh-tw" data-language="zh-tw" data-label="繁體中文" data-isdefault="false"></a>
+						</li>
+				</ul>
+	</div>
+
+
+			
+			<div class="queueHolder">
+					<a class="buttonSub" href="https://login.live.com/login.srf?wa=wsignin1.0&amp;rpsnv=13&amp;ct=1542401461&amp;rver=6.6.6577.0&amp;wp=MBI_SSL&amp;wreply=https:%2F%2Fchannel9.msdn.com%2FEvents%2FVisual-Studio%2FVisual-Studio-2017-Launch%2FT108&amp;id=47159">Sign in to queue</a>
+				<div class="queueError holder hidden">
+					<div class="container">
+						Sorry, an error occurred.
+						<button class="close">
+							<span class="screenReader">
+								Close
+							</span>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="ch9tabGroup descriptionEmbedFormat" data-ch9tab_group_name="descriptionEmbedFormat" role="tablist">
+				<section role="tab" class="ch9tab description" data-ch9tab_name="description">
+					<h2 tabindex="0">Description</h2>
+					<div class="ch9tabContent" dir="ltr" lang="en" role="tabpanel">
+						<p>Announcing .NET Core tools are 1.0! Check out the changes in .NET Core tooling such as csproj and the new dotnet commands. Get a recap of recent .NET Core news. Refresh your knowledge of LTS and&nbsp;Current release trains. Learn about .NET and Docker.</p><p>See a demo of dotnet migrate in Visual Studio 2017 and the open source <a href="https://docs.microsoft.com">docs.microsoft.com.</a></p><p>Get started today by downloading Visual Studio 2017, visit: <a href="http://www.visualstudio.com/vs/whatsnew">http://www.visualstudio.com/vs/whatsnew</a></p>
+
+						<div class="details" dir="ltr" lang="en">
+							<div class="tags">
+								<h3>Tags:</h3>
+								<a href="/Events/Visual-Studio/Visual-Studio-2017-Launch?t=asp.net">ASP.NET</a><span>, </span><a href="/Events/Visual-Studio/Visual-Studio-2017-Launch?t=.net">.NET</a><span>, </span><a href="/Events/Visual-Studio/Visual-Studio-2017-Launch?t=.net%2Bcore">.NET Core</a>
+							</div>
+								<div class="day">
+									<h3>Day: </h3>
+									<a href="/Events/Visual-Studio/Visual-Studio-2017-Launch?d=0">0</a>
+								</div>
+								<div class="type">
+									<h3>Session Type:</h3>
+									<a href="/Events/Visual-Studio/Visual-Studio-2017-Launch?y=Pre-recorded">Pre-recorded</a>
+								</div>
+								<div class="code">
+									<h3>Code: </h3>
+									T108
+								</div>
+						</div>
+					</div>
+				</section>
+
+				<section role="tab" class="ch9tab share" data-ch9tab_name="share">
+					<h2 tabindex="0">Share</h2>
+					<div class="ch9tabContent" role="tabpanel">
+						<ul class="sharing">
+							<li>
+								<a target="_blank" href="https://twitter.com/intent/tweet/?text=What%27s+new+for+.NET+Core+and+Visual+Studio+2017&url=https%3a%2f%2fchannel9.msdn.com%2fEvents%2fVisual-Studio%2fVisual-Studio-2017-Launch%2fT108&via=ch9" class="twitter mediumIcon"><span class="screenReader">Twitter</span></a>
+              				</li>
+							<li>
+								<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fchannel9.msdn.com%2fEvents%2fVisual-Studio%2fVisual-Studio-2017-Launch%2fT108" class="facebook mediumIcon"><span class="screenReader">Facebook</span></a>
+							</li>
+							<li>
+								<a target="_blank" href="https://www.reddit.com/submit?url=https%3a%2f%2fchannel9.msdn.com%2fEvents%2fVisual-Studio%2fVisual-Studio-2017-Launch%2fT108" class="reddit mediumIcon"><span class="screenReader">Reddit</span></a>
+							</li>
+						</ul>
+						<form class="ch9form bypassDirty">
+							<fieldset>
+								<label for="shareLink" class="screenReader">Share Link</label>
+								<input type="text" id="shareLink" value="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108"/>
+								<input class="buttonPri copy" type="button" value="Copy"/>
+							</fieldset>
+						</form>
+					</div>
+				</section>
+
+				<section role="tab" class="ch9tab embed" data-ch9tab_name="embed">
+					<h2 tabindex="0">Embed</h2>
+					<div class="ch9tabContent" role="tabpanel"></div>
+				</section>
+
+				<section role="tab" class="ch9tab download" data-ch9tab_name="download">
+					<h2 tabindex="0">Download</h2>
+					<div class="ch9tabContent" role="tabpanel">
+					
+						<div class="download">
+							<div>
+								<h3>Download this episode</h3>
+								<ul class="default">
+											<li>
+												<a href="https://sec.ch9.ms/ch9/e38e/55fb9c4b-33b1-4742-9fda-225eb92ee38e/VS2017LaunchT108.mp3" download="T108.mp3">
+													MP3
+												</a> (7.6 MB)
+											</li>
+											<li>
+												<a href="https://sec.ch9.ms/ch9/e38e/55fb9c4b-33b1-4742-9fda-225eb92ee38e/VS2017LaunchT108.mp4" download="T108_low.mp4">
+													Low Quality MP4
+												</a> (12.7 MB)
+											</li>
+											<li>
+												<a href="https://sec.ch9.ms/ch9/e38e/55fb9c4b-33b1-4742-9fda-225eb92ee38e/VS2017LaunchT108_high.mp4" download="T108_high.mp4">
+													High Quality MP4
+												</a> (47.9 MB)
+											</li>
+											<li>
+												<a href="https://sec.ch9.ms/ch9/e38e/55fb9c4b-33b1-4742-9fda-225eb92ee38e/VS2017LaunchT108_mid.mp4" download="T108_mid.mp4">
+													Mid Quality MP4
+												</a> (31.4 MB)
+											</li>
+								</ul>
+							</div>
+
+							<div>
+								<h3>Download captions</h3>
+								<ul class="default">
+									<li>
+										<a href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=ru" download="T108_ru.vtt">
+											Русский
+										</a>
+									</li>
+											<li>
+												<a href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=cs" download="T108_cs.vtt">
+													Česky
+												</a>
+											</li>
+											<li>
+												<a href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=de" download="T108_de.vtt">
+													Deutsch
+												</a>
+											</li>
+											<li>
+												<a href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=en" download="T108_en.vtt">
+													English
+												</a>
+											</li>
+											<li>
+												<a href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=es" download="T108_es.vtt">
+													Espa&#241;ol
+												</a>
+											</li>
+											<li>
+												<a href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=fr" download="T108_fr.vtt">
+													Fran&#231;ais
+												</a>
+											</li>
+											<li>
+												<a href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=it" download="T108_it.vtt">
+													Italiano
+												</a>
+											</li>
+											<li>
+												<a href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=ja" download="T108_ja.vtt">
+													日本語
+												</a>
+											</li>
+											<li>
+												<a href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=ko" download="T108_ko.vtt">
+													한국어
+												</a>
+											</li>
+											<li>
+												<a href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=pl" download="T108_pl.vtt">
+													Polski
+												</a>
+											</li>
+											<li>
+												<a href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=pt" download="T108_pt.vtt">
+													Portugu&#234;s
+												</a>
+											</li>
+											<li>
+												<a href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=tr" download="T108_tr.vtt">
+													T&#252;rk&#231;e
+												</a>
+											</li>
+											<li>
+												<a href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=zh-cn" download="T108_zh-cn.vtt">
+													简体中文
+												</a>
+											</li>
+											<li>
+												<a href="https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108/captions?f=webvtt&amp;l=zh-tw" download="T108_zh-tw.vtt">
+													繁體中文
+												</a>
+											</li>
+								</ul>
+							</div>
+							
+						
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+
+	<section class="moreEpisodes">
+		<div class="container">
+			<div class="holder">
+					<h2>More episodes in this series</h2>
+					
+
+	
+<article class="abstract xSmall" data-api="/Sessions(guid&#39;ed72fb48-c56a-49cb-87f3-a72f000f00b5&#39;)/" dir="ltr" lang="en">
+	<header>
+		<div class="seriesTitle">
+			<a href="/Events/Visual-Studio/Visual-Studio-2017-Launch">Visual Studio 2017&#160;Launch</a>
+		</div>
+		<h3>
+			<a href="/Events/Visual-Studio/Visual-Studio-2017-Launch/K100">Interview with Dave and Benjamin&#160;Johnson</a>
+		</h3>
+	</header>
+
+	<a tabindex="-1" class="tile" href="/Events/Visual-Studio/Visual-Studio-2017-Launch/K100">
+			<img role="img" src="https://sec.ch9.ms/ch9/d389/d95843eb-f894-4bd7-aea9-884dff2ad389/VSLaunch2017DaveBen_512.jpg" alt="Interview with Dave and Benjamin Johnson"/>
+			<time class="caption" datetime="00:09:51">09:51</time>
+	</a>
+</article>
+
+
+	
+<article class="abstract xSmall" data-api="/Sessions(guid&#39;dbfc30cf-1cb5-434c-873a-a72e015d724e&#39;)/" dir="ltr" lang="en">
+	<header>
+		<div class="seriesTitle">
+			<a href="/Events/Visual-Studio/Visual-Studio-2017-Launch">Visual Studio 2017&#160;Launch</a>
+		</div>
+		<h3>
+			<a href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T106">Getting started with Azure in Visual Studio&#160;2017</a>
+		</h3>
+	</header>
+
+	<a tabindex="-1" class="tile" href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T106">
+			<img role="img" src="https://sec.ch9.ms/ch9/f6b5/92f55da4-cc77-443b-9542-2a570954f6b5/GettingStartedWithAzureinVS2017_512.jpg" alt="Getting started with Azure in Visual Studio 2017"/>
+			<time class="caption" datetime="00:07:11">07:11</time>
+	</a>
+</article>
+
+					<h2>Related episodes</h2>
+					
+
+	
+<article class="abstract xSmall" data-api="/Sessions(guid&#39;e8670699-c3d4-4b79-9c95-a938014f7c4a&#39;)/" dir="ltr" lang="en">
+	<header>
+		<div class="seriesTitle">
+			<a href="/Events/dotnetConf/2018">.NET Conf&#160;2018</a>
+		</div>
+		<h3>
+			<a href="/Events/dotnetConf/2018/S105">Latest Productivity Updates in Visual Studio 2017 Update&#160;15.8</a>
+		</h3>
+	</header>
+
+	<a tabindex="-1" class="tile" href="/Events/dotnetConf/2018/S105">
+			<img role="img" src="https://sec.ch9.ms/ch9/244f/5d368fc4-8f21-4836-a5ed-bcb61933244f/S105Havens_512.jpg" alt="Latest Productivity Updates in Visual Studio 2017 Update 15.8"/>
+			<time class="caption" datetime="00:52:33">52:33</time>
+	</a>
+</article>
+
+
+	
+<article class="abstract xSmall noVideo" data-api="/Sessions(guid&#39;f789e6ab-f353-4588-ad1d-a8d800fc6caa&#39;)/" dir="ltr" lang="en">
+	<header>
+		<div class="seriesTitle">
+			<a href="/Events/Build/2018">Microsoft Build&#160;2018</a>
+		</div>
+		<h3>
+			<a href="/Events/Build/2018/BRK2134">The Present and Not-too-distant Future of Visual&#160;Studio</a>
+		</h3>
+	</header>
+
+	<a tabindex="-1" class="tile" href="/Events/Build/2018/BRK2134">
+			<img role="img" src="https://f.ch9.ms/thumbnail/6d0d4eac-150f-4022-9cea-b93ea06d8118.png" alt="The Present and Not-too-distant Future of Visual Studio"/>
+	</a>
+</article>
+
+
+	
+<article class="abstract xSmall" data-api="/Sessions(guid&#39;075b31de-7938-4876-ba55-a76d015a560b&#39;)/" dir="ltr" lang="en">
+	<header>
+		<div class="seriesTitle">
+			<a href="/Events/Build/2017">Build&#160;2017</a>
+		</div>
+		<h3>
+			<a href="/Events/Build/2017/P4187">.NET Core and Visual Studio for&#160;Mac</a>
+		</h3>
+	</header>
+
+	<a tabindex="-1" class="tile" href="/Events/Build/2017/P4187">
+			<img role="img" src="https://sec.ch9.ms/ch9/2c0e/4ecb63f3-8e15-4175-9a0a-f3d270b52c0e/P4187_512.jpg" alt=".NET Core and Visual Studio for Mac"/>
+			<time class="caption" datetime="00:13:11">13:11</time>
+	</a>
+</article>
+
+
+	
+<article class="abstract xSmall" data-api="/Sessions(guid&#39;0a6469c7-0880-42d4-a756-a768001c664b&#39;)/" dir="ltr" lang="en">
+	<header>
+		<div class="seriesTitle">
+			<a href="/Events/Build/2017">Build&#160;2017</a>
+		</div>
+		<h3>
+			<a href="/Events/Build/2017/B8095">Visual Studio for&#160;Mac</a>
+		</h3>
+	</header>
+
+	<a tabindex="-1" class="tile" href="/Events/Build/2017/B8095">
+			<img role="img" src="https://sec.ch9.ms/ch9/c8c7/be96ecfb-8cbb-42b1-8059-b45fbc61c8c7/B8095_512.jpg" alt="Visual Studio for Mac"/>
+			<time class="caption" datetime="01:00:30">01:00:30</time>
+	</a>
+</article>
+
+
+	
+<article class="abstract xSmall" data-api="/Sessions(guid&#39;c5fd2d51-b39b-42b6-8804-a6bf00cc5163&#39;)/" dir="ltr" lang="en">
+	<header>
+		<div class="seriesTitle">
+			<a href="/Events/Connect/2016">Connect(); //&#160;2016</a>
+		</div>
+		<h3>
+			<a href="/Events/Connect/2016/106">What's new in .NET Core&#160;1.1?</a>
+		</h3>
+	</header>
+
+	<a tabindex="-1" class="tile" href="/Events/Connect/2016/106">
+			<img role="img" src="https://sec.ch9.ms/ch9/1691/48c8e1f0-e2cb-4bf1-b39a-c2c0fcca1691/106DotNetCore11_512.jpg" alt="What&#39;s new in .NET Core 1.1?"/>
+			<time class="caption" datetime="00:05:26">05:26</time>
+	</a>
+</article>
+
+			</div>
+		</div>
+	</section>
+
+	<section class="followTheDiscussion">
+	
+		<div class="container">
+			<div class="holder">
+				<div class="commentLinks">
+				</div>
+				<h2>The Discussion</h2>
+			
+				<ul class="discussion" id="comments">
+					<li>
+
+
+
+
+<figure data-authorname="dcuccia">
+		<a tabindex="-1" href="/Niners/dcuccia" title="Go to Profile page of dcuccia.">
+			<img src="https://sec.ch9.ms/content/default.gif" alt="User profile image"/>
+		</a>
+		<figcaption>
+			<a href="/Niners/dcuccia" title="Go to Profile page of dcuccia.">
+				dcuccia
+			</a>
+		</figcaption>
+</figure>
+
+<div class="details withAuthor" id="c636245161799612098">
+		<p>Awesome. Congrats to all on the release.</p><p>Regarding &quot;dotnet migrate,&quot; is the plan to use this same tooling/framework to assist migration from .NET Framework as well? If so, what's the timeline on that? It's great to have assistance for people that used project.json, but obviously the much bigger cohort are those of us who have waited for 1.0 tooling to migrate over from the full framework. Something along the lines of the MoMA/Xamarin tools for checking compatibility against different profiles will be crucial for this.</p>
+</div>
+
+<footer>
+	<div class="modified">
+		Last modified <time datetime="2017-03-07T20:42:59.9612098+00:00"><a class="permalink" href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108#c636245161799612098" rel="nofollow" title="Comment Permalink">Mar 07, 2017 at&#160;12:42PM</a></time>
+	</div>
+</footer>
+					</li>
+					<li>
+
+
+
+
+<figure data-authorname="kendrahavens">
+		<a tabindex="-1" href="/Niners/kendrahavens" title="Go to Profile page of kendrahavens.">
+			<img src="https://f.ch9.ms/thumbnail/d5eb8db2-023c-41ad-aa14-497bfad2661d.jpg" alt="User profile image"/>
+		</a>
+		<figcaption>
+			<a href="/Niners/kendrahavens" title="Go to Profile page of kendrahavens.">
+				kendrahavens
+			</a>
+		</figcaption>
+</figure>
+
+<div class="details withAuthor" id="c636245941451043060">
+		<p>@<a href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108#c636245161799612098">dcuccia</a>: Thank you! Immo Landwerth has a <a href="https://blogs.msdn.microsoft.com/dotnet/2016/02/10/porting-to-net-core/">great blog post</a> covering the challenges associated with porting from the .NET Framework to .NET Core. For now,&nbsp;we have&nbsp;<a href="https://github.com/Microsoft/dotnet-apiport">dotnet-apiport</a>&nbsp;that will help identify what libraries are compatible and what will need more work put into them. Keep in mind, many APIs will be added to .NET Core 2.0 that will make porting even easier with .NET Standard 2.0. Currently, .NET Core 2.0 and .NET Standard 2.0&nbsp;are planned for&nbsp;<a href="https://github.com/dotnet/core/blob/master/roadmap.md">Q3 2017</a>.</p>
+</div>
+
+<footer>
+	<div class="modified">
+		Last modified <time datetime="2017-03-08T18:22:25.1043060+00:00"><a class="permalink" href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108#c636245941451043060" rel="nofollow" title="Comment Permalink">Mar 08, 2017 at&#160;10:22AM</a></time>
+	</div>
+</footer>
+					</li>
+					<li>
+
+
+
+
+<figure data-authorname="Eric Schneider">
+		<span>
+			<img src="https://sec.ch9.ms/content/default.gif" alt="User profile image"/>
+		</span>
+		<figcaption>
+				Eric&#160;Schneider
+		</figcaption>
+</figure>
+
+<div class="details withAuthor" id="c636246329785548883">
+		<p>No Netstandard or Core templates for vb.net !!!!!</p>
+</div>
+
+<footer>
+	<div class="modified">
+		Last modified <time datetime="2017-03-09T05:09:38.5548883+00:00"><a class="permalink" href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108#c636246329785548883" rel="nofollow" title="Comment Permalink">Mar 08, 2017 at&#160;9:09PM</a></time>
+	</div>
+</footer>
+					</li>
+					<li>
+
+
+
+
+<figure data-authorname="anurajp">
+		<a tabindex="-1" href="/Niners/anurajp" title="Go to Profile page of anurajp.">
+			<img src="https://sec.ch9.ms/content/default.gif" alt="User profile image"/>
+		</a>
+		<figcaption>
+			<a href="/Niners/anurajp" title="Go to Profile page of anurajp.">
+				anurajp
+			</a>
+		</figcaption>
+</figure>
+
+<div class="details withAuthor" id="c636246360437394336">
+		<p>ASP.NET Core tooling is still in RTM?</p>
+</div>
+
+<footer>
+	<div class="modified">
+		Last modified <time datetime="2017-03-09T06:00:43.7394336+00:00"><a class="permalink" href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108#c636246360437394336" rel="nofollow" title="Comment Permalink">Mar 08, 2017 at&#160;10:00PM</a></time>
+	</div>
+</footer>
+					</li>
+					<li>
+
+
+
+
+<figure data-authorname="Amirsas">
+		<a tabindex="-1" href="/Niners/Amirsas" title="Go to Profile page of Amirsas.">
+			<img src="https://sec.ch9.ms/content/default.gif" alt="User profile image"/>
+		</a>
+		<figcaption>
+			<a href="/Niners/Amirsas" title="Go to Profile page of Amirsas.">
+				Amirsas
+			</a>
+		</figcaption>
+</figure>
+
+<div class="details withAuthor" id="c636246405620279969">
+		<ul><li>Thank you @kendra for the recap. <span>Any clue when will the live unit tests feature be supported for dotnet core? In the meantime, is there any alternative? (Besides waiting&nbsp;<span class="c9emoticon mceNonEditable c9emoticon_smiley">:)</span>&nbsp;)</span></li></ul>
+</div>
+
+<footer>
+	<div class="modified">
+		Last modified <time datetime="2017-03-09T07:16:02.0279969+00:00"><a class="permalink" href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108#c636246405620279969" rel="nofollow" title="Comment Permalink">Mar 08, 2017 at&#160;11:16PM</a></time>
+	</div>
+</footer>
+					</li>
+					<li>
+
+
+
+
+<figure data-authorname="Juan">
+		<span>
+			<img src="https://sec.ch9.ms/content/default.gif" alt="User profile image"/>
+		</span>
+		<figcaption>
+				Juan
+		</figcaption>
+</figure>
+
+<div class="details withAuthor" id="c636246959416964717">
+		<p>Hello I see them from Argentina and I am learning English to understand their instructive events. In the future it would be possible to add subtitles in English because very fast and one can not continue in their dialogues, thanks for the instruction</p>
+</div>
+
+<footer>
+	<div class="modified">
+		Last modified <time datetime="2017-03-09T22:39:01.6964717+00:00"><a class="permalink" href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108#c636246959416964717" rel="nofollow" title="Comment Permalink">Mar 09, 2017 at&#160;2:39PM</a></time>
+	</div>
+</footer>
+					</li>
+					<li>
+
+
+
+
+<figure data-authorname="iAmBipinPaul">
+		<a tabindex="-1" href="/Niners/iAmBipinPaul" title="Go to Profile page of iAmBipinPaul.">
+			<img src="https://sec.ch9.ms/content/default.gif" alt="User profile image"/>
+		</a>
+		<figcaption>
+			<a href="/Niners/iAmBipinPaul" title="Go to Profile page of iAmBipinPaul.">
+				iAmBipinPaul
+			</a>
+		</figcaption>
+</figure>
+
+<div class="details withAuthor" id="c636249927332283555">
+		<p>I migrated my ASP.NET core project to VS 2017 , it works fine but while applying migrations&nbsp; getting an error as</p><p>&quot;No database provider has been configured for this DbContext. A provider can be configured by overriding the DbContext.OnConfiguring method or by using AddDbContext on the application service provider. If AddDbContext is used, then also ensure that your DbContext type accepts a DbContextOptions&lt;TContext&gt; object in its constructor and passes it to the base constructor for DbContext&quot;</p><p><pre class="brush: csharp"> public void ConfigureServices(IServiceCollection services)
+        {
+            // Add framework services.
+
+            services.AddApplicationInsightsTelemetry(Configuration);
+
+            services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt;
+                options.UseSqlServer(Configuration.GetConnectionString(&quot;DefaultConnection&quot;)));
+
+            services.AddIdentity&lt;ApplicationUser, IdentityRole&gt;()
+                .AddEntityFrameworkStores&lt;ApplicationDbContext&gt;()
+                .AddDefaultTokenProviders();
+
+
+            services.AddMvc();
+
+            // Add application services.
+            services.AddTransient&lt;IEmailSender, AuthMessageSender&gt;();
+            services.AddTransient&lt;ISmsSender, AuthMessageSender&gt;();
+        }</pre></p><p>But it works fine with VS 2015</p>
+</div>
+
+<footer>
+	<div class="modified">
+		Last modified <time datetime="2017-03-13T09:05:33.2283555+00:00"><a class="permalink" href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108#c636249927332283555" rel="nofollow" title="Comment Permalink">Mar 13, 2017 at&#160;2:05AM</a></time>
+	</div>
+</footer>
+					</li>
+					<li>
+
+
+
+
+<figure data-authorname="dcuccia">
+		<a tabindex="-1" href="/Niners/dcuccia" title="Go to Profile page of dcuccia.">
+			<img src="https://sec.ch9.ms/content/default.gif" alt="User profile image"/>
+		</a>
+		<figcaption>
+			<a href="/Niners/dcuccia" title="Go to Profile page of dcuccia.">
+				dcuccia
+			</a>
+		</figcaption>
+</figure>
+
+<div class="details withAuthor" id="c636251163640679516">
+		<p></p><blockquote><div class="quoteText"><p></p><p>@<a href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108#c636245161799612098">dcuccia</a>: Thank you! Immo Landwerth has a <a href="https://blogs.msdn.microsoft.com/dotnet/2016/02/10/porting-to-net-core/">great blog post</a> covering the challenges associated with porting from the .NET Framework to .NET Core. For now,&nbsp;we have&nbsp;<a href="https://github.com/Microsoft/dotnet-apiport">dotnet-apiport</a>&nbsp;that will help identify what libraries are compatible and what will need more work put into them. Keep in mind, many APIs will be added to .NET Core 2.0 that will make porting even easier with .NET Standard 2.0. Currently, .NET Core 2.0 and .NET Standard 2.0&nbsp;are planned for&nbsp;<a href="https://github.com/dotnet/core/blob/master/roadmap.md">Q3 2017</a>.</p><p></p></div></blockquote><p></p><p>Thanks for your reply and for the timelines. I'd seen that dotnet-apiport hadn't been worked on for a while, so I assumed it wasn't supported/recommended for the 1.0 tooling release. I'm just one voice, but it would sure be nice to have this baked in to the shipped tooling, and &quot;dotnet migrate&quot;&nbsp;sure sounds relevant to this class of compatibility assesment.</p>
+</div>
+
+<footer>
+	<div class="modified">
+		Last modified <time datetime="2017-03-14T19:26:04.0679516+00:00"><a class="permalink" href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108#c636251163640679516" rel="nofollow" title="Comment Permalink">Mar 14, 2017 at&#160;12:26PM</a></time>
+	</div>
+</footer>
+					</li>
+					<li>
+
+
+
+
+<figure data-authorname="kendrahavens">
+		<a tabindex="-1" href="/Niners/kendrahavens" title="Go to Profile page of kendrahavens.">
+			<img src="https://f.ch9.ms/thumbnail/d5eb8db2-023c-41ad-aa14-497bfad2661d.jpg" alt="User profile image"/>
+		</a>
+		<figcaption>
+			<a href="/Niners/kendrahavens" title="Go to Profile page of kendrahavens.">
+				kendrahavens
+			</a>
+		</figcaption>
+</figure>
+
+<div class="details withAuthor" id="c636252974982504339">
+		<p>@<a href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108#c636246959416964717">Juan</a>:Hey there! You should be able to turn on English subtitles on all channel 9 videos! There is a small CC button in the bottom of the video. Click that and select &quot;On&quot; for English subtitles.</p><p>&nbsp;</p><p>@<a href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108#c636246405620279969">Amirsas</a>: I'm not sure. I think we are keeping it vague for now.&nbsp;It's definitely something we are working on.</p><p>&nbsp;</p><p>@<a href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108#c636249927332283555">iAmBipinPaul</a>:Looks like a few people ran into this problem during our RC releases and the solution was creating your own default constructor described here:<a href="https://github.com/aspnet/EntityFramework/issues/4825#issuecomment-248652706">&nbsp;https://github.com/aspnet/EntityFramework/issues/4825#issuecomment-248652706</a>. Let me know if that helps!</p><p>&nbsp;</p><p>@<a href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108#c636246360437394336">anurajp</a>:Yep, but that's just the tooling (SDK) version going 1.0. The .NET libraries and runtime are well past 1.0.</p><p>&nbsp;</p><p>@<a href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108#c636251163640679516">dcuccia</a>:That is great feedback. Thank you!&nbsp;You can track progress on adding the api-port to VS2017 Tooling here: <a href="https://github.com/Microsoft/dotnet-apiport/issues/397">https://github.com/Microsoft/dotnet-apiport/issues/397</a>&nbsp;The &quot;migrate&quot; and &quot;port&quot; tools do sound similar. That's a great point to bring up. We definitely don't want them to be conflated. I'll be looking into the documentation on these. <span class="c9emoticon c9emoticon_smiley">:)</span></p>
+</div>
+
+<footer>
+	<div class="modified">
+		Last modified <time datetime="2017-03-16T21:44:58.2504339+00:00"><a class="permalink" href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108#c636252974982504339" rel="nofollow" title="Comment Permalink">Mar 16, 2017 at&#160;2:44PM</a></time>
+	</div>
+</footer>
+					</li>
+					<li>
+
+
+
+
+<figure data-authorname="iAmBipinPaul">
+		<a tabindex="-1" href="/Niners/iAmBipinPaul" title="Go to Profile page of iAmBipinPaul.">
+			<img src="https://sec.ch9.ms/content/default.gif" alt="User profile image"/>
+		</a>
+		<figcaption>
+			<a href="/Niners/iAmBipinPaul" title="Go to Profile page of iAmBipinPaul.">
+				iAmBipinPaul
+			</a>
+		</figcaption>
+</figure>
+
+<div class="details withAuthor" id="c636256917605773338">
+		<p>@<a href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108#c636252974982504339">kendrahavens</a>: There was already default constructor for ApplicationDbContext but&nbsp;it was before the constructor which takes the argument as ApplicationDbContext .</p><p>Before my code was like</p><p><pre class="brush: csharp"> public ApplicationDbContext()
+        {
+             Database.EnsureCreated();
+        }
+
+                public DbSet&lt;Team&gt; Teams { get; set; }
+        public DbSet&lt;Player&gt; Players { get; set; }
+        
+        public ApplicationDbContext(DbContextOptions&lt;ApplicationDbContext&gt; options)
+            : base(options)
+        {
+        }</pre></p><p>&nbsp;</p><p>After</p><p><pre class="brush: text">           public DbSet&lt;Team&gt; Teams { get; set; }
+        public DbSet&lt;Player&gt; Players { get; set; }
+
+        public ApplicationDbContext(DbContextOptions&lt;ApplicationDbContext&gt; options)
+            : base(options)
+        {
+        }
+
+        public ApplicationDbContext()
+        {
+            Database.EnsureCreated();
+        }
+</pre></p><p>Thanks !,&nbsp;&nbsp;It Worked.</p><p>I think,&nbsp;Constructor order matters in VS 2017 but not in VS 2015 because it was working perfectly in VS 2015.</p><p>&nbsp;</p>
+</div>
+
+<footer>
+	<div class="modified">
+		Last modified <time datetime="2017-03-21T11:16:00.5773338+00:00"><a class="permalink" href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108#c636256917605773338" rel="nofollow" title="Comment Permalink">Mar 21, 2017 at&#160;4:16AM</a></time>
+	</div>
+</footer>
+					</li>
+					<li>
+
+
+
+
+<figure data-authorname="Armel Mudasigwa">
+		<span>
+			<img src="https://sec.ch9.ms/content/default.gif" alt="User profile image"/>
+		</span>
+		<figcaption>
+				Armel&#160;Mudasigwa
+		</figcaption>
+</figure>
+
+<div class="details withAuthor" id="c636546105109552834">
+		<p>Hello Ms Havens. Where can i find a full course of visual studio 2017 for mac for beginners?</p>
+</div>
+
+<footer>
+	<div class="modified">
+		Last modified <time datetime="2018-02-19T04:15:10.9552834+00:00"><a class="permalink" href="/Events/Visual-Studio/Visual-Studio-2017-Launch/T108#c636546105109552834" rel="nofollow" title="Comment Permalink">Feb 18, 2018 at&#160;8:15PM</a></time>
+	</div>
+</footer>
+					</li>
+				</ul>
+				
+				
+
+						<!-- this form is for not signed in users -->
+						<form method="post" id="commentState" class="ch9form discussion episode" autocomplete="off">
+							<fieldset id="commentForm">
+								<h2>Add Your 2 Cents</h2>
+								<ul class="clearfix">
+									<li>
+										<label class="subject" for="CommentState_Subject">Are you human? If so, leave this field blank.</label>
+										<input class="subject" id="CommentState_Subject" name="CommentState.Subject" type="text" value="" />
+										<span class="field-validation-valid" data-valmsg-for="CommentState.Subject" data-valmsg-replace="true"></span>
+									</li>
+									<li>
+										<label for="CommentState_AnonymousUser_DisplayName">Name</label>
+										<input data-val="true" data-val-regex="Please enter a name with only letters, numbers, and spaces" data-val-regex-pattern="[A-Za-z0-9][A-Za-z 0-9]+[A-Za-z0-9]" data-val-required="Name field is required" id="CommentState_AnonymousUser_DisplayName" name="CommentState.AnonymousUser.DisplayName" type="text" value="" />
+										<span class="field-validation-valid" data-valmsg-for="CommentState.AnonymousUser.DisplayName" data-valmsg-replace="true"></span>
+									</li>
+									<li>
+										<label for="CommentState_AnonymousUser_Email">Email</label>
+										<input data-val="true" data-val-email="Please enter your email address in the format someone@example.com" data-val-required="Email address is required" id="CommentState_AnonymousUser_Email" name="CommentState.AnonymousUser.Email" type="text" value="" />
+										<span class="field-validation-valid" data-valmsg-for="CommentState.AnonymousUser.Email" data-valmsg-replace="true"></span>
+									</li>
+									<li class="sign-in">
+										<span class="conjunction">Or</span>
+										<a class="buttonPri" href="https://login.live.com/login.srf?wa=wsignin1.0&amp;rpsnv=13&amp;ct=1542401461&amp;rver=6.6.6577.0&amp;wp=MBI_SSL&amp;wreply=https:%2F%2Fchannel9.msdn.com%2FEvents%2FVisual-Studio%2FVisual-Studio-2017-Launch%2FT108&amp;id=47159">Sign In</a>
+									</li>
+									<li>
+										<label for="CommentState_AnonymousBody">Comment</label>
+										<textarea class="comment" cols="100" data-val="true" data-val-requireone="Comment field is required." data-val-requireone-otherpropertyname="AuthenticatedBody" id="CommentState_AnonymousBody" name="CommentState.AnonymousBody" rows="10">
+</textarea>
+										<span class="field-validation-valid" data-valmsg-for="CommentState.AnonymousBody" data-valmsg-replace="true"></span>
+									</li>
+								</ul>
+							</fieldset>
+							<input name="__RequestVerificationToken" type="hidden" value="CfDJ8PaHJsX7-ClJknA69Rnbfr89qsV9OEw3WcEXDFNctjkDL3H6KWyGkK4LzQitxM5curscFa6WDJqbmsDFFA91X8iwxzsg2e_p59t1oFfBGQy-zN1GuXCg24blR-Bl7uutOi2oOPRVVDtnLwQu72tCT-81" />
+							<div id="recaptcha"></div>
+							<span class="field-validation-valid" data-valmsg-for="Recaptcha" data-valmsg-replace="true"></span>
+							<input type="submit" value="Comment" class="buttonPri" disabled="disabled"/>
+						</form>
+			</div>
+		</div>
+	
+	</section>
+
+</main>
+
+
+
+
+<footer role="contentinfo">
+	<div class="container">
+			<ul class="sharing">
+				<li>
+					<a href="/ContactUs" class="email mediumIcon"><span class="screenReader">Email</span></a>
+				</li>
+				<li>
+					<a href="https://twitter.com/ch9" class="twitter mediumIcon"><span class="screenReader">Twitter</span></a>
+				</li>
+				<li>
+					<a href="https://www.facebook.com/msftchannel9" class="facebook mediumIcon"><span class="screenReader">Facebook</span></a>
+				</li>
+				<li>
+					<a href="https://s.ch9.ms/Feeds/RSS" class="rss mediumIcon"><span class="screenReader">RSS</span></a>
+				</li>
+				<li>
+					<a href="https://www.reddit.com/r/ch9" class="reddit mediumIcon">
+						<span class="screenReader">Reddit</span>
+					</a>
+				</li>
+			</ul>
+
+			<ul class="otherLinks">
+				<li>
+					<a href="/About">About</a>
+				</li>
+				<li>
+					<a href="/Browse/Authors?direction=desc">Authors</a>
+				</li>
+				<li>
+					<a href="/Events/Speakers?direction=desc">Speakers</a>
+				</li>
+				<li>
+					<a href="/Browse/Tags?letter=A">Tags</a>
+				</li>
+				<li>
+					<a href="/ContactUs">Contact Us</a>
+				</li>
+				<li>
+					<a lang="en" href="/localization/chrome?returnUrl=%252fEvents%252fVisual-Studio%252fVisual-Studio-2017-Launch%252fT108">
+						English
+					</a>
+				</li>
+				<li>
+					<a href="/CodeOfConduct" data-mscc-ic="false">Code of Conduct</a>
+				</li>
+				<li>
+					<a href="https://go.microsoft.com/?linkid=4412892" data-mscc-ic="false">Terms of Service</a>
+				</li>
+				<li>
+					<a href="https://www.microsoft.com/privacystatement/en-us/Channel9App/Default.aspx" data-mscc-ic="false">Privacy Statement</a>
+				</li>
+			</ul>
+
+		<p class="copyright">
+			&copy; 2018 Microsoft. <wbr>Microsoft reserves all rights associated with the materials on this site.
+		</p>
+
+	</div>
+</footer>
+			
+		
+		
+	</body>
+</html>

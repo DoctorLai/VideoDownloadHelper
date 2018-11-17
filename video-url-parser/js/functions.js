@@ -116,14 +116,16 @@ const ValidURL = (url) => {
 };    
 
 function FixURL(url) {        
-    if (url.length > 5) {
-        if (url.startsWith("http:\\/\\/") || url.startsWith("https:\\/\\/")) {
-            return url.replace(/\\\//g, "/");
-        }
-    }        
-    if (url.length > 5) {
-        if ((url.charAt(0) == '/') && (url.charAt(1) == '/')) {
-            return "http:" + url;
+    if (url && (url.length !== undefined)) {
+        if (url.length > 5) {
+            if (url.startsWith("http:\\/\\/") || url.startsWith("https:\\/\\/")) {
+                return url.replace(/\\\//g, "/");
+            }
+        }        
+        if (url.length > 5) {
+            if ((url.charAt(0) == '/') && (url.charAt(1) == '/')) {
+                return "http:" + url;
+            }
         }
     }
     return url;
@@ -142,4 +144,17 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 	module.exports = {
 		getParameterByName, FixURL, extractDomain, ValidURL
 	};
+}
+
+// remove duplicate urls in array
+Array.prototype.uniq = function () {
+    let data = [];
+    // convert arguments (special object) to array
+    const arr = [].slice.apply(this, arguments, 0);
+    for (let x of arr) {
+        if (!data.includes(x)) {
+            data.push(x);
+        }
+    }
+    return data;
 }
