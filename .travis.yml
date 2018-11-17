@@ -2,6 +2,6 @@ language: node_js
 node_js:
   - "node"
 before_script:
-  - cd video-url-parser && npm install -g mocha && npm install -g chai && npm install -g webpack 
+  - cd video-url-parser && npm install --save-dev mocha && npm install --save-dev chai && npm install --save-dev webpack 
 script:
   - npm run test && npm run build
