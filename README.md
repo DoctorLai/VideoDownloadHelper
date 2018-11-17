@@ -12,6 +12,12 @@ Unit tests are based on `mocha` and `chai`.  Run all tests: `npm run build`.
 # Webpack
 Using `npm run build` to pack to `dist\*`
 
+# Tested URLs
+Please see [this](https://github.com/DoctorLai/VideoDownloadHelper/blob/master/video-url-parser/tested-urls.txt)
+
+# Video URLs to Support
+Please see [this](https://github.com/DoctorLai/VideoDownloadHelper/blob/master/video-url-parser/todo-urls.txt)
+
 # 中文
 
 博文: [说说我那复活的视频下载插件](https://justyy.com/archives/5615)
