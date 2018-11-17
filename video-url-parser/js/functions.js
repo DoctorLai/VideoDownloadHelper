@@ -3,7 +3,7 @@
 "use strict";
 
 // truncate the long URLs.
-String.prototype.trim2 = function (length) {
+String.prototype.TrimToLength = function (length) {
 	return this.length > length ? this.substring(0, length) + "..." : this;
 };
 

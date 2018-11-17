@@ -117,6 +117,7 @@ class ParseVideo {
             }
             found = re.exec(html);
         }
+        video_url = video_url.uniq();
         return (video_url.length === 0) ? null :
                ( (video_url.length === 1) ? video_url[0] : video_url);
     }
@@ -133,6 +134,7 @@ class ParseVideo {
             }
             found = re.exec(html);
         }        
+        video_url = video_url.uniq();
         return (video_url.length === 0) ? null :
                ( (video_url.length === 1) ? video_url[0] : video_url);        
     }
@@ -149,6 +151,7 @@ class ParseVideo {
             }
             found = re.exec(html);
         }
+        video_url = video_url.uniq();
         return (video_url.length === 0) ? null :
                ( (video_url.length === 1) ? video_url[0] : video_url);
     }

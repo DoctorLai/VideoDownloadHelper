@@ -83,7 +83,7 @@ function setUrlOfflineArray(urls) {
     let s = "<h3>"+ get_text("videos_list") + "</h3>";
     s += "<ol>";
     for (let i = 0; i < urls_length; ++i) {
-        s += "<li><a target=_blank rel=nofollow href='" + urls[i] + "'>" + urls[i].trim2(max_url_length) + "</a></li>";
+        s += "<li><a target=_blank rel=nofollow href='" + urls[i] + "'>" + urls[i].TrimToLength(max_url_length) + "</a></li>";
     }
     s += "</ol>";
     $('div#down').html(s);
@@ -94,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function() {
     $(function() {
         $( "#tabs" ).tabs();
     });
-
 
     // load settings
     chrome.storage.sync.get('video_downloader_settings', function(data) {

@@ -1,4 +1,4 @@
-/* jshint -W097 *//* jshint -W097 */
+/* jshint -W097 */
 /* jshint -W117 */
 "use strict";
 
