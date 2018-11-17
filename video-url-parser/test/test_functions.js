@@ -29,7 +29,13 @@ describe('FixURL', function() {
     });    
     it('http:\/\/example.com\/abc\/', function() {
         assert.equal('http://example.com/abc/', FixURL('http:\/\/example.com\/abc\/'));
-    });             
+    });  
+    it('null', function() {
+        assert.equal(null, FixURL(null));
+    });                   
+    it('undefined', function() {
+        assert.equal(undefined, FixURL(undefined));
+    });                   
 });
 
 describe('ValidURL', function() {
@@ -90,4 +96,19 @@ describe('extractDomain', function() {
     it('abc', function() {
         assert.equal("abc", extractDomain("abc"));
     });                 
+});
+
+describe('Array.prototype.uniq', function() {
+    it('[1,2,2,3]', function() {
+        assert.deepEqual([1,2,2,3].uniq(), [1, 2, 3]);
+    });   
+    it('[1,"2",2,3]', function() { 
+        assert.deepEqual([1,"2",2,3].uniq(), [1, "2", 2, 3]);
+    });       
+    it('["https://domain1.com", "https://domain1.com", "https://domain1.com"]', function() { 
+        assert.deepEqual(["https://domain1.com", "https://domain1.com", "https://domain1.com"].uniq(), ["https://domain1.com"]);
+    });       
+    it('["https://domain1.com", "https://domain2.com", "https://domain1.com"]', function() { 
+        assert.deepEqual(["https://domain1.com", "https://domain2.com", "https://domain1.com"].uniq(), ["https://domain1.com", "https://domain2.com"]);
+    });       
 });
