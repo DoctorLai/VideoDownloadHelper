@@ -1,5 +1,5 @@
 # Simple Video Download Helper
-Chrome Extension to Help Download Video for Some Video Sites. made by [@justyy](https://steemit.com/@justyy/)
+Chrome Extension to Help Download Video for Some Video Sites. made by [@justyy](https://steemit.com/@justyy/). The Video Downloader is a Chrome Extension that helps you save your favorite videos. 
 
 # Chrome WebStore
 On 31/Oct/2017, Google has reinstated the extension, which is available at: https://chrome.google.com/webstore/detail/simple-video-download-hel/ilcdiicigjaccgipndigcenjieedjohj
@@ -10,13 +10,26 @@ It is a cut-down version ([original extension page](https://weibomiaopai.com/chr
 Unit tests are based on `mocha` and `chai`.  Run all tests: `npm run build`.
 
 # Webpack
-Using `npm run build` to pack to `dist\*`
+Using `npm run build` to pack to `dist/dist.min.js`
+
+# Install on Firefox or other browsers?
+It should work, but not fully tested on Firefox via [Chrome Extension Foxified](https://addons.mozilla.org/en-GB/firefox/addon/chrome-store-foxified/).
+
+# Install Unpacked Versions
+- Zipped releases: https://github.com/DoctorLai/VideoDownloadHelper/releases 
+- Download the zip and then you can load unpacked version in Chrome. (under development mode)
 
 # Tested URLs
-Please see [this](https://github.com/DoctorLai/VideoDownloadHelper/blob/master/video-url-parser/tested-urls.txt)
+Please see [this](https://github.com/DoctorLai/VideoDownloadHelper/blob/master/video-url-parser/tested-urls.txt).
 
 # Video URLs to Support
-Please see [this](https://github.com/DoctorLai/VideoDownloadHelper/blob/master/video-url-parser/todo-urls.txt)
+Please see [this](https://github.com/DoctorLai/VideoDownloadHelper/blob/master/video-url-parser/todo-urls.txt).
+
+# Contribution
+You can create a issue if you want to:
+1. report a bug
+2. suggest a feature
+Contributions (Pull Requests) are also welcome!
 
 # 中文
 
