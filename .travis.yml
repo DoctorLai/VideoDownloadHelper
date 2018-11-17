@@ -1,7 +1,5 @@
 language: node_js
 node_js:
   - "node"
-install:
-  - cd video-url-parser && npm run build
 script:
   - cd video-url-parser && npm run test
