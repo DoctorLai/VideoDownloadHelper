@@ -1,5 +1,6 @@
 # Simple Video Download Helper
 [![Build Status](https://travis-ci.com/DoctorLai/VideoDownloadHelper.svg?branch=master)](https://travis-ci.com/DoctorLai/VideoDownloadHelper)
+[![GitHub license](https://img.shields.io/badge/license-GPL-blue.svg)](https://github.com/DoctorLai/VideoDownloadHelper/blob/master/LICENSE)
 
 Chrome Extension to Help Download Video for Some Video Sites. made by [@justyy](https://steemit.com/@justyy/). The Video Downloader is a Chrome Extension that helps you save your favorite videos. 
 
