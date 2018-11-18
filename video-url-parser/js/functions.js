@@ -146,15 +146,7 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 	};
 }
 
-// remove duplicate urls in array
+// remove duplicate urls in array using ES6 syntax - just beautiful
 Array.prototype.uniq = function () {
-    let data = [];
-    // convert arguments (special object) to array
-    const arr = [].slice.apply(this, arguments, 0);
-    for (let x of arr) {
-        if (!data.includes(x)) {
-            data.push(x);
-        }
-    }
-    return data;
+    return [...new Set(this)];
 }
