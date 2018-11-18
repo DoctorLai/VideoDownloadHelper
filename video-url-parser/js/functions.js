@@ -8,7 +8,7 @@ String.prototype.TrimToLength = function (length) {
 };
 
 const getChromeVersion = () => {     
-	let raw = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./);
+	const raw = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./);
 	return raw ? parseInt(raw[2], 10) : false;
 };
 
@@ -133,7 +133,7 @@ function FixURL(url) {
 
 function getParameterByName(name, url) {
     name = name.replace(/[\[\]]/g, "\\$&");
-    let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+    const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
         results = regex.exec(url);
     if (!results) return null;
     if (!results[2]) return '';
