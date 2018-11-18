@@ -10,7 +10,7 @@ On 31/Oct/2017, Google has reinstated the extension, which is available at: http
 It is a cut-down version ([original extension page](https://weibomiaopai.com/chrome-extension/)) that does not support Youtube download and all other adult sites. *I am sorry*. But you are still able to use the web version:  https://weibomiaopai.com/download-video-parser.php
 
 # Unit Tests
-Unit tests are based on `mocha` and `chai`.  Run all tests: `npm run build`.
+Unit tests are based on `mocha` and `chai`.  Run all tests: `npm run test`.
 
 # Webpack
 Using `npm run build` to pack to `dist/dist.min.js`
