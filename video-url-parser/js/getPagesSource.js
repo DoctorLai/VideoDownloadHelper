@@ -5,9 +5,9 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
 (function() {     
     "use strict";
     
-    let pageurl = document.location.href;
-    let domain = extractDomain(pageurl);
-    let html = document.documentElement.outerHTML;
+    const pageurl = document.location.href;
+    const domain = extractDomain(pageurl);
+    const html = document.documentElement.outerHTML;
     let video_url = "";
     let video_dom = null;
 
