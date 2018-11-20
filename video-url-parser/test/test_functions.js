@@ -3,7 +3,7 @@
 'use strict';
 
 const { assert } = require("chai");
-let { FixURL, extractDomain, getParameterByName, ValidURL } = require('../js/functions');
+const { FixURL, extractDomain, getParameterByName, ValidURL } = require('../js/functions');
 
 describe('getParameterByName', function() {
     it('https://example.com/?a=b&c=d&e=f', function() {

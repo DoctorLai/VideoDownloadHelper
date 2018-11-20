@@ -3,12 +3,12 @@
 "use strict";
 
 // truncate the long URLs.
-String.prototype.trim2 = function (length) {
+String.prototype.TrimToLength = function (length) {
 	return this.length > length ? this.substring(0, length) + "..." : this;
 };
 
 const getChromeVersion = () => {     
-	let raw = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./);
+	const raw = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./);
 	return raw ? parseInt(raw[2], 10) : false;
 };
 
@@ -133,7 +133,7 @@ function FixURL(url) {
 
 function getParameterByName(name, url) {
     name = name.replace(/[\[\]]/g, "\\$&");
-    let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+    const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
         results = regex.exec(url);
     if (!results) return null;
     if (!results[2]) return '';
@@ -146,15 +146,7 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 	};
 }
 
-// remove duplicate urls in array
+// remove duplicate urls in array using ES6 syntax - just beautiful
 Array.prototype.uniq = function () {
-    let data = [];
-    // convert arguments (special object) to array
-    const arr = [].slice.apply(this, arguments, 0);
-    for (let x of arr) {
-        if (!data.includes(x)) {
-            data.push(x);
-        }
-    }
-    return data;
+    return [...new Set(this)];
 }

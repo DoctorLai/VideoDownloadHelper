@@ -1,17 +1,17 @@
-/* jshint -W097 *//* jshint -W097 */
+/* jshint -W097 */
 /* jshint -W117 */
 "use strict";
 
 const { assert } = require("chai");
-let { ParseVideo } = require('../js/parsevideo');
+const { ParseVideo } = require('../js/parsevideo');
 const fs  = require("fs");
 
 describe('ted.com', function() {
-    let url = 'https://www.ted.com/talks/atul_gawande_want_to_get_great_at_something_get_a_coach?language=en#t-48048';
+    const url = 'https://www.ted.com/talks/atul_gawande_want_to_get_great_at_something_get_a_coach?language=en#t-48048';
     it(url, function() {
-        let html = fs.readFileSync('test/data/ted-1.html').toString();
-        let video = new ParseVideo(url, html);
-        let video_urls = video.Parse();
+        const html = fs.readFileSync('test/data/ted-1.html').toString();
+        const video = new ParseVideo(url, html);
+        const video_urls = video.Parse();
         assert.deepEqual(video_urls, [ 
             'https://download.ted.com/talks/AtulGawande_2017-light.mp4?apikey=acme-roadrunner',
             'https://download.ted.com/talks/AtulGawande_2017.mp4?apikey=acme-roadrunner',

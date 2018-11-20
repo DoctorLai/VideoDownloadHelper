@@ -1,3 +1,5 @@
+/* jshint -W119 */
+/* jshint -W104 */
 // inject to the current page
 window.onload = () => {
 	'use strict';
@@ -17,8 +19,8 @@ window.onload = () => {
 			callback();
 		}
 	};
-    executeScripts(null, [ 
+	executeScripts(null, [ 
 		{ file: "js/jquery-3.3.1.min.js" },
 		{ file: "dist/dist.min.js" }
-    ]);	
+	]);	
 }; 
