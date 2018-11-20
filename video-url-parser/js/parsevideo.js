@@ -45,7 +45,13 @@ class ParseVideo {
             if (ValidURL(video_url)) {
                 return video_url;
             }            
-        }                   
+        }          
+        if (domain.includes("xiaokaxiu.com")) {
+            video_url = ParseVideo.parse_xiaokaxiu_com(this.url, this.html);
+            if (ValidURL(video_url)) {
+                return video_url;
+            }            
+        }                     
         video_url = ParseVideo.extract_all_video_urls(this.url, this.html);
         if (video_url !== null) {
             return video_url;
@@ -178,6 +184,24 @@ class ParseVideo {
         return (video_url.length === 0) ? null :
                ( (video_url.length === 1) ? video_url[0] : video_url);        
     }    
+
+    // parse xiaokaxiu.com video e.g. https://v.xiaokaxiu.com/v/fhX23JOcSbVEJOQ9LFKtOP2WBkeP1AA-.html
+    static parse_xiaokaxiu_com(url, html) {
+        const re =  /player.swf\?scid=([^"\'&]+)/gi;
+        let found = re.exec(html);
+        let video_url = [];
+        while (found !== null) {  
+            const tmp_url = "http://gslb.miaopai.com/stream/" + found[1] + ".mp4";
+            const url = FixURL(tmp_url);
+            if (ValidURL(url)) {
+                video_url.push(url);
+            }
+            found = re.exec(html);
+        }
+        video_url = video_url.uniq();
+        return (video_url.length === 0) ? null :
+               ( (video_url.length === 1) ? video_url[0] : video_url);        
+    }      
 }
 
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
