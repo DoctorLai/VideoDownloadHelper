@@ -5,6 +5,11 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
 (function() {     
     "use strict";
     
+    // defines a known failed URLs so we can skip and try next method
+    const FAILED_URLS = [
+        "https://staticxx.facebook.com/common/referer_frame.php"
+    ];
+
     const pageurl = document.location.href;
     const domain = extractDomain(pageurl);
     const html = document.documentElement.outerHTML;
@@ -13,13 +18,41 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
 
     // Simple Video Parser
     let SimpleVidoeParser = new ParseVideo(pageurl, html);
-    video_url = SimpleVidoeParser.Parse();
-    if (ValidURL(video_url)) {        
-        chrome.runtime.sendMessage({
-            action: "getSource",
-            source: JSON.stringify(video_url)
-        });
-        return;
+    video_url = SimpleVidoeParser.Parse();    
+    if (ValidURL(video_url)) {    
+        if (typeof video_url === "string") {
+            // embeded URL is not a real video url                        
+            if (video_url.includes("/embed/")) {
+                $.ajax({
+                    type: "GET",
+                    dataType: "html",
+                    url: video_url,
+                    success: function(data) {
+                        // now we have the sub HTML
+                        SimpleVidoeParser = new ParseVideo(video_url, data);
+                        video_url = SimpleVidoeParser.Parse();                           
+                        chrome.runtime.sendMessage({
+                            action: "getSource",
+                            source: JSON.stringify(video_url)
+                        });   
+                        return;                                             
+                    },
+                    error: function(request, status, error) {
+                        
+                    },
+                    complete: function(data) {
+
+                    }             
+                });                
+            }
+        }
+        if (!FAILED_URLS.includes(video_url)) {
+            chrome.runtime.sendMessage({
+                action: "getSource",
+                source: JSON.stringify(video_url)
+            });        
+            return;
+        }
     }
 
     // http://michaelzzz520.tumblr.com/post/156206105600
@@ -623,6 +656,10 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                             'console.log(unescape("' +
                             escape(request.request.url) + '"))'
                         );
+                        chrome.runtime.sendMessage({
+                            action: "getSource",
+                            source: JSON.stringify(FixURL(request.request.url))
+                        });                        
                     }
                 }
             );         

@@ -51,12 +51,26 @@ class ParseVideo {
             if (ValidURL(video_url)) {
                 return video_url;
             }            
-        }                     
+        }       
+        if (domain.includes("facebook.com")) {
+            video_url = ParseVideo.parse_facebook_video(this.url, this.html);
+            return video_url;
+        }                           
         video_url = ParseVideo.extract_all_video_urls(this.url, this.html);
         if (video_url !== null) {
             return video_url;
         }
         video_url = ParseVideo.extract_all_mp4_urls(this.url, this.html);
+        if (video_url !== null) {
+            return video_url;
+        }
+        // get the og:video_url from the header
+        video_url = ParseVideo.parse_header_og_video_url(this.url, this.html);
+        if (video_url !== null) {
+            return video_url;
+        }
+        // get the <video src> from the html
+        video_url = ParseVideo.parse_video_tag_in_html(this.url, this.html);
         if (video_url !== null) {
             return video_url;
         }
@@ -202,6 +216,87 @@ class ParseVideo {
         return (video_url.length === 0) ? null :
                ( (video_url.length === 1) ? video_url[0] : video_url);        
     }      
+
+    // parse the og:video_url in header HTML
+    // e.g. <meta property="og:video:url" content="https://......." />
+    static parse_header_og_video_url(url, html) {
+        const re = /\<meta\s+property\s*=\s*(['"])og:video(.*)\1\s+content=(["'])(https?:\/\/[^'",]*)\3\s*\/?\>/ig;
+        let found = re.exec(html);
+        let video_url = [];
+        while (found !== null) {  
+            const url = FixURL(found[4]);
+            if (ValidURL(url)) {
+                video_url.push(url);
+            }
+            found = re.exec(html);
+        }
+        video_url = video_url.uniq();
+        return (video_url.length === 0) ? null :
+               ( (video_url.length === 1) ? video_url[0] : video_url);        
+    } 
+    
+    // parse the video tag
+    // e.g. <video id="player-html5" class='videoPlayer' src="https://ev-ph.ypncdn.com/videos/201807/10/173954251/480P_2000K_173954251.mp4?rate=141k&amp;burst=1400k&amp;validfrom=1543514700&amp;validto=1543529100&amp;hash=%2B3Po2O4r7uQZFHm7NCKaT1rMY5s%3D" x-webkit-airplay="allow" controls poster="https://di1-ph.ypncdn.com/m=eaAaaEPbaaaa/videos/201807/10/173954251/original/(m=eqgl9daaaa)(mh=nuY0nvopChJ7Fc-_)8.jpg"></video>
+    static parse_video_tag_in_html(url, html) {
+        const re = /\<video(.*)src=(["'])(https?:\/\/[^'",]*)\2/ig;
+        let found = re.exec(html);
+        let video_url = [];
+        while (found !== null) {  
+            const url = FixURL(found[3]);
+            if (ValidURL(url)) {
+                video_url.push(url);
+            }
+            found = re.exec(html);
+        }
+        video_url = video_url.uniq();
+        return (video_url.length === 0) ? null :
+               ( (video_url.length === 1) ? video_url[0] : video_url);        
+    }        
+
+    // parse the facebook video
+    // e.g. https://www.facebook.com/zhihua.lai/videos/10150166829094739/
+    static parse_facebook_video(url, html) {
+        let re = /['"]?hd_src_no_ratelimit['"]?: *(['"])(https?:[^\s'",]+)\1,/ig;
+        let found = re.exec(html);
+        let video_url = [];
+        while (found !== null) {  
+            const url = FixURL(found[2]);
+            if (ValidURL(url)) {
+                video_url.push(url);
+            }
+            found = re.exec(html);
+        }
+        re = /['"]?hd_src['"]?: *(['"])(https?:[^\s'",]+)\1,/ig;
+        found = re.exec(html);
+        while (found !== null) {  
+            const url = FixURL(found[2]);
+            if (ValidURL(url)) {
+                video_url.push(url);
+            }
+            found = re.exec(html);
+        }
+        re = /['"]?sd_src_no_ratelimit['"]?: *(['"])(https?:[^\s'",]+)\1,/ig;
+        found = re.exec(html);
+        while (found !== null) {  
+            const url = FixURL(found[2]);
+            if (ValidURL(url)) {
+                video_url.push(url);
+            }
+            found = re.exec(html);
+        }        
+        re = /['"]?sd_src['"]?: *(['"])(https?:[^\s'",]+)\1,/ig;     
+        found = re.exec(html);   
+        while (found !== null) {  
+            const url = FixURL(found[2]);
+            if (ValidURL(url)) {
+                video_url.push(url);
+            }
+            found = re.exec(html);
+        }              
+        video_url = video_url.uniq();
+        return (video_url.length === 0) ? null :
+               ( (video_url.length === 1) ? video_url[0] : video_url);            
+    }
 }
 
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
