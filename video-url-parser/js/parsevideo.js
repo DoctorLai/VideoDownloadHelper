@@ -51,7 +51,11 @@ class ParseVideo {
             if (ValidURL(video_url)) {
                 return video_url;
             }            
-        }                     
+        }       
+        if (domain.includes("facebook.com")) {
+            video_url = ParseVideo.parse_facebook_video(this.url, this.html);
+            return video_url;
+        }                           
         video_url = ParseVideo.extract_all_video_urls(this.url, this.html);
         if (video_url !== null) {
             return video_url;
@@ -248,6 +252,51 @@ class ParseVideo {
         return (video_url.length === 0) ? null :
                ( (video_url.length === 1) ? video_url[0] : video_url);        
     }        
+
+    // parse the facebook video
+    // e.g. https://www.facebook.com/zhihua.lai/videos/10150166829094739/
+    static parse_facebook_video(url, html) {
+        let re = /['"]?hd_src_no_ratelimit['"]?: *(['"])(https?:[^\s'",]+)\1,/ig;
+        let found = re.exec(html);
+        let video_url = [];
+        while (found !== null) {  
+            const url = FixURL(found[2]);
+            if (ValidURL(url)) {
+                video_url.push(url);
+            }
+            found = re.exec(html);
+        }
+        re = /['"]?hd_src['"]?: *(['"])(https?:[^\s'",]+)\1,/ig;
+        found = re.exec(html);
+        while (found !== null) {  
+            const url = FixURL(found[2]);
+            if (ValidURL(url)) {
+                video_url.push(url);
+            }
+            found = re.exec(html);
+        }
+        re = /['"]?sd_src_no_ratelimit['"]?: *(['"])(https?:[^\s'",]+)\1,/ig;
+        found = re.exec(html);
+        while (found !== null) {  
+            const url = FixURL(found[2]);
+            if (ValidURL(url)) {
+                video_url.push(url);
+            }
+            found = re.exec(html);
+        }        
+        re = /['"]?sd_src['"]?: *(['"])(https?:[^\s'",]+)\1,/ig;     
+        found = re.exec(html);   
+        while (found !== null) {  
+            const url = FixURL(found[2]);
+            if (ValidURL(url)) {
+                video_url.push(url);
+            }
+            found = re.exec(html);
+        }              
+        video_url = video_url.uniq();
+        return (video_url.length === 0) ? null :
+               ( (video_url.length === 1) ? video_url[0] : video_url);            
+    }
 }
 
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {

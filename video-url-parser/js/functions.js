@@ -140,13 +140,13 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+// remove duplicate urls in array using ES6 syntax - just beautiful
+Array.prototype.uniq = function () {
+    return [...new Set(this)];
+}
+
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 	module.exports = {
 		getParameterByName, FixURL, extractDomain, ValidURL
 	};
-}
-
-// remove duplicate urls in array using ES6 syntax - just beautiful
-Array.prototype.uniq = function () {
-    return [...new Set(this)];
 }
