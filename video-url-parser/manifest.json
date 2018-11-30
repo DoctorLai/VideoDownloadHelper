@@ -25,7 +25,8 @@
       "js/*", 
       "dist/*", 
   		"images/*",
-  		"bs/*"
+      "bs/*",
+      "tested-urls.txt"
   ],  
   "background": {
     "scripts": ["js/background.js"]

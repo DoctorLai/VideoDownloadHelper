@@ -249,4 +249,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    // append tested urls to log memo
+    const url = chrome.runtime.getURL('tested-urls.txt');
+    fetch(url).then((response) => {
+        return response.text().then(function(text) {
+            $('textarea#about').val($('textarea#about').val() + "\n****Supported URLs****:\n" + text);
+        });        
+    });
 }, false);
