@@ -2,7 +2,7 @@
 /* jshint -W117 */
 "use strict";
 
-const { ValidURL, extractDomain, FixURL } = require( '../js/functions' )  ;
+const { ValidURL, extractDomain, FixURL, ArrayIntersection } = require( '../js/functions' )  ;
 
 class ParseVideo {
     constructor(url, html = "") {
@@ -55,7 +55,11 @@ class ParseVideo {
         if (domain.includes("facebook.com")) {
             video_url = ParseVideo.parse_facebook_video(this.url, this.html);
             return video_url;
-        }                           
+        }     
+        if (domain.includes("seseporn.com")) {
+            video_url = ParseVideo.parse_ssp_video(this.url, this.html);
+            return video_url;
+        }                                 
         video_url = ParseVideo.extract_all_video_urls(this.url, this.html);
         if (video_url !== null) {
             return video_url;
@@ -296,6 +300,67 @@ class ParseVideo {
         video_url = video_url.uniq();
         return (video_url.length === 0) ? null :
                ( (video_url.length === 1) ? video_url[0] : video_url);            
+    }
+
+    // parse ssp.com video e.g. https://www.ssp*.com/videos/8395/900/
+    static parse_ssp_video(url, html) {
+        const re = /https?:\/\/(www.)?[a-zA-Z]+.com\/get_file\/([0-9]+)\/([a-z0-9]{32})\/([0-9]+)\/([0-9]+)\/([0-9]+)\.mp4\/\?br=([0-9]+)/ig;
+        let found = re.exec(html);
+        if (found == null) {
+            return null;
+        }
+        const id = ParseVideo._sse_reverse_engineering_helper(found[3]);
+        let surl = found[0].replace(found[3], id)
+        return surl + "&rnd=" + ((new Date()).getTime() + 500);
+    }      
+
+    // reverse engineering helper function for ssp
+    // to solve a mapping relations between two 32-character IDs
+    static _sse_reverse_engineering_helper(source) {
+        // known mappings
+        const arr = {
+            "27663617dc59e052bf3e2c671ca6a73c": "d7c6ec235367cb2a1279ef6a6061c573",
+            "07b3a7920ee0ee63a329e6caf223cbac": "07e3e6e2eab2ca3290b0937c3ecf26aa",
+            "3ec8852551e4ac36e981c555230868d1": "5e18a5c8edc51e60238419568c523358",
+            "68b8f34e248b19a6acf92a1ef1587c8c": "28481a2f88beca6546cb9c37891f1aef",
+            "1b34453212843b5e5a6443a97bd0b50f": "1b2433468032f5ed31544a5b0ba7b594",
+            "9d1e9aa135872b85749ed602cc6ac68a": "3d5e26d98811a756a967e4acab0cc829"
+        };
+        let data = [];
+        for (let i = 0; i < 32; ++ i) {
+            let map = [];
+            let keys = Object.keys(arr);
+            keys.forEach(function(key) {
+                let val = arr[key];
+                let x = key[i];
+                let s = "";
+                for (let j = 0; j < 32; ++ j) {
+                    if (val[j] == x) {
+                        s += (j + ",");
+                    }
+                }
+                if (s.length > 0 && s[s.length - 1] === ',') {
+                    s = s.slice(0, -1);
+                }
+                if (map.length == 0) {
+                    map = s.split(',');
+                } else {
+                    // narrow down the answers
+                    map = ArrayIntersection(map, s.split(','));
+                }
+            });
+            if (map.length > 0) {
+                data[map[0]] = i;
+            }
+        }
+        let s = '';
+        for (let i = 0; i < 32; ++ i) {
+            if (data[i] !== undefined) {
+                // restore the mapping
+                s += source[data[i]];
+            }
+        }
+        return s;
     }
 }
 

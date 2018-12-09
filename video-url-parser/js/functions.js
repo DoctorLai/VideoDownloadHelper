@@ -145,8 +145,14 @@ Array.prototype.uniq = function () {
     return [...new Set(this)];
 }
 
+// return the intersection between two arrays
+const ArrayIntersection = (a, b) => {
+    var setB = new Set(b);
+    return [...new Set(a)].filter(x => setB.has(x));
+}
+
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 	module.exports = {
-		getParameterByName, FixURL, extractDomain, ValidURL
+		getParameterByName, FixURL, extractDomain, ValidURL, ArrayIntersection
 	};
 }

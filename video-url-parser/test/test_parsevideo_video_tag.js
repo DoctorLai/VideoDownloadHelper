@@ -7,7 +7,7 @@ const { ParseVideo } = require('../js/parsevideo');
 const fs  = require("fs");
 
 describe('html <video src>', function() {
-    let url = 'https://example.com/example-video.html';
+    const url = 'https://example.com/example-video.html';
     it(url, function() {
         const html = fs.readFileSync('test/data/html-video-tag.html').toString();
         const video = new ParseVideo(url, html);
