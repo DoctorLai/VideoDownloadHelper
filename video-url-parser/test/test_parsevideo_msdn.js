@@ -7,7 +7,7 @@ const { ParseVideo } = require('../js/parsevideo');
 const fs  = require("fs");
 
 describe('msdn.com', function() {
-    let url = 'https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108';
+    const url = 'https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2017-Launch/T108';
     it(url, function() {
         const html = fs.readFileSync('test/data/msdn-1.html').toString();
         const video = new ParseVideo(url, html);

@@ -251,10 +251,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // append tested urls to log memo
-    const url = chrome.runtime.getURL('tested-urls.txt');
+    const url = 'https://raw.githubusercontent.com/DoctorLai/VideoDownloadHelper/master/video-url-parser/tested-urls.txt';
     fetch(url).then((response) => {
         return response.text().then(function(text) {
-            $('textarea#about').val($('textarea#about').val() + "\n****Supported URLs****:\n" + text);
+            $('textarea#about').val($('textarea#about').val() + "\n****Tested URLs****:\n" + text);
         });        
     });
 }, false);

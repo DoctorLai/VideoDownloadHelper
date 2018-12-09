@@ -3,7 +3,7 @@
 'use strict';
 
 const { assert } = require("chai");
-const { FixURL, extractDomain, getParameterByName, ValidURL } = require('../js/functions');
+const { FixURL, extractDomain, getParameterByName, ValidURL, ArrayIntersection } = require('../js/functions');
 
 describe('getParameterByName', function() {
     it('https://example.com/?a=b&c=d&e=f', function() {
@@ -111,4 +111,19 @@ describe('Array.prototype.uniq', function() {
     it('["https://domain1.com", "https://domain2.com", "https://domain1.com"]', function() { 
         assert.deepEqual(["https://domain1.com", "https://domain2.com", "https://domain1.com"].uniq(), ["https://domain1.com", "https://domain2.com"]);
     });       
+});
+
+describe('ArrayIntersection', function() {
+    it('[1,2,2,3], [2,3,4]', function() {
+        assert.deepEqual(ArrayIntersection([1, 2, 2, 3], [2, 3, 4]), [2, 3]);
+    }); 
+    it('[1], [2]', function() {
+        assert.deepEqual(ArrayIntersection([1], [2]), []);
+    });     
+    it('[2], [2]', function() {
+        assert.deepEqual(ArrayIntersection([2], [2]), [2]);
+    }); 
+    it('[2], []', function() {
+        assert.deepEqual(ArrayIntersection([2], []), []);
+    });   
 });
