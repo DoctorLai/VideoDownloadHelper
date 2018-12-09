@@ -304,13 +304,15 @@ class ParseVideo {
 
     // parse ssp.com video e.g. https://www.ssp*.com/videos/8395/900/
     static parse_ssp_video(url, html) {
-        const re = /https?:\/\/(www.)?[a-zA-Z]+.com\/get_file\/([0-9]+)\/([a-z0-9]{32})\/([0-9]+)\/([0-9]+)\/([0-9]+)\.mp4\/\?br=([0-9]+)/ig;
+        const re = /https?:\/\/(www.)?[a-zA-Z]+\.com\/get_file\/([0-9]+)\/([a-z0-9]{32})\/([0-9]+)\/([0-9]+)\/([0-9]+)\.mp4\/\?br=([0-9]+)/ig;
         let found = re.exec(html);
         if (found == null) {
             return null;
         }
+        // get the mapping
         const id = ParseVideo._sse_reverse_engineering_helper(found[3]);
-        let surl = found[0].replace(found[3], id)
+        // decrypte it and replace
+        let surl = found[0].replace(found[3], id);
         return surl + "&rnd=" + ((new Date()).getTime() + 500);
     }      
 
