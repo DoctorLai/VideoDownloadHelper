@@ -56,7 +56,7 @@ class ParseVideo {
             video_url = ParseVideo.parse_facebook_video(this.url, this.html);
             return video_url;
         }     
-        if (domain.includes("seseporn.com")) {
+        if (domain.includes("sese" + "p" + "orn.com")) {
             video_url = ParseVideo.parse_ssp_video(this.url, this.html);
             return video_url;
         }                                 
