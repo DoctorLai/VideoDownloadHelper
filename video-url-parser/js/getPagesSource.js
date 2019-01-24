@@ -522,6 +522,47 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
         }
     }     
 
+    if (!ValidURL(video_url)) {
+        video_dom = document.querySelector("div#player-wrapper>iframe");
+        if (video_dom) {
+            video_url = video_dom.getAttribute("src");             
+            if (ValidURL(video_url)) {
+                let url1 = video_url;
+                video_url = "";
+                $.ajax({
+                    type: "GET",
+                    dataType: "html",
+                    url: url1,
+                    success: function(data) {
+                        let dom = $(data).find("source");
+                        if (dom) {
+                            video_url = dom.attr('src');
+                            if (ValidURL(video_url)) {
+                                video_url = video_url.replace(".m3u8", ".ts");
+                                chrome.runtime.sendMessage({
+                                    action: "getSource",
+                                    source: JSON.stringify(FixURL(video_url))
+                                });
+                            }                            
+                        }
+                        if (!ValidURL(video_url)) {
+                            let re = /src:\s*\"(.*)\"/i;
+                            let found = re.exec(data);
+                            if (found != null) {
+                                video_url = found[1];
+                                video_url = video_url.replace(".m3u8", ".ts");
+                                chrome.runtime.sendMessage({
+                                    action: "getSource",
+                                    source: JSON.stringify(FixURL(video_url))
+                                });                                
+                            }
+                        }
+                    },       
+                });
+            }
+        }
+    }     
+
     if ((!domain.includes("dailymotion.com")) && (!domain.includes("youtube.com"))) {
         // instagram
         if (!ValidURL(video_url)) {
