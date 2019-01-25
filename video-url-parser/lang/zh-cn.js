@@ -1,6 +1,8 @@
 'use strict';
 
 let translation_simplified_chinese = {
+	'links_list': '页面链接',
+	'links': '链接',
 	'text_vip_server_api_key': 'VIP服务器API密钥',
 	'vip_desc': 'VIP允许使用远程服务器视频解析器API。',
 	'youtube_notice': '请注意（不支持YOUTUBE）：Google不允许任何支持或鼓励下载YouTube视频的行为，因此此插件不再支持YouTube。',

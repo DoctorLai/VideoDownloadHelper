@@ -214,7 +214,55 @@ document.addEventListener('DOMContentLoaded', function() {
                         found = re.exec(data);
                     }
                     if (tmp.length > 0) {
+                        // remove duplicate
+                        tmp = tmp.uniq();
                         let s = "<h3>" + get_text("images_list") + "</h3>";
+                        s += "<ol>";
+                        for (let i = 0; i < tmp.length; ++i) {
+                            s += "<li><a target=_blank href='" + tmp[i] + "'>" + tmp[i] + "</a>";
+                        }
+                        s += "</ol>";
+                        $('div#down').html(s);
+                    }
+                },
+                error: function(request, status, error) {},
+                complete: function(data) {}
+            });
+        });
+
+
+        $("#links").click(function() {
+            let domain = pageurl.replace('http://', '').replace('https://', '').replace('www.', '').split(/[/?#]/)[0];
+            if (pageurl.startsWith("http://")) {
+                domain = "http://" + domain;
+            } else if (pageurl.startsWith("https://")) {
+                domain = "https://" + domain;
+            }
+            $.ajax({
+                type: "GET",
+                url: pageurl,
+                success: function(data) {
+                    let tmp = [];
+                    let re = /(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*))/ig;
+                    let found = re.exec(data);
+                    while (found != null) {
+                        let tmp_url = found[0];
+                        if ((tmp_url != null) && (tmp_url.length > 0)) {
+                            if (tmp_url.startsWith("http://") || tmp_url.startsWith("https://")) {
+                                tmp.push(tmp_url);
+                            } else {
+                                if (tmp_url[0] == '/') {
+                                    tmp.push(domain + tmp_url);
+                                } else {
+                                    tmp.push(domain + '/' + tmp_url);
+                                }
+                            }
+                        }
+                        found = re.exec(data);
+                    }
+                    if (tmp.length > 0) {
+                        tmp = tmp.uniq();
+                        let s = "<h3>" + get_text("links_list") + "</h3>";
                         s += "<ol>";
                         for (let i = 0; i < tmp.length; ++i) {
                             s += "<li><a target=_blank href='" + tmp[i] + "'>" + tmp[i] + "</a>";
@@ -229,6 +277,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    
     // get video url from getPageSource.js
     chrome.runtime.onMessage.addListener(function(request, sender) {
         if (request.action == "getSource") {
