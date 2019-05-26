@@ -481,6 +481,66 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
         }
     }     
     
+    // https://which0.r.worldssl.net/video/embed/119838?player=hola&v=1&vip=0&mobile=0
+    // https://which0.r.worldssl.net/videos/1/119838/119838.240p.m3u8?v=1.1
+    if (!ValidURL(video_url)) {
+        video_dom = document.querySelector("div#player-wrapper>iframe");
+        if (video_dom) {
+            video_url = video_dom.getAttribute("src");             
+            if (ValidURL(video_url)) {
+                let url1 = video_url;
+                video_url = "";                
+                $.ajax({
+                    type: "GET",
+                    dataType: "html",
+                    url: url1,
+                    success: function(data) {
+                        let dom = $(data).find("source");
+                        if (dom) {
+                            video_url = dom.attr('src');                             
+                            if (ValidURL(video_url)) {
+                                video_url = video_url.replace(".m3u8", ".ts");
+                                chrome.runtime.sendMessage({
+                                    action: "getSource",
+                                    source: JSON.stringify(FixURL(video_url))
+                                });
+                            }
+                        }  
+                        if (!ValidURL(video_url)) {
+                            let re = /src:\s*\"(.*)\"/i;
+                            let found = re.exec(data);
+                            if (found != null) {                                
+                                video_url = found[1];                                
+                                video_url = video_url.replace(".m3u8", ".ts");
+                                chrome.runtime.sendMessage({
+                                    action: "getSource",
+                                    source: JSON.stringify(FixURL(video_url))
+                                });                                
+                            }
+                        }
+                        // https://which2.r.worldssl.net/videos/0/76346/76346.240p.ts?v=1.1
+                        // https://which0.r.worldssl.net/videos/1/76346/76346.240p.ts?v=1.1
+                        if (!ValidURL(video_url)) {
+                            let video_id_re = /(.*)video\/(.*)embed\/([0-9]+)\?/;
+                            let video_id = video_id_re.exec(url1);
+                            if (video_id != null) {
+                                video_url = [
+                                    video_id[1] + "videos/0/" + video_id[3] + "/" + video_id[3] + ".240p.ts?v=1.1",
+                                    video_id[1] + "videos/1/" + video_id[3] + "/" + video_id[3] + ".240p.ts?v=1.1",
+                                    video_id[1] + "videos/2/" + video_id[3] + "/" + video_id[3] + ".240p.ts?v=1.1"
+                                ];
+                                chrome.runtime.sendMessage({
+                                    action: "getSource",
+                                    source: JSON.stringify(FixURL(video_url))
+                                });                                  
+                            }                            
+                        }
+                    },       
+                });
+            }
+        }
+    }     
+
     if (!ValidURL(video_url)) {
         video_dom = document.querySelector("div#player-wrapper>iframe");
         if (video_dom) {
@@ -504,7 +564,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                                 });
                             }                            
                         }
-                        if (!ValidURL(video_url)) {
+                        if (!ValidURL(video_url)) {    
                             let re = /src:\s*\"(.*)\"/i;
                             let found = re.exec(data);
                             if (found != null) {
@@ -520,48 +580,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                 });
             }
         }
-    }     
-
-    if (!ValidURL(video_url)) {
-        video_dom = document.querySelector("div#player-wrapper>iframe");
-        if (video_dom) {
-            video_url = video_dom.getAttribute("src");             
-            if (ValidURL(video_url)) {
-                let url1 = video_url;
-                video_url = "";
-                $.ajax({
-                    type: "GET",
-                    dataType: "html",
-                    url: url1,
-                    success: function(data) {
-                        let dom = $(data).find("source");
-                        if (dom) {
-                            video_url = dom.attr('src');
-                            if (ValidURL(video_url)) {
-                                video_url = video_url.replace(".m3u8", ".ts");
-                                chrome.runtime.sendMessage({
-                                    action: "getSource",
-                                    source: JSON.stringify(FixURL(video_url))
-                                });
-                            }                            
-                        }
-                        if (!ValidURL(video_url)) {
-                            let re = /src:\s*\"(.*)\"/i;
-                            let found = re.exec(data);
-                            if (found != null) {
-                                video_url = found[1];
-                                video_url = video_url.replace(".m3u8", ".ts");
-                                chrome.runtime.sendMessage({
-                                    action: "getSource",
-                                    source: JSON.stringify(FixURL(video_url))
-                                });                                
-                            }
-                        }
-                    },       
-                });
-            }
-        }
-    }     
+    }         
 
     if ((!domain.includes("dailymotion.com")) && (!domain.includes("youtube.com"))) {
         // instagram
