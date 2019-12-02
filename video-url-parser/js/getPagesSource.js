@@ -12,6 +12,11 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
 
     const pageurl = document.location.href;
     const domain = extractDomain(pageurl);
+
+    if (domain.includes("youtube.com")) {
+        return; 
+    }
+
     const html = document.documentElement.outerHTML;
     let video_url = "";
     let video_dom = null;
