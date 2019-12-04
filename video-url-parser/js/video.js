@@ -177,6 +177,9 @@ document.addEventListener('DOMContentLoaded', function() {
             setUrlOffline(s, pageurl);
         } else {
             $('div#down').html("<BR/>" + "<blockquote>" + get_text('youtube_notice') + "</blockquote>");
+            $('button#m3u8').hide();
+            $('button#links').hide();
+            $('button#pic').hide();
         }
 
         $("#m3u8").click(function() {
