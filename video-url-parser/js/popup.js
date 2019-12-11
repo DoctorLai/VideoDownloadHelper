@@ -20,7 +20,7 @@ window.onload = () => {
 		}
 	};
 	executeScripts(null, [ 
-		{ file: "js/jquery-3.3.1.min.js" },
+		{ file: "js/jquery-3.4.1.min.js" },
 		{ file: "dist/dist.min.js" }
 	]);	
 }; 
