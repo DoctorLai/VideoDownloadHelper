@@ -2,7 +2,9 @@
 "use strict";
 
 const max_url_length = 95;
+
 const steemit_domains = [
+    'steempeak.com',
     'steemit.com', 
     'steemkr.com', 
     'cnsteem.com',
