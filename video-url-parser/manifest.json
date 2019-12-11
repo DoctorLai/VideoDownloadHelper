@@ -41,6 +41,7 @@
    ],
    "content_scripts": [
     {
+      "matches": ["http*://*"],
       "exclude_matches": ["*://*youtube.com/*"],
       "js": [
         "js/background.js", 
