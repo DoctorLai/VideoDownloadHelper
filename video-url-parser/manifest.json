@@ -38,15 +38,13 @@
      "storage",
      "tabs",
      "<all_urls>"
-   ],
-   "content_scripts": [
-    {
-      "matches": ["http*://*"],
-      "exclude_matches": ["*://*youtube.com/*"],
+  ],
+  "content_scripts": [ {
+      "matches": ["http://*/*", "https://*/*"],
+      "exclude_matches": ["http://*.youtube.com/*", "https://*.youtube.com/*"],
       "js": [
         "js/background.js", 
         "js/m_inc.js"
       ]
-    }
-  ]   
+  } ]   
 }
