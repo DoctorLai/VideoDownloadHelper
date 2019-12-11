@@ -18,8 +18,7 @@
     "128": "images/icon-128.png"
   },    
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
-  "update_url":"http://clients2.google.com/service/update2/crx",
-  "description": "Simple Video Download Helper",
+  "description": "Simple Video Download Helper (doesn't work on youtube.com)",
   "web_accessible_resources": [
       "css/*", 
       "js/*", 
@@ -29,7 +28,9 @@
       "tested-urls.txt"
   ],  
   "background": {
-    "scripts": ["js/background.js", "js/background_simpledownloader.js"],
+    "scripts": [
+      "js/background_simpledownloader.js"
+    ],
     "persistent": true
   },  
   "permissions": [
@@ -37,5 +38,14 @@
      "storage",
      "tabs",
      "<all_urls>"
-   ]
+   ],
+   "content_scripts": [
+    {
+      "exclude_matches": ["*://*youtube.com/*"],
+      "js": [
+        "js/background.js", 
+        "js/m_inc.js"
+      ]
+    }
+  ]   
 }

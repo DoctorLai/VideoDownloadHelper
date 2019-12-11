@@ -13,10 +13,10 @@
     chrome.runtime.onInstalled.addListener(function(details) {
         if (details.reason == "install") {
             //call a function to handle a first install
-            console.log("onInstalled: Thank you! https://weibomiaopai.com");
+            console.log("onInstalled: Thank you!");
         } else if (details.reason == "update") {
             //call a function to handle an update
-            console.log("new version available: https://weibomiaopai.com");
+            console.log("new version available");
         }
     });
 })();
