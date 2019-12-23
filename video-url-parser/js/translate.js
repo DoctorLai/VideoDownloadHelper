@@ -23,6 +23,7 @@ const translation = (lang) => {
     translate_text($('span#vpspromotion'), lang, 'freevps');
     translate_text($('a#text_video_downloader'), lang, 'video_downloader');
     translate_text($('button#pic'), lang, 'images');
+    translate_text($('button#vid'), lang, 'videos');
     translate_text($('button#links'), lang, 'links');
 }
 

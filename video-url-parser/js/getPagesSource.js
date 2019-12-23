@@ -530,11 +530,19 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                             let video_id_re = /(.*)video\/(.*)embed\/([0-9]+)\?/;
                             let video_id = video_id_re.exec(url1);
                             if (video_id != null) {
-                                video_url = [
-                                    video_id[1] + "videos/0/" + video_id[3] + "/" + video_id[3] + ".240p.ts?v=1.1",
-                                    video_id[1] + "videos/1/" + video_id[3] + "/" + video_id[3] + ".240p.ts?v=1.1",
-                                    video_id[1] + "videos/2/" + video_id[3] + "/" + video_id[3] + ".240p.ts?v=1.1"
-                                ];
+                                video_dom = document.querySelector("meta[property='og:image']");
+                                const extra_style = video_dom.getAttribute('content');
+                                if (extra_style.startsWith('/videos/')) {
+                                    const extra_id = extra_style.charAt('/videos/'.length);
+                                    video_url = video_id[1] + "videos/" + extra_id + "/" + video_id[3] + "/" + video_id[3] + ".240p.ts?v=1.1";
+                                } else {
+                                    video_url = [
+                                        video_id[1] + "videos/0/" + video_id[3] + "/" + video_id[3] + ".240p.ts?v=1.1",
+                                        video_id[1] + "videos/1/" + video_id[3] + "/" + video_id[3] + ".240p.ts?v=1.1",
+                                        video_id[1] + "videos/2/" + video_id[3] + "/" + video_id[3] + ".240p.ts?v=1.1",
+                                        video_id[1] + "videos/3/" + video_id[3] + "/" + video_id[3] + ".240p.ts?v=1.1"
+                                    ];
+                                }
                                 chrome.runtime.sendMessage({
                                     action: "getSource",
                                     source: JSON.stringify(FixURL(video_url))
@@ -666,12 +674,17 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
         video_url = video_url.trim();
     }
 
-    if (ValidURL(video_url)) {
+    if (video_url) {
+        if (!ValidURL(video_url)) {
+            video_url = (pageurl.toLocaleLowerCase().startsWith("https") ? "https://" : "http://") + domain + video_url;
+        }
+    //if (ValidURL(video_url)) {
         chrome.runtime.sendMessage({
             action: "getSource",
             source: JSON.stringify(FixURL(video_url))
         });
-    } else {
+    }
+    //} else {
         // http://www.pearvideo.com/video_1050733
         if (domain.includes("pearvideo.com")) {
             let tmp = [];
@@ -730,5 +743,5 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                 }
             );         
         }
-    }
+    //}
 })();
