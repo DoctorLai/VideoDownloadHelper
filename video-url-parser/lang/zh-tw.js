@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-let translation_traditional_chinese = {
+const translation_traditional_chinese = {
 	'links_list': '頁面鏈接',
 	'links': '鏈接',
 	'text_vip_server_api_key': 'VIP服務器API密鑰',
@@ -27,4 +27,4 @@ let translation_traditional_chinese = {
 	'calling': '正在調用',	
 	'proudly_brought_to_you_by': '開發：',
 	'freevps': '雲VPS促銷活動'
-}
+};

@@ -34,6 +34,12 @@ const get_lang = () => {
         case 'zh-cn': return (translation_simplified_chinese); 
         case 'en-us': return (translation_english); 
         case 'zh-tw': return (translation_traditional_chinese); 
+        case 'de-de': return (translation_de_de); 
+        case 'es-sp': return (translation_es_sp); 
+        case 'fr-fr': return (translation_fr_fr); 
+        case 'it-it': return (translation_it_it); 
+        case 'ru-ru': return (translation_ru_ru); 
+        case 'nl-nl': return (translation_nl_nl); 
     }	
 }
 

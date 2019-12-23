@@ -1,0 +1,30 @@
+"use strict";
+
+const translation_de_de = {
+	'links_list': 'Links List',
+	'links': 'Links',
+	'text_vip_server_api_key': 'VIP Server API Key',
+	'vip_desc': 'VIP ermöglicht die Verwendung der Remote-Server-Video-Parser-API.',
+	'youtube_notice': 'Bitte beachten Sie (NO YOUTUBE): Google erlaubt kein Verhalten, das das Herunterladen von YouTube-Videos unterstützt oder ermutigt, und daher unterstützt dieses Plugin YouTube nicht mehr.',
+	'video_downloader': 'Video Downloader',
+	'not_found': 'Bisher nichts gefunden :(',
+	'videos': 'Videos',
+	'images': 'Images',
+	'images_list': 'Bilderliste',
+	'videos_list': 'Videoliste',
+	'source_code': 'Source Code',
+	'report_bugs': 'Fehler melden',
+	'text_logs': 'Versionsverlauf',	
+	'save': 'Speichern',
+	'alert_save': 'Einstellungen gespeichert (Erforderlich: Erweiterung neu laden)',	
+	'ui_language': 'UI-Sprache',	
+	'setting': 'Setting',
+	'log': 'Log',	
+	'application': 'Bewerbung',
+	'last_updated': 'Last Updated',
+	'chrome_version': 'Chrome Version',
+	'api_finished': 'API beendet',
+	'calling': 'Benennen',	
+	'proudly_brought_to_you_by': 'Entwickelt von',
+	'freevps': 'Cloud VPS-Werbeaktionen'
+};

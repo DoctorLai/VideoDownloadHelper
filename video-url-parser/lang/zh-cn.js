@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-let translation_simplified_chinese = {
+const translation_simplified_chinese = {
 	'links_list': '页面链接',
 	'links': '链接',
 	'text_vip_server_api_key': 'VIP服务器API密钥',
@@ -27,4 +27,4 @@ let translation_simplified_chinese = {
 	'calling': '正在调用',	
 	'proudly_brought_to_you_by': '开发：',
 	'freevps': '云VPS促销活动'
-}
+};

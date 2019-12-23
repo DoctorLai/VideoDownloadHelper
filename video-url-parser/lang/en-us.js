@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-let translation_english = {
+const translation_english = {
 	'links_list': 'Links List',
 	'links': 'Links',
 	'text_vip_server_api_key': 'VIP Server API Key',
@@ -27,4 +27,4 @@ let translation_english = {
 	'calling': 'Calling',	
 	'proudly_brought_to_you_by': 'Developed By',
 	'freevps': 'Cloud VPS Promotions'
-}
+};

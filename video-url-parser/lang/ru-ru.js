@@ -1,0 +1,30 @@
+"use strict";
+
+const translation_ru_ru = {
+	'links_list': 'Список ссылок',
+	'links': 'Links',
+	'text_vip_server_api_key': 'Ключ VIP-сервера API',
+	'vip_desc': 'VIP позволяет использовать API анализатора видео удаленного сервера.',
+	'youtube_notice': 'Обратите внимание (НЕТ YOUTUBE): Google не допускает никаких действий, которые поддерживают или поощряют загрузку видео с YouTube, и поэтому этот плагин больше не поддерживает YouTube.',
+	'video_downloader': 'Video Downloader',
+	'not_found': 'Пока ничего не найдено :(',
+	'videos': 'Videos',
+	'images': 'Images',
+	'images_list': 'Список изображений',
+	'videos_list': 'Список видео',
+	'source_code': 'Исходный код',
+	'report_bugs': 'Сообщить об ошибках',
+	'text_logs': 'История версий',
+	'save': 'Save',
+	'alert_save': 'Настройки сохранены (обязательно: Обновить расширение)',
+	'ui_language': 'Язык интерфейса пользователя',
+	'setting': 'Setting',
+	'log': 'Log',
+	'application': 'Application',
+	'last_updated': 'Последнее обновление',
+	'chrome_version': 'Chrome Version',
+	'api_finished': 'API Finished',
+	'calling': 'Calling',
+	'proudly_brought_to_you_by ':' Разработано ',
+	'freevps': 'Акции в облаке VPS'
+};
