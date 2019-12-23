@@ -1,0 +1,30 @@
+"use strict";
+
+const translation_tr_tr = {
+	'links_list': 'Bağlantılar Listesi',
+	'links': 'Bağlantılar',
+	'text_vip_server_api_key': 'VIP Sunucu API Anahtarı',
+	'vip_desc': 'VIP uzak sunucu video ayrıştırıcı API\'sının kullanılmasına izin veriyor.',
+	'youtube_notice': 'Lütfen dikkat (YOUTUBE YOK): Google, youtube videolarının indirilmesini destekleyen veya teşvik eden herhangi bir davranışa izin vermez ve bu nedenle bu eklenti artık youtube\'u desteklemez.',
+	'video_downloader': 'Video İndirici',
+	'not_found': 'Şimdiye kadar hiçbir şey bulunamadı :(',
+	'videos': 'Videolar',
+	'images': 'Görüntüler',
+	'images_list': 'Görüntüler Listesi',
+	'videos_list': 'Videolar Listesi',
+	'source_code': 'Kaynak Kodu',
+	'report_bugs': 'Hataları Bildir',
+	'text_logs': 'Sürüm Geçmişi',
+	'save': 'Kaydet',
+	'alert_save': 'Ayarlar Kaydedildi (Gerekli: Uzantıyı Yeniden Yükle)',
+	'ui_language': 'Kullanıcı Arayüzü Dili',
+	'setting': 'Setting',
+	'log': 'Log',
+	'application': 'Uygulama',
+	'last_updated': 'Son Güncelleme',
+	'chrome_version': 'Chrome Sürümü',
+	'api_finished': 'API Tamamlandı',
+	'calling': 'Calling',
+	'proudly_brought_to_you_by': 'Geliştiren',
+	'freevps': 'Cloud VPS Promosyonları'
+};
