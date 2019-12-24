@@ -180,6 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
             $('button#m3u8').hide();
             $('button#links').hide();
             $('button#pic').hide();
+            $('button#vid').hide();
             $('#text_setting').hide();
             $('#text_log').hide();
         }
