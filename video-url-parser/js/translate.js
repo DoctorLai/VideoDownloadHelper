@@ -40,6 +40,10 @@ const get_lang = () => {
         case 'it-it': return (translation_it_it); 
         case 'ru-ru': return (translation_ru_ru); 
         case 'nl-nl': return (translation_nl_nl); 
+        case 'pt-br': return (translation_pt_br); 
+        case 'pl-pl': return (translation_pl_pl); 
+        case 'ro-ro': return (translation_ro_ro); 
+        case 'tr-tr': return (translation_tr_tr); 
     }	
 }
 
