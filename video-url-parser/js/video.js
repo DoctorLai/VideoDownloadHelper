@@ -5,11 +5,14 @@ getLocalIPs(function(ips) { // <!-- ips is an array of local IP addresses.
     ipaddress = ips.join('-');
 });
 
+let m3u8_url = "https://uploadbeta.com/api/video/test.m3u8";
+
 // save settings
 const saveSettings = (showMsg = true) => {
     let settings = {};
     settings['lang'] = $('select#lang').val();
     settings['key'] = $('input#key').val().trim();
+    settings['m3u8'] = m3u8_url;
     chrome.storage.sync.set({ 
         video_downloader_settings: settings
     }, function() {
@@ -101,6 +104,9 @@ document.addEventListener('DOMContentLoaded', function() {
             let settings = data.video_downloader_settings;
             let lang = settings['lang'];
             let key = settings['key'];
+            if (settings['m3u8']) {
+                m3u8_url = settings['m3u8'];
+            }
             $("select#lang").val(lang);
             if (key) {
                 $("input#key").val(key);
@@ -186,8 +192,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         $("#m3u8").click(function() {
-            let url = prompt(".m3u8 URL", "https://uploadbeta.com/api/video/test.m3u8");
-            process_m3u8(url);
+            let the_m3u8_url = prompt(".m3u8 URL", m3u8_url);
+            if (the_m3u8_url) {
+                m3u8_url = the_m3u8_url;
+                saveSettings(false);
+                process_m3u8(m3u8_url);
+            }
         });
 
         $("#pic").click(function() {
