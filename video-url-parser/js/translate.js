@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 // translation a text
 const translate_text = (dom, lang, text) => {
-    let s = lang[text];
+    const s = lang[text];
     if (s) {
         dom.html(s);
     }
@@ -29,7 +29,7 @@ const translation = (lang) => {
 
 // get ui lang data
 const get_lang = () => {
-    let lang = $('select#lang').val();
+    const lang = $('select#lang').val();
     switch (lang) {
         case 'zh-cn': return (translation_simplified_chinese); 
         case 'en-us': return (translation_english); 
@@ -49,13 +49,13 @@ const get_lang = () => {
 
 // ui translate
 const ui_translate = () => {
-	let data = get_lang();
+	const data = get_lang();
 	translation(data);
 }
 
 // translate
 const get_text = (x, default_text = '') => {
-	let lang = get_lang();
+	const lang = get_lang();
 	if (lang && lang[x]) {
 		return lang[x];
 	}
