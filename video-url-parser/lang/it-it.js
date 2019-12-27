@@ -15,7 +15,7 @@ const translation_it_it = {
 	'source_code': 'Source Code',
 	"report_bugs": "Segnala bug",
 	"text_logs": "Cronologia versioni",
-	'salva': 'Salva',
+	'save': 'Salva',
 	"alert_save": "Impostazioni salvate (obbligatorio: ricaricare l'estensione)",
 	"ui_language": "UI Language",
 	'setting': 'Setting',

@@ -20,7 +20,7 @@ const saveSettings = (showMsg = true) => {
             alert(get_text('alert_save'));
         }
     });
-}
+};
 
 // log in the textarea
 const logit = (dom, msg, showtime = true) => {

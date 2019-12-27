@@ -15,7 +15,7 @@ const translation_ro_ro = {
 	'source_code': 'Codul sursă',
 	'report_bugs': 'Raportați erori',
 	'text_logs': 'Istoricul versiunilor',
-	'salva': 'Salvați',
+	'save': 'Salvați',
 	'alert_save': 'Setări salvate (Obligatoriu: Extensie reîncărcare)',
 	'ui_language': 'Limba UI',
 	'setting': 'Setare',
@@ -24,7 +24,7 @@ const translation_ro_ro = {
 	'last_updated': 'Ultima actualizare',
 	'chrome_version': 'Versiunea Chrome',
 	'api_finished': 'API-ul terminat',
-	'apel': 'Apelare',
+	'calling': 'Apelare',
 	'proudly_brought_to_you_by': 'Dezvoltat de',
 	'freevps': 'Promoții cloud VPS'
 };
