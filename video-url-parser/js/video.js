@@ -27,10 +27,10 @@ const logit = (dom, msg, showtime = true) => {
     if ((msg == undefined) || (msg == null)) {
         return;
     }
-    let s = dom.val();
+    const s = dom.val();
     if (showtime) {
-        let d = new Date();
-        let n = d.toLocaleTimeString();            
+        const d = new Date();
+        const n = d.toLocaleTimeString();            
         dom.val((s + "\n" + n + ": " + msg).trim());
     } else {
         dom.val((s + "\n" + msg).trim());
@@ -39,7 +39,7 @@ const logit = (dom, msg, showtime = true) => {
 
 // use server API
 const callAPI = (key, url) => {
-    let api = "https://uploadbeta.com/api/video/?cached&video=" + encodeURIComponent(url) + "&hash=" + key;
+    const api = "https://uploadbeta.com/api/video/?cached&video=" + encodeURIComponent(url) + "&hash=" + key;
     console.log(api);
     return new Promise((resolve, reject) => {
         fetch(api, {mode: 'cors'})
@@ -65,7 +65,7 @@ const callAPI = (key, url) => {
 function setUrlOffline(url, url2 = '') {
     if (url.includes("weibomiaopai.com")) { // alternative 
         $('div#down').html("<h3>" + get_text("videos_list") + "</h3><ul><li><a target=_blank rel=nofollow href='" + url + "'>" + "<i><font color=gray>" + url + "</font></i></a></li></ul>");
-        let key = $('input#key').val().trim();
+        const key = $('input#key').val().trim();
         if (key) {
             callAPI(key, url2).then((video) => {
                 if ((video != null) && (video.constructor == Array)) {
@@ -82,7 +82,7 @@ function setUrlOffline(url, url2 = '') {
 
 // display more than 1 video urls
 function setUrlOfflineArray(urls) {
-    let urls_length = urls.length;
+    const urls_length = urls.length;
     let s = "<h3>"+ get_text("videos_list") + "</h3>";
     s += "<ol>";
     for (let i = 0; i < urls_length; ++i) {
@@ -101,9 +101,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // load settings
     chrome.storage.sync.get('video_downloader_settings', function(data) {
         if (data && data.video_downloader_settings) {
-            let settings = data.video_downloader_settings;
-            let lang = settings['lang'];
-            let key = settings['key'];
+            const settings = data.video_downloader_settings;
+            const lang = settings['lang'];
+            const key = settings['key'];
             if (settings['m3u8']) {
                 m3u8_url = settings['m3u8'];
             }
@@ -115,8 +115,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // first time set default parameters
         }
         // about
-        let manifest = chrome.runtime.getManifest();    
-        let app_name = manifest.name + " v" + manifest.version;
+        const manifest = chrome.runtime.getManifest();    
+        const app_name = manifest.name + " v" + manifest.version;
         // version number
         $('textarea#about').val(get_text('application') + ': ' + app_name + '\n' + get_text('chrome_version') + ': ' + getChromeVersion());
 
