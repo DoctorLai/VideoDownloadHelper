@@ -1,12 +1,12 @@
 {
   "manifest_version": 2,
-  "name": "Simple Video Download Helper",
-  "short_name": "Video Download Helper",
+  "name": "Simple Video Download Helper (Doesnt work on Youtube)",
+  "short_name": "Video Download Helper (Doesnt work on Youtube)",
   "default_locale": "en",
   "version": "3.0.16",
   "browser_action": {
      "default_icon": "icon.png",
-     "default_title": "Video Download Helper",
+     "default_title": "Video Download Helper (Doesnt work on Youtube)",
      "default_popup": "main.html"
   },
   "offline_enabled": true,  

@@ -1,10 +1,10 @@
 {
-      "appName": {
-        "message": "Ajutor pentru descărcare video",
-        "description": "Ein leistungsstarker Video-URL-Parser - Video-URL abrufen (schnell und korrekt)."
-      },
-      "appDesc": {
-        "message": "Ajutor pentru descărcare video (parser URL URL video)",
-        "description": "Ein leistungsstarker Video-URL-Parser - Video-URL abrufen (schnell und korrekt)."
-      }
+  "appName": {
+    "message": "Ajutor pentru descărcare video",
+    "description": "Ein leistungsstarker Video-URL-Parser - Video-URL abrufen (schnell und korrekt)."
+  },
+  "appDesc": {
+    "message": "Ajutor pentru descărcare video (parser URL URL video)",
+    "description": "Ein leistungsstarker Video-URL-Parser - Video-URL abrufen (schnell und korrekt)."
   }
+}
