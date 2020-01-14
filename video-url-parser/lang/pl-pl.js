@@ -3,7 +3,7 @@
 const translation_pl_pl = {
 	'links_list': 'Lista linków',
 	'links': 'Links',
-	'text_vip_server_api_key': 'Klucz API serwera VIP',
+	'text_vip_server_api_key': 'Klucz API serwera VIP (No Youtube)',
 	'vip_desc': 'VIP zezwala na używanie interfejsu API analizatora wideo zdalnego serwera.',
 	'youtube_notice': 'Uwaga (NO YOUTUBE): Google nie zezwala na żadne zachowanie, które obsługuje lub zachęca do pobierania filmów z YouTube, a zatem ta wtyczka nie obsługuje już youtube.',
 	'video_downloader': 'Video Downloader',

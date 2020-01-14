@@ -29,7 +29,7 @@
   ],  
   "background": {
     "scripts": [
-      "js/background_simpledownloader.js"
+      "js/simpledownloader.js"
     ],
     "persistent": true
   },  

@@ -3,7 +3,7 @@
 const translation_ru_ru = {
 	'links_list': 'Список ссылок',
 	'links': 'Links',
-	'text_vip_server_api_key': 'Ключ VIP-сервера API',
+	'text_vip_server_api_key': 'Ключ VIP-сервера API (No Youtube)',
 	'vip_desc': 'VIP позволяет использовать API анализатора видео удаленного сервера.',
 	'youtube_notice': 'Обратите внимание (НЕТ YOUTUBE): Google не допускает никаких действий, которые поддерживают или поощряют загрузку видео с YouTube, и поэтому этот плагин больше не поддерживает YouTube.',
 	'video_downloader': 'Video Downloader',

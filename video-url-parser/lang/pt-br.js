@@ -3,7 +3,7 @@
 const translation_pt_br = {
 	'links_list': 'Lista de links',
 	'links': 'Links',
-	'text_vip_server_api_key': 'Chave da API do servidor VIP',
+	'text_vip_server_api_key': 'Chave da API do servidor VIP (No Youtube)',
 	'vip_desc': 'VIP permite usar a API do analisador de vídeo do servidor remoto.',
 	'youtube_notice': 'Observe (NO YOUTUBE): o Google não permite nenhum comportamento que ofereça suporte ou incentive o download de vídeos do youtube e, portanto, este plugin não suporta mais o youtube.',
 	'video_downloader': 'Video Downloader',

@@ -3,7 +3,7 @@
 const translation_de_de = {
 	'links_list': 'Links List',
 	'links': 'Links',
-	'text_vip_server_api_key': 'VIP Server API Key',
+	'text_vip_server_api_key': 'VIP Server API Key (No Youtube)',
 	'vip_desc': 'VIP ermöglicht die Verwendung der Remote-Server-Video-Parser-API.',
 	'youtube_notice': 'Bitte beachten Sie (NO YOUTUBE): Google erlaubt kein Verhalten, das das Herunterladen von YouTube-Videos unterstützt oder ermutigt, und daher unterstützt dieses Plugin YouTube nicht mehr.',
 	'video_downloader': 'Video Downloader',

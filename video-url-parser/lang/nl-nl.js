@@ -3,7 +3,7 @@
 const translation_nl_nl = {
 	'links_list': 'Links List',
 	'links': 'Links',
-	'text_vip_server_api_key': 'VIP Server API Key',
+	'text_vip_server_api_key': 'VIP Server API Key (No Youtube)',
 	'vip_desc': 'VIP maakt het gebruik van externe servervideopars-API mogelijk.',
 	'youtube_notice': 'Let op (GEEN YOUTUBE): Google staat geen gedrag toe dat het downloaden van YouTube-video\'s ondersteunt of aanmoedigt en daarom ondersteunt deze plug-in YouTube niet meer.',
 	'video_downloader': 'Video Downloader',

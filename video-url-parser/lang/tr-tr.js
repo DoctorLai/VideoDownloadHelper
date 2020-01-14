@@ -3,7 +3,7 @@
 const translation_tr_tr = {
 	'links_list': 'Bağlantılar Listesi',
 	'links': 'Bağlantılar',
-	'text_vip_server_api_key': 'VIP Sunucu API Anahtarı',
+	'text_vip_server_api_key': 'VIP Sunucu API Anahtarı (No Youtube)',
 	'vip_desc': 'VIP uzak sunucu video ayrıştırıcı API\'sının kullanılmasına izin veriyor.',
 	'youtube_notice': 'Lütfen dikkat (YOUTUBE YOK): Google, youtube videolarının indirilmesini destekleyen veya teşvik eden herhangi bir davranışa izin vermez ve bu nedenle bu eklenti artık youtube\'u desteklemez.',
 	'video_downloader': 'Video İndirici',

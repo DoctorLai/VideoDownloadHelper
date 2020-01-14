@@ -3,7 +3,7 @@
 const translation_ro_ro = {
 	'links_list': 'Lista de legături',
 	'links': 'Link-uri',
-	'text_vip_server_api_key': 'cheie API pentru server VIP',
+	'text_vip_server_api_key': 'cheie API pentru server VIP (No Youtube)',
 	'vip_desc': 'VIP permite utilizarea API-ului parser video serverului la distanță.',
 	'youtube_notice': 'Vă rugăm să rețineți (FĂR NU VREȚI): Google nu permite niciun comportament care acceptă sau încurajează descărcarea videoclipurilor YouTube și, prin urmare, acest plugin nu mai acceptă YouTube.',
 	'video_downloader': 'Video Downloader',
