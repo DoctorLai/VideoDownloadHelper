@@ -192,11 +192,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         $("#m3u8").click(function() {
-            let the_m3u8_url = prompt(".m3u8 URL", m3u8_url);
+            let the_m3u8_url = prompt(".m3u8 URL (No Youtube)", m3u8_url);
             if (the_m3u8_url) {
-                m3u8_url = the_m3u8_url;
-                saveSettings(false);
-                process_m3u8(m3u8_url);
+                if (the_m3u8_url.toLocaleLowerCase().includes("youtube.com")) {
+                    alert("No Youtube!");
+                } else {
+                    m3u8_url = the_m3u8_url;
+                    saveSettings(false);
+                    process_m3u8(m3u8_url);
+                }
             }
         });
 
