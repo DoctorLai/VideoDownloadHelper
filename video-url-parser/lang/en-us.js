@@ -1,12 +1,14 @@
-'use strict';
+"use strict";
 
-let translation_english = {
+const translation_english = {
 	'links_list': 'Links List',
 	'links': 'Links',
-	'text_vip_server_api_key': 'VIP Server API Key',
+	'text_vip_server_api_key': 'VIP Server API Key (No Youtube)',
 	'vip_desc': 'VIP allows using remote server video parser API.',
 	'youtube_notice': 'Please note (NO YOUTUBE): Google does not allow any behavior that supports or encourages downloading youtube videos and therefore this plugin does not support youtube anymore.',
 	'video_downloader': 'Video Downloader',
+	'not_found': 'Nothing found so far :(',
+	'videos': 'Videos',
 	'images': 'Images',
 	'images_list': 'Images List',
 	'videos_list': 'Videos List',
@@ -25,4 +27,4 @@ let translation_english = {
 	'calling': 'Calling',	
 	'proudly_brought_to_you_by': 'Developed By',
 	'freevps': 'Cloud VPS Promotions'
-}
+};

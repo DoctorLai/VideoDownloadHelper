@@ -1,0 +1,30 @@
+"use strict";
+
+const translation_nl_nl = {
+	'links_list': 'Links List',
+	'links': 'Links',
+	'text_vip_server_api_key': 'VIP Server API Key (No Youtube)',
+	'vip_desc': 'VIP maakt het gebruik van externe servervideopars-API mogelijk.',
+	'youtube_notice': 'Let op (GEEN YOUTUBE): Google staat geen gedrag toe dat het downloaden van YouTube-video\'s ondersteunt of aanmoedigt en daarom ondersteunt deze plug-in YouTube niet meer.',
+	'video_downloader': 'Video Downloader',
+	'not_found': 'Tot nu toe niets gevonden :(',
+	'videos': 'Videos',
+	'images': 'Images',
+	'images_list': 'Afbeeldingenlijst',
+	'videos_list': 'Videos List',
+	'source_code': 'Source Code',
+	'report_bugs': 'Report Bugs',
+	'text_logs': 'Versions History',
+	'save': 'Save',
+	'alert_save': 'Instellingen opgeslagen (vereist: extensie opnieuw laden)',
+	'ui_language': 'UI Language',
+	'setting': 'Setting',
+	'log': 'Log',
+	'application': 'Application',
+	'last_updated': 'Laatst bijgewerkt',
+	'chrome_version': 'Chrome-versie',
+	'api_finished': 'API Finished',
+	'calling': 'Calling',
+	'proudly_brought_to_you_by': 'Ontwikkeld door',
+	'freevps': 'Cloud VPS Promotions'
+};

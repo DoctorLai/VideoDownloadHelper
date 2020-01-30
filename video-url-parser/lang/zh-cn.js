@@ -1,12 +1,14 @@
-'use strict';
+"use strict";
 
-let translation_simplified_chinese = {
+const translation_simplified_chinese = {
 	'links_list': '页面链接',
 	'links': '链接',
-	'text_vip_server_api_key': 'VIP服务器API密钥',
+	'text_vip_server_api_key': 'VIP服务器API密钥 (No Youtube)',
 	'vip_desc': 'VIP允许使用远程服务器视频解析器API。',
 	'youtube_notice': '请注意（不支持YOUTUBE）：Google不允许任何支持或鼓励下载YouTube视频的行为，因此此插件不再支持YouTube。',
 	'video_downloader': '视频下载',
+	'not_found': '对不起，没有找到。:(',
+	'videos': '视频',	
 	'images': '图片',
 	'images_list': '图片列表',
 	'videos_list': '视频列表',	
@@ -25,4 +27,4 @@ let translation_simplified_chinese = {
 	'calling': '正在调用',	
 	'proudly_brought_to_you_by': '开发：',
 	'freevps': '云VPS促销活动'
-}
+};

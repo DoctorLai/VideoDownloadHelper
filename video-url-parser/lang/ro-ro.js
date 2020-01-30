@@ -1,0 +1,30 @@
+"use strict";
+
+const translation_ro_ro = {
+	'links_list': 'Lista de legături',
+	'links': 'Link-uri',
+	'text_vip_server_api_key': 'cheie API pentru server VIP (No Youtube)',
+	'vip_desc': 'VIP permite utilizarea API-ului parser video serverului la distanță.',
+	'youtube_notice': 'Vă rugăm să rețineți (FĂR NU VREȚI): Google nu permite niciun comportament care acceptă sau încurajează descărcarea videoclipurilor YouTube și, prin urmare, acest plugin nu mai acceptă YouTube.',
+	'video_downloader': 'Video Downloader',
+	'not_found': 'Nu s-a găsit nimic până acum :(',
+	'videos': 'Videos',
+	'images': 'Imagini',
+	'images_list': 'Lista de imagini',
+	'videos_list': 'Lista videoclipurilor',
+	'source_code': 'Codul sursă',
+	'report_bugs': 'Raportați erori',
+	'text_logs': 'Istoricul versiunilor',
+	'save': 'Salvați',
+	'alert_save': 'Setări salvate (Obligatoriu: Extensie reîncărcare)',
+	'ui_language': 'Limba UI',
+	'setting': 'Setare',
+	'log': 'jurnal',
+	'application': 'cerere',
+	'last_updated': 'Ultima actualizare',
+	'chrome_version': 'Versiunea Chrome',
+	'api_finished': 'API-ul terminat',
+	'calling': 'Apelare',
+	'proudly_brought_to_you_by': 'Dezvoltat de',
+	'freevps': 'Promoții cloud VPS'
+};

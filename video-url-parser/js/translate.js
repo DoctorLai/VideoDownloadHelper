@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 // translation a text
 const translate_text = (dom, lang, text) => {
-    let s = lang[text];
+    const s = lang[text];
     if (s) {
         dom.html(s);
     }
@@ -23,28 +23,39 @@ const translation = (lang) => {
     translate_text($('span#vpspromotion'), lang, 'freevps');
     translate_text($('a#text_video_downloader'), lang, 'video_downloader');
     translate_text($('button#pic'), lang, 'images');
+    translate_text($('button#vid'), lang, 'videos');
     translate_text($('button#links'), lang, 'links');
 }
 
 // get ui lang data
 const get_lang = () => {
-    let lang = $('select#lang').val();
+    const lang = $('select#lang').val();
     switch (lang) {
         case 'zh-cn': return (translation_simplified_chinese); 
         case 'en-us': return (translation_english); 
         case 'zh-tw': return (translation_traditional_chinese); 
+        case 'de-de': return (translation_de_de); 
+        case 'es-sp': return (translation_es_sp); 
+        case 'fr-fr': return (translation_fr_fr); 
+        case 'it-it': return (translation_it_it); 
+        case 'ru-ru': return (translation_ru_ru); 
+        case 'nl-nl': return (translation_nl_nl); 
+        case 'pt-br': return (translation_pt_br); 
+        case 'pl-pl': return (translation_pl_pl); 
+        case 'ro-ro': return (translation_ro_ro); 
+        case 'tr-tr': return (translation_tr_tr); 
     }	
 }
 
 // ui translate
 const ui_translate = () => {
-	let data = get_lang();
+	const data = get_lang();
 	translation(data);
 }
 
 // translate
 const get_text = (x, default_text = '') => {
-	let lang = get_lang();
+	const lang = get_lang();
 	if (lang && lang[x]) {
 		return lang[x];
 	}

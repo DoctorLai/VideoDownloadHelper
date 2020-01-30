@@ -1,13 +1,15 @@
-'use strict';
+"use strict";
 
-let translation_traditional_chinese = {
+const translation_traditional_chinese = {
 	'links_list': '頁面鏈接',
 	'links': '鏈接',
-	'text_vip_server_api_key': 'VIP服務器API密鑰',
+	'text_vip_server_api_key': 'VIP服務器API密鑰 (No Youtube)',
 	'vip_desc': 'VIP允許使用遠程服務器視頻解析器API。',
 	'youtube_notice': '請注意（不支持YOUTUBE）：谷歌不允許任何支持或鼓勵下載的YouTube視頻的行為，因此此插件不再支持YouTube上。',
 	'video_downloader': '視頻下載',
+	'not_found': '對不起，沒有找到。:(',
 	'images': '圖片',
+	'videos': '視頻',		
 	'images_list': '圖片列表',
 	'videos_list': '視頻列表',		
 	'source_code': '源代碼',
@@ -25,4 +27,4 @@ let translation_traditional_chinese = {
 	'calling': '正在調用',	
 	'proudly_brought_to_you_by': '開發：',
 	'freevps': '雲VPS促銷活動'
-}
+};

@@ -1,0 +1,30 @@
+"use strict";
+
+const translation_pl_pl = {
+	'links_list': 'Lista linków',
+	'links': 'Links',
+	'text_vip_server_api_key': 'Klucz API serwera VIP (No Youtube)',
+	'vip_desc': 'VIP zezwala na używanie interfejsu API analizatora wideo zdalnego serwera.',
+	'youtube_notice': 'Uwaga (NO YOUTUBE): Google nie zezwala na żadne zachowanie, które obsługuje lub zachęca do pobierania filmów z YouTube, a zatem ta wtyczka nie obsługuje już youtube.',
+	'video_downloader': 'Video Downloader',
+	'not_found': 'Jak dotąd nic nie znaleziono :(',
+	'videos': 'filmy',
+	'images': 'Images',
+	'images_list': 'Lista obrazów',
+	'videos_list': 'Lista filmów',
+	'source_code': 'kod źródłowy',
+	'report_bugs': 'Report Bugs',
+	'text_logs': 'Historia wersji',
+	'save': 'zapisz',
+	'alert_save': 'Ustawienia zapisane (wymagane: przeładuj rozszerzenie)',
+	'ui_language': 'Język interfejsu użytkownika',
+	'setting': 'ustawienie',
+	'log': 'Log',
+	'application': 'Application',
+	'last_updated': 'Ostatnia aktualizacja',
+	'chrome_version': 'Wersja Chrome',
+	'api_finished': 'API Finished',
+	'calling': 'dzwonienie',
+	'proudly_brought_to_you_by': 'Opracowany przez',
+	'freevps': 'Promocje VPS w chmurze'
+};

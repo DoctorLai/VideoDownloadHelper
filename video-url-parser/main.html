@@ -8,6 +8,16 @@
     <script src="lang/en-us.js"></script>
     <script src="lang/zh-cn.js"></script>
     <script src="lang/zh-tw.js"></script>
+    <script src="lang/de-de.js"></script>
+    <script src="lang/es-sp.js"></script>
+    <script src="lang/fr-fr.js"></script>
+    <script src="lang/it-it.js"></script>
+    <script src="lang/nl-nl.js"></script>    
+    <script src="lang/ru-ru.js"></script>    
+    <script src="lang/ro-ro.js"></script>    
+    <script src="lang/pl-pl.js"></script>    
+    <script src="lang/pt-br.js"></script>    
+    <script src="lang/tr-tr.js"></script>    
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/constants.js"></script>
     <script src="js/functions.js"></script>
@@ -31,9 +41,10 @@
         </ul>
         <div id="tabs-video-downloader">
             <form class='form-inline'>
-                <button type='button' class="form-control" style='width: 70px' id="m3u8">.m3u8</button>
-                <button type='button' class="form-control" style='width: 70px' id="pic">Images</button>
-                <button type='button' class="form-control" style='width: 70px' id="links">Links</button>
+                <button type='button' class="form-control" style='width: 120px' id="m3u8">.m3u8</button> &nbsp;
+                <button type='button' class="form-control" style='width: 120px' id="pic">Images</button> &nbsp;
+                <button type='button' class="form-control" style='width: 120px' id="vid">Videos</button> &nbsp;
+                <button type='button' class="form-control" style='width: 120px' id="links">Links</button>
             </form>
             <div id=down class="breakword">
                 <div id=message class="breakword"> </div>
@@ -45,19 +56,29 @@
                 <option value="en-us">English</option>
                 <option value="zh-cn">简体中文</option>
                 <option value="zh-tw">繁體中文</option>
+                <option value="fr-fr">français</option>
+                <option value="nl-nl">Nederlands</option>
+                <option value="es-sp">Español</option>
+                <option value="it-it">italiano</option>          
+                <option value="ru-ru">русский</option>
+                <option value="de-de">Deutsche</option>
+                <option value="ro-ro">Română</option>
+                <option value="pl-pl">Polskie</option>
+                <option value="pt-br">Português</option>
+                <option value="tr-tr">Türk</option>
             </select>
-            <h4 id="text_vip_server_api_key">VIP Server API Key</h4>
+            <h4 id="text_vip_server_api_key">VIP Server API Key (No Youtube)</h4>
             <input type='password' id='key' name='key' class="form-control">
             <div id="vip_desc" style='font-style:italic'>VIP allows using remote server video parser API.</div>
-            <button class="form-control" style='width: 70px' id="setting_save_btn">Save</button>            
+            <button class="form-control" id="setting_save_btn" style='width: 130px'>Save</button>            
         </div>
         <div id="tabs-log">
-            <h4><span id='proudly_brought_to_you_by'>Proudly brought to you by</span> <a target=_blank href="https://steemit.com/@justyy">@justyy</a> (<a target=_blank id='report_bugs' href="https://steakovercooked.com/Contact.Mail?title=Video+Downloader">Report Bugs</a>)        
+            <h4><span id='proudly_brought_to_you_by'>Proudly brought to you by</span> @justyy (<a target=_blank id='report_bugs' href="https://steakovercooked.com/Contact.Mail?title=Video+Downloader">Report Bugs</a>)
             </h4>          
             <h5>
-               <a target=_blank href="https://github.com/DoctorLai/VideoDownloadHelper"><B><span id='source_code'>Source Code</span></B>: https://github.com/DoctorLai/VideoDownloadHelper</a>
+               <!--<a target=_blank href="https://github.com/DoctorLai/VideoDownloadHelper"><B><span id='source_code'>Source Code</span></B>: https://github.com/DoctorLai/VideoDownloadHelper</a>-->
             </h5>
-            <textarea readonly class='form-control' rows=15 id='about'>
+            <textarea readonly class='form-control' rows=12 id='about'>
             </textarea>
             <BR/>
             <a target=_blank href='https://www.paypal.me/doctorlai/3'><img src='images/paypal.png' class='banner'></a> &nbsp;
@@ -70,6 +91,7 @@
             <a target=_blank href='https://justyy.com/out/do'><img title='Free $10 VPS' src='images/digitalocean.jpg' class='banner'></a>                
         </div>        
         <div id='vpsdiv' style='text-align:center'>
+            <a href="https://helloacm.com/out/buymecoffee" target="_blank"><img src="images/lato-blue.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a> <BR/>
             <I><span id='vpspromotion' style='color:gray'>VPS Promotions</span></I>
             <B>
             <a target=_blank href='https://justyy.com/out/vultr2'>Vultr ($10)</a> | <a target=_blank href='https://justyy.com/out/linode'>Linode ($20)</a> | <a target=_blank href='https://justyy.com/out/do'>Digital Ocean ($10)</a>                
