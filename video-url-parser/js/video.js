@@ -39,7 +39,7 @@ const logit = (dom, msg, showtime = true) => {
 
 // use server API
 const callAPI = (key, url) => {
-    const api = "https://uploadbeta.com/api/video/?cached&video=" + encodeURIComponent(url) + "&hash=" + key;
+    const api = "https://video.justyy.workers.dev/api/video/?cached&from=simplevideodownloader&video=" + encodeURIComponent(url) + "&hash=" + key;
     console.log(api);
     return new Promise((resolve, reject) => {
         fetch(api, {mode: 'cors'})
@@ -281,14 +281,22 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                         found = re.exec(data);
                     }
+                    const w_url = "https://weibomiaopai.com/download-video-parser.php?url=" + encodeURIComponent(pageurl);
                     if (tmp.length > 0) {
                         // remove duplicate
                         tmp = tmp.uniq();
-                        let s = "<h3>" + get_text("videos_list") + "</h3>";
+                        let s = "<h3>" + get_text("videos_list") + "</h3>";                        
                         s += "<ol>";
+                        s += "<li><a target=_blank href='" + w_url + "'>" + w_url + "</a>";
                         for (let i = 0; i < tmp.length; ++i) {
                             s += "<li><a target=_blank href='" + tmp[i] + "'>" + tmp[i] + "</a>";
                         }
+                        s += "</ol>";
+                        $('div#down').html(s);
+                    } else {
+                        let s = "<h3>" + get_text("videos_list") + "</h3>";
+                        s += "<ol>";                        
+                        s += "<li><a target=_blank href='" + w_url + "'>" + w_url + "</a>";
                         s += "</ol>";
                         $('div#down').html(s);
                     }
