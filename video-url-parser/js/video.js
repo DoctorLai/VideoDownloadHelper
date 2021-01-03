@@ -180,7 +180,9 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 s = 'https://weibomiaopai.com/download-video-parser.php?url=' + encodeURIComponent(pageurl);
             }
-            // setUrlOffline(s, pageurl);
+            if (pageurl.includes("http")) {
+                setUrlOffline(s, pageurl);
+            }
         } else {
             $('div#down').html("<BR/>" + "<blockquote>" + get_text('youtube_notice') + "</blockquote>");
             $('button#m3u8').hide();
