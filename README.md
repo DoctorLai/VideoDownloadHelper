@@ -35,6 +35,8 @@ You can create a issue if you want to:
 
 Contributions (Pull Requests) are also welcome!
 
+<a rel="nofollow" href="http://helloacm.com/out/buymecoffee" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/lato-blue.png" alt="Buy Me A Coffee"></a>
+
 # 中文
 
 博文: [说说我那复活的视频下载插件](https://justyy.com/archives/5615)
@@ -47,3 +49,5 @@ Contributions (Pull Requests) are also welcome!
 # Donation 支持一下呗
 Thank you if you want to help this little project. 
 [Paypal](https://justyy.com/out/paypal)
+
+<a rel="nofollow" href="http://helloacm.com/out/buymecoffee" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/lato-blue.png" alt="Buy Me A Coffee"></a>
