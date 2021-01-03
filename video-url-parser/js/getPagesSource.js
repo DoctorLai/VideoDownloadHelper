@@ -22,6 +22,36 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
     let video_url = "";
     let video_dom = null;
 
+    // try 91p*rn.com
+    if (domain.includes("91p" + "orn.com")) {
+        if (!ValidURL(video_url)) {
+            // http://91p*rn.com/view_video.php?viewkey=8c78f3bad2f4b346ba9a&page=&viewtype=&category=
+            let re = /VID=([0-9]+)/gi;
+            let found = re.exec(html);                        
+            let video_url_arr = [];
+            while (found != null) {
+                for (let i = 0; i <= 100; ++ i) {
+                    let tmp_url = "https://fdc.91p49.com//m3u8/" + found[1] + "/" + found[1] + i + ".ts";                
+                    tmp_url = FixURL(tmp_url);
+                    video_url_arr.push(tmp_url);    
+                }   
+                video_url = video_url_arr[0];
+                break;
+            }
+            if (video_url_arr.length > 0) {
+                chrome.runtime.sendMessage({
+                    action: "getSource",
+                    source: JSON.stringify(video_url_arr)
+                });                          
+            } else {
+                chrome.runtime.sendMessage({
+                    action: "getSource",
+                    source: JSON.stringify(FixURL(video_url))
+                });                              
+            }
+        }        
+    }
+
     // Simple Video Parser
     let SimpleVidoeParser = new ParseVideo(pageurl, html);
     video_url = SimpleVidoeParser.Parse();    

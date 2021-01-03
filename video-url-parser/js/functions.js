@@ -82,6 +82,9 @@ const validateResponse = (response) => {
 };
 
 const ValidURL = (url) => {
+    if (url.includes("blob:http://")) {
+        return false;
+    }
     // if parameter is array, then we check all its elements
     if (url instanceof Array) {
         for (let i = 0; i < url.length; ++ i) {
