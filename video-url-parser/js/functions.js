@@ -82,6 +82,9 @@ const validateResponse = (response) => {
 };
 
 const ValidURL = (url) => {
+    if (url == null) {
+        return false;
+    }        
     if (url.includes("blob:http://")) {
         return false;
     }
@@ -95,9 +98,6 @@ const ValidURL = (url) => {
         }
         return true;
     }
-    if (url == null) {
-        return false;
-    }        
     if (url == "") {
         return false;
     }

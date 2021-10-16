@@ -16,50 +16,26 @@ class ParseVideo {
     Parse() {
         const domain = extractDomain(this.url);
         let video_url = "";
-        if (domain.includes("miaopai.com")) {
-            video_url = ParseVideo.parse_miaopai_com(this.url, this.html);
-            if (ValidURL(video_url)) {
-                return video_url;
+
+        const handler = {
+            "miaopai.com": ParseVideo.parse_miaopai_com,
+            "pearvideo.com": ParseVideo.parse_pearvideo_com,
+            "ted.com": ParseVideo.parse_ted_com,
+            "msdn.com": ParseVideo.parse_msdn_com,
+            "weibo.com": ParseVideo.parse_weibo_com,
+            "xiaokaxiu.com": ParseVideo.parse_xiaokaxiu_com,
+            "facebook.com": ParseVideo.parse_facebook_video,
+            "seseporn.com": ParseVideo.parse_ssp_video
+        }
+        const vKeys = Object.keys(handler);
+        for (let i = 0; i < vKeys.length; ++ i) {
+            if (domain.includes(vKeys[i])) {
+                video_url = handler[vKeys[i]](this.url, this.html);
+                if (ValidURL(video_url)) {
+                    return video_url;
+                }                
             }
-        }        
-        if (domain.includes("pearvideo.com")) {
-            video_url = ParseVideo.parse_pearvideo_com(this.url, this.html);
-            if (ValidURL(video_url)) {
-                return video_url;
-            }            
         }
-        if (domain.includes("ted.com")) {
-            video_url = ParseVideo.parse_ted_com(this.url, this.html);
-            if (ValidURL(video_url)) {
-                return video_url;
-            }            
-        }
-        if (domain.includes("msdn.com")) {
-            video_url = ParseVideo.parse_msdn_com(this.url, this.html);
-            if (ValidURL(video_url)) {
-                return video_url;
-            }            
-        }     
-        if (domain.includes("weibo.com")) {
-            video_url = ParseVideo.parse_weibo_com(this.url, this.html);
-            if (ValidURL(video_url)) {
-                return video_url;
-            }            
-        }          
-        if (domain.includes("xiaokaxiu.com")) {
-            video_url = ParseVideo.parse_xiaokaxiu_com(this.url, this.html);
-            if (ValidURL(video_url)) {
-                return video_url;
-            }            
-        }       
-        if (domain.includes("facebook.com")) {
-            video_url = ParseVideo.parse_facebook_video(this.url, this.html);
-            return video_url;
-        }     
-        if (domain.includes("sese" + "p" + "orn.com")) {
-            video_url = ParseVideo.parse_ssp_video(this.url, this.html);
-            return video_url;
-        }                                 
         video_url = ParseVideo.extract_all_video_urls(this.url, this.html);
         if (video_url !== null) {
             return video_url;
