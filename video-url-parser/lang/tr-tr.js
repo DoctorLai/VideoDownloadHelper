@@ -1,6 +1,7 @@
 "use strict";
 
 const translation_tr_tr = {
+	'merger': 'Videoları Birleştir',
 	'links_list': 'Bağlantılar Listesi',
 	'links': 'Bağlantılar',
 	'text_vip_server_api_key': 'VIP Sunucu API Anahtarı (No Youtube)',

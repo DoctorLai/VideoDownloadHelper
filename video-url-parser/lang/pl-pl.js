@@ -1,6 +1,7 @@
 "use strict";
 
 const translation_pl_pl = {
+	'merger': 'Połącz filmy',
 	'links_list': 'Lista linków',
 	'links': 'Links',
 	'text_vip_server_api_key': 'Klucz API serwera VIP (No Youtube)',

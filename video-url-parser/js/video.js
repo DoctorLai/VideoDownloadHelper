@@ -175,7 +175,8 @@ document.addEventListener('DOMContentLoaded', function() {
         let domain = extractDomain(pageurl).toLowerCase();        
         if (!domain.includes('youtube.com')) {
             let s;
-            if ($('select#lang').val() != 'en-us') {
+            let lang
+            if (["zh-cn", "zh-tw"].includes($('select#lang').val())) {
                 s = 'https://weibomiaopai.com/?url=' + encodeURIComponent(pageurl);
             } else {
                 s = 'https://weibomiaopai.com/download-video-parser.php?url=' + encodeURIComponent(pageurl);
@@ -185,6 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } else {
             $('div#down').html("<BR/>" + "<blockquote>" + get_text('youtube_notice') + "</blockquote>");
+            $('button#merger').hide();
             $('button#m3u8').hide();
             $('button#links').hide();
             $('button#pic').hide();
@@ -251,6 +253,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 error: function(request, status, error) {},
                 complete: function(data) {}
             });
+        });
+
+
+        $("#merger").click(function() {
+            if (["zh-cn", "zh-tw"].includes($('select#lang').val())) {
+                open("https://slowapi.com/merge-videos-files/");
+            } else {
+                open("https://slowapi.com/merge-videos/");
+            }            
         });
 
         $("#vid").click(function() {

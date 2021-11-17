@@ -25,6 +25,7 @@ const translation = (lang) => {
     translate_text($('button#pic'), lang, 'images');
     translate_text($('button#vid'), lang, 'videos');
     translate_text($('button#links'), lang, 'links');
+    translate_text($('button#merger'), lang, 'merger');
 }
 
 // get ui lang data

@@ -1,6 +1,7 @@
 "use strict";
 
 const translation_de_de = {
+	'merger': 'Videos zusammenführen',
 	'links_list': 'Links List',
 	'links': 'Links',
 	'text_vip_server_api_key': 'VIP Server API Key (No Youtube)',

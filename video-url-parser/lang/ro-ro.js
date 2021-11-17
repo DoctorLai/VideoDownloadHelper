@@ -1,6 +1,7 @@
 "use strict";
 
 const translation_ro_ro = {
+	'merger': 'Îmbinați videoclipuri',
 	'links_list': 'Lista de legături',
 	'links': 'Link-uri',
 	'text_vip_server_api_key': 'cheie API pentru server VIP (No Youtube)',

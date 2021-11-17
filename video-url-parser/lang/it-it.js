@@ -1,6 +1,7 @@
 "use strict";
 
 const translation_it_it = {
+	'merger': 'Unisci video',
 	"links_list": "Links List",
 	'links': 'Links',
 	'text_vip_server_api_key': 'Chiave API server VIP (No Youtube)',
