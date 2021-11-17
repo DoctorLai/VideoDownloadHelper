@@ -1,6 +1,7 @@
 "use strict";
 
 const translation_simplified_chinese = {
+	'merger': '合并视频',
 	'links_list': '页面链接',
 	'links': '链接',
 	'text_vip_server_api_key': 'VIP服务器API密钥 (No Youtube)',

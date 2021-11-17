@@ -3,7 +3,7 @@
   "name": "Simple Video Download Helper",
   "short_name": "Video Download Helper",
   "default_locale": "en",
-  "version": "3.0.22",
+  "version": "3.0.23",
   "browser_action": {
      "default_icon": "icon.png",
      "default_title": "Video Download Helper (Doesnt work on Youtube)",

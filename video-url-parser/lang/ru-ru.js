@@ -1,6 +1,7 @@
 "use strict";
 
 const translation_ru_ru = {
+	'merger': 'Объединить видео',
 	'links_list': 'Список ссылок',
 	'links': 'Links',
 	'text_vip_server_api_key': 'Ключ VIP-сервера API (No Youtube)',
