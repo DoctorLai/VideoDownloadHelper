@@ -51,6 +51,9 @@ const bglog = (obj) => {
 
 // extract domain of url
 const extractDomain = (url) => {
+    if (typeof url === "undefined" || (!url)) {
+        return "";
+    }
     let domain;
     //find & remove protocol (http, ftp, etc.) and get domain
     if (url.indexOf("://") > -1) {
