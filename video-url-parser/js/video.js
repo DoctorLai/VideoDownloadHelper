@@ -1,11 +1,13 @@
 'use strict';
 
-let ipaddress = '';
-getLocalIPs(function(ips) { // <!-- ips is an array of local IP addresses.
-    ipaddress = ips.join('-');
-});
-
 let m3u8_url = "https://uploadbeta.com/api/video/test.m3u8";
+
+async function getCurrentTab() {
+    let queryOptions = { active: true, lastFocusedWindow: true };
+    // `tab` will either be a `tabs.Tab` instance or `undefined`.
+    let [tab] = await chrome.tabs.query(queryOptions);
+    return tab;
+}
 
 // save settings
 const saveSettings = (showMsg = true) => {
@@ -92,7 +94,7 @@ function setUrlOfflineArray(urls) {
     $('div#down').html(s);
 }
 
-document.addEventListener('DOMContentLoaded', function() {   
+document.addEventListener('DOMContentLoaded', async function() {   
     // init tabs
     $(function() {
         $( "#tabs" ).tabs();
@@ -169,13 +171,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     let pageurl = '';
-    chrome.tabs.getSelected(null, function(tab) {
+    let tab = await getCurrentTab();
+    
+    //chrome.tabs.query({ currentWindow: true, active: true }, (tab) => {
+    if (true) {
         pageurl = tab.url;
 
         let domain = extractDomain(pageurl).toLowerCase();        
         if (!domain.includes('youtube.com')) {
             let s;
-            let lang
             if (["zh-cn", "zh-tw"].includes($('select#lang').val())) {
                 s = 'https://weibomiaopai.com/?url=' + encodeURIComponent(pageurl);
             } else {
@@ -364,7 +368,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 complete: function(data) {}
             });
         });
-    });
+    };
     
     // get video url from getPageSource.js
     chrome.runtime.onMessage.addListener(function(request, sender) {
