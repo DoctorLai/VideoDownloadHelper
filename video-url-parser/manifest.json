@@ -1,10 +1,10 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Simple Video Download Helper",
   "short_name": "Video Download Helper",
   "default_locale": "en",
-  "version": "3.0.23",
-  "browser_action": {
+  "version": "3.0.24",
+  "action": {
      "default_icon": "icon.png",
      "default_title": "Video Download Helper (Doesnt work on Youtube)",
      "default_popup": "main.html"
@@ -17,19 +17,27 @@
     "48": "images/icon-48.png",
     "128": "images/icon-128.png"
   },    
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },  
   "description": "Simple Video Download Helper (doesn't work on youtube.com)",
-  "web_accessible_resources": [
+  "web_accessible_resources": [{
+    "resources": [
       "css/*", 
       "js/*", 
       "dist/*", 
   		"images/*",
       "bs/*",
       "tested-urls.txt"
-  ],  
+    ],
+    "extension_ids": ["ilcdiicigjaccgipndigcenjieedjohj"]
+  }],
   "permissions": [
-     "activeTab",
-     "storage",
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
      "https://uploadbeta.com/api/*",
      "https://video.justyy.workers.dev/api/*"
   ],
@@ -42,6 +50,10 @@
         "encoding": "UTF-8",
         "is_default": true
     }
+  },  
+  "background": {
+    "service_worker": "js/background.js",
+    "type": "module"
   },  
   "content_scripts": [ {
       "matches": ["http://*/*", "https://*/*"],
