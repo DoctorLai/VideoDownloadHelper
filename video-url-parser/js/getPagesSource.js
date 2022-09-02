@@ -4,6 +4,8 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
 
 (function() {     
     "use strict";
+
+    console.log("Loaded getPageSource.js");
     
     // defines a known failed URLs so we can skip and try next method
     const FAILED_URLS = [
@@ -41,7 +43,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
 
             function handle91(baseURL) {
                 while (found != null) {
-                    for (let i = 0; i <= 120; ++ i) {
+                    for (let i = 0; i <= 150; ++ i) {
                         let tmp_url = baseURL + found[1] + "/" + found[1] + i + ".ts";                
                         tmp_url = FixURL(tmp_url);
                         video_url_arr.push(tmp_url);    
@@ -67,7 +69,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
             .then((jsonResponse) => {
                 handle91(jsonResponse["base"]);
             }).catch((error) => {
-                handle91("https://cdn.workgreat14.live//m3u8/");
+                handle91("https://cdn77.91p49.com/m3u8/");
             });
         }        
     }

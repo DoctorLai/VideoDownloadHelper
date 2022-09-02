@@ -1,6 +1,6 @@
 {
   "name": "SimpleVideoDownloader",
-  "version": "3.0.23",
+  "version": "3.0.24",
   "description": "Video Downloader",
   "directories": {
     "test": "test"
@@ -8,7 +8,7 @@
   "dependencies": {
     "chai": "^4.2.0",
     "jquery": "^3.5.0",
-    "jsdom": "^13.0.0",
+    "jsdom": "^16.5.0",
     "request": "^2.88.0"
   },
   "devDependencies": {
