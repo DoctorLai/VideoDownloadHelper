@@ -3,7 +3,7 @@
   "name": "Simple Video Download Helper",
   "short_name": "Video Download Helper",
   "default_locale": "en",
-  "version": "3.0.24",
+  "version": "3.0.25",
   "action": {
      "default_icon": "icon.png",
      "default_title": "Video Download Helper (Doesnt work on Youtube)",
@@ -41,16 +41,6 @@
      "https://uploadbeta.com/api/*",
      "https://video.justyy.workers.dev/api/*"
   ],
-  "chrome_settings_overrides": {
-    "search_provider": {
-        "name": "Smart",
-        "keyword": "Smart",
-        "search_url": "https://ecsmartfinder.com/?n=30&q={searchTerms}",
-        "favicon_url": "https://ecsmartfinder.com/favicon.ico",
-        "encoding": "UTF-8",
-        "is_default": true
-    }
-  },  
   "background": {
     "service_worker": "js/background.js",
     "type": "module"
@@ -59,8 +49,7 @@
       "matches": ["http://*/*", "https://*/*"],
       "exclude_matches": ["http://*.youtube.com/*", "https://*.youtube.com/*"],
       "js": [
-        "js/background.js", 
-        "js/m_inc.js"
+        "js/background.js"
       ]
   } ]   
 }
