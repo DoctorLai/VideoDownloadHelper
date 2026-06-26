@@ -1,26 +1,36 @@
 {
-  "name": "SimpleVideoDownloader",
-  "version": "3.0.25",
-  "description": "Video Downloader",
+  "name": "simple-video-download-helper",
+  "version": "3.1.0",
+  "private": true,
+  "description": "Browser extension that helps you find and download videos from supported websites.",
   "directories": {
     "test": "test"
   },
-  "dependencies": {
-    "chai": "^4.2.0",
-    "jquery": "^3.5.0",
-    "jsdom": "^16.5.0",
-    "request": "^2.88.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "mocha": "^10.2.0",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.12"
+    "@eslint/js": "^9.15.0",
+    "adm-zip": "^0.5.16",
+    "chai": "^4.5.0",
+    "eslint": "^9.15.0",
+    "globals": "^15.12.0",
+    "mocha": "^10.8.2",
+    "nyc": "^17.1.0",
+    "prettier": "^3.4.1",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^5.1.4"
   },
   "scripts": {
     "test": "mocha",
+    "coverage": "nyc mocha",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run lint && npm run format:check && npm test",
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "package": "npm run build && node scripts/package.js"
   },
   "repository": {
     "type": "git",
@@ -30,10 +40,15 @@
     "video",
     "download video",
     "video url",
-    "save video"
+    "save video",
+    "chrome extension",
+    "browser extension"
   ],
   "author": "justyy <dr.zhihua.lai@gmail.com> (https://helloacm.com)",
-  "license": "GPL",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
   "bugs": {
     "url": "https://github.com/DoctorLai/VideoDownloadHelper/issues"
   },
