@@ -1,3 +1,17 @@
 *.zip
 node_modules/
 .vscode/
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+dist/

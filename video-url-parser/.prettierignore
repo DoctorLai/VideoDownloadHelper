@@ -1,0 +1,30 @@
+# Dependencies and build output
+node_modules/
+dist/
+coverage/
+.nyc_output/
+package-lock.json
+
+# Vendored third-party assets
+bs/
+css/
+js/jquery-3.4.1.min.js
+js/jquery-ui.js
+js/MD5.js
+js/m_inc.js
+
+# Legacy browser UI (not maintained under the lint/format toolchain)
+main.html
+js/background.js
+js/getPagesSource.js
+js/popup.js
+js/translate.js
+js/video.js
+
+# Static data, fixtures and assets
+images/
+lang/
+_locales/
+test/data/
+*.min.js
+*.min.css

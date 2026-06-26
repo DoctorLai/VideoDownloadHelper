@@ -1,0 +1,41 @@
+{
+  "name": "video-download-helper",
+  "version": "3.1.0",
+  "private": true,
+  "description": "Repository root for the Simple Video Download Helper browser extension. The extension and its tooling live in the video-url-parser/ directory; the scripts below simply delegate there so they can be run from the repository root.",
+  "scripts": {
+    "postinstall": "npm --prefix video-url-parser install",
+    "test": "npm --prefix video-url-parser test",
+    "coverage": "npm --prefix video-url-parser run coverage",
+    "lint": "npm --prefix video-url-parser run lint",
+    "lint:fix": "npm --prefix video-url-parser run lint:fix",
+    "format": "npm --prefix video-url-parser run format",
+    "format:check": "npm --prefix video-url-parser run format:check",
+    "check": "npm --prefix video-url-parser run check",
+    "build": "npm --prefix video-url-parser run build",
+    "dev": "npm --prefix video-url-parser run dev",
+    "watch": "npm --prefix video-url-parser run watch",
+    "package": "npm --prefix video-url-parser run package"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DoctorLai/VideoDownloadHelper"
+  },
+  "keywords": [
+    "video",
+    "download video",
+    "video url",
+    "save video",
+    "chrome extension",
+    "browser extension"
+  ],
+  "author": "justyy <dr.zhihua.lai@gmail.com> (https://helloacm.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DoctorLai/VideoDownloadHelper/issues"
+  },
+  "homepage": "https://github.com/DoctorLai/VideoDownloadHelper#readme"
+}

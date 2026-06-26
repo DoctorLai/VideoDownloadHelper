@@ -3,53 +3,41 @@
   "name": "Simple Video Download Helper",
   "short_name": "Video Download Helper",
   "default_locale": "en",
-  "version": "3.0.25",
+  "version": "3.1.0",
   "action": {
-     "default_icon": "icon.png",
-     "default_title": "Video Download Helper (Doesnt work on Youtube)",
-     "default_popup": "main.html"
+    "default_icon": "icon.png",
+    "default_title": "Video Download Helper (Doesnt work on Youtube)",
+    "default_popup": "main.html"
   },
-  "offline_enabled": true,  
+  "offline_enabled": true,
   "author": "justyy<dr.zhihua.lai@gmail.com>",
   "icons": {
     "16": "images/icon-16.png",
     "32": "images/icon-32.png",
     "48": "images/icon-48.png",
     "128": "images/icon-128.png"
-  },    
+  },
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
-  },  
+  },
   "description": "Simple Video Download Helper (doesn't work on youtube.com)",
-  "web_accessible_resources": [{
-    "resources": [
-      "css/*", 
-      "js/*", 
-      "dist/*", 
-  		"images/*",
-      "bs/*",
-      "tested-urls.txt"
-    ],
-    "extension_ids": ["ilcdiicigjaccgipndigcenjieedjohj"]
-  }],
-  "permissions": [
-    "activeTab",
-    "storage",
-    "scripting"
+  "web_accessible_resources": [
+    {
+      "resources": ["css/*", "js/*", "dist/*", "images/*", "bs/*", "tested-urls.txt"],
+      "extension_ids": ["ilcdiicigjaccgipndigcenjieedjohj"]
+    }
   ],
-  "host_permissions": [
-     "https://uploadbeta.com/api/*",
-     "https://video.justyy.workers.dev/api/*"
-  ],
+  "permissions": ["activeTab", "storage", "scripting"],
+  "host_permissions": ["https://uploadbeta.com/api/*", "https://video.justyy.workers.dev/api/*"],
   "background": {
     "service_worker": "js/background.js",
     "type": "module"
-  },  
-  "content_scripts": [ {
+  },
+  "content_scripts": [
+    {
       "matches": ["http://*/*", "https://*/*"],
       "exclude_matches": ["http://*.youtube.com/*", "https://*.youtube.com/*"],
-      "js": [
-        "js/background.js"
-      ]
-  } ]   
+      "js": ["js/background.js"]
+    }
+  ]
 }
