@@ -13,6 +13,8 @@ const translation = (lang) => {
     translate_text($('a#text_setting'), lang, 'setting');
     translate_text($('a#text_log'), lang, 'log');
     translate_text($('h4#text_ui_language'), lang, 'ui_language');
+    translate_text($('h4#text_dark_mode'), lang, 'dark_mode');
+    translate_text($('span#text_dark_desc'), lang, 'dark_desc');
     translate_text($('h4#text_logs'), lang, 'text_logs');
     translate_text($('h4#text_vip_server_api_key'), lang, 'text_vip_server_api_key');
     translate_text($('div#vip_desc'), lang, 'vip_desc');
@@ -32,20 +34,20 @@ const translation = (lang) => {
 const get_lang = () => {
     const lang = $('select#lang').val();
     switch (lang) {
-        case 'zh-cn': return (translation_simplified_chinese); 
-        case 'en-us': return (translation_english); 
-        case 'zh-tw': return (translation_traditional_chinese); 
-        case 'de-de': return (translation_de_de); 
-        case 'es-sp': return (translation_es_sp); 
-        case 'fr-fr': return (translation_fr_fr); 
-        case 'it-it': return (translation_it_it); 
-        case 'ru-ru': return (translation_ru_ru); 
-        case 'nl-nl': return (translation_nl_nl); 
-        case 'pt-br': return (translation_pt_br); 
-        case 'pl-pl': return (translation_pl_pl); 
-        case 'ro-ro': return (translation_ro_ro); 
-        case 'tr-tr': return (translation_tr_tr); 
-    }	
+        case 'zh-cn': return (translation_simplified_chinese);
+        case 'en-us': return (translation_english);
+        case 'zh-tw': return (translation_traditional_chinese);
+        case 'de-de': return (translation_de_de);
+        case 'es-sp': return (translation_es_sp);
+        case 'fr-fr': return (translation_fr_fr);
+        case 'it-it': return (translation_it_it);
+        case 'ru-ru': return (translation_ru_ru);
+        case 'nl-nl': return (translation_nl_nl);
+        case 'pt-br': return (translation_pt_br);
+        case 'pl-pl': return (translation_pl_pl);
+        case 'ro-ro': return (translation_ro_ro);
+        case 'tr-tr': return (translation_tr_tr);
+    }
 }
 
 // ui translate

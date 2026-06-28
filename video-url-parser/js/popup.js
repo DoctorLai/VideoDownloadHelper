@@ -19,7 +19,7 @@ window.onload = async function() {
 	chrome.scripting.executeScript({
 		target: { tabId: tab.id },
 		files: ["js/jquery-3.4.1.min.js", "dist/dist.min.js"]
-	});	
+	});
 	*/
 	/*
 	const executeScripts = (tabId, injectDetailsArray) => {
@@ -38,9 +38,9 @@ window.onload = async function() {
 			callback();
 		}
 	};
-	executeScripts(null, [ 
+	executeScripts(null, [
 		{ file: "js/jquery-3.4.1.min.js" },
 		{ file: "dist/dist.min.js" }
-	]);	
+	]);
 	*/
-}; 
+};

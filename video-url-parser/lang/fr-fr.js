@@ -27,5 +27,13 @@ const translation_fr_fr = {
 	'api_finished': 'API terminée',
 	'calling': 'appelant',
 	'proudly_brought_to_you_by': 'Développé par',
-	'freevps': 'Promotions Cloud VPS'
+	'freevps': 'Promotions Cloud VPS',
+	'download': 'Télécharger',
+	'copy': 'Copier',
+	'download_all': 'Tout télécharger',
+	'copy_all': 'Tout copier',
+	'copied': 'Copié !',
+	'copy_failed': 'Échec de la copie',
+	'dark_mode': 'Mode sombre',
+	'dark_desc': 'Activer le thème sombre'
 };

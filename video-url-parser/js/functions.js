@@ -177,6 +177,51 @@ const ArrayIntersection = (a, b) => {
     return [...new Set(a)].filter((x) => setB.has(x));
 };
 
+// get the lowercased file extension (without the dot) from a URL, ignoring any
+// query string or fragment. Returns "" when there is no usable extension.
+const getFileExtension = (url) => {
+    if (!url || typeof url !== "string") {
+        return "";
+    }
+    const path = url.split(/[?#]/)[0];
+    const slash = path.lastIndexOf("/");
+    const name = slash === -1 ? path : path.substring(slash + 1);
+    const dot = name.lastIndexOf(".");
+    if (dot === -1 || dot === name.length - 1) {
+        return "";
+    }
+    return name.substring(dot + 1).toLowerCase();
+};
+
+// remove characters that are illegal in filenames on common platforms so the
+// result is safe to hand to chrome.downloads.download({ filename }).
+const sanitizeFilename = (name) => {
+    if (!name || typeof name !== "string") {
+        return "";
+    }
+    return name
+        .replace(/[\\/:*?"<>|]/g, "_")
+        .replace(/\s+/g, " ")
+        .trim()
+        .replace(/^\.+/, "")
+        .substring(0, 120)
+        .trim();
+};
+
+// build a safe, human-friendly download filename from a page title and the
+// media URL. An optional zero-based index disambiguates batch downloads.
+const suggestFilename = (url, title, index) => {
+    let base = sanitizeFilename(title || "");
+    if (!base) {
+        base = "video";
+    }
+    if (typeof index === "number" && index >= 0) {
+        base += "-" + (index + 1);
+    }
+    const ext = getFileExtension(url);
+    return ext ? base + "." + ext : base;
+};
+
 if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
     module.exports = {
         getChromeVersion,
@@ -190,5 +235,8 @@ if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
         extractDomain,
         ValidURL,
         ArrayIntersection,
+        getFileExtension,
+        sanitizeFilename,
+        suggestFilename,
     };
 }

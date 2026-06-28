@@ -118,7 +118,7 @@ var islogin=false,myMobile="";
     <div class="video-main">
         <div class="main-video-box" id="drag_target1">
             <div class="img prism-player" style="height:100% !important;" id="JprismPlayer">
-            </div> 
+            </div>
         </div>
         <div id="poster" class="" data-id="">
             <img class="img" src="http://image.pearvideo.com/cont/20170320/cont-1050733-10201065.png" alt="朱茵初见周星驰：又搂又抱又跳恰恰">
@@ -134,7 +134,7 @@ var contId="1050733",liveStatusUrl="liveStatus.jsp",liveSta="",playSta="1",autoP
 var player;
 function newPrismplayer(_sourceId,_source,_isLive,_autoplay){
     var $hornId = $("#"+_sourceId);
-    
+
         if(!!player){
             try{
             player.dispose();
@@ -148,30 +148,30 @@ function newPrismplayer(_sourceId,_source,_isLive,_autoplay){
             isLive: _isLive,
             autoplay: _autoplay,
             playsinline: true,
-            
+
             useH5Prism: true,
             useFlashPrism: false,
-                
+
             controlBarVisibility: 'hover',
             showBarTime: 3000,
             skinRes: skinRes,
-            
+
             skinLayout: [
                 {name: "H5Loading", align: "cc"},
                 {
                     name: "controlBar", align: "blabs", x: 0, y: 0,
                     children: [
-                    
+
                         {name: "progress", align: "tlabs", x: 0, y: 0},
                         {name: "playButton", align: "tl", x: 15, y: 12},
                         {name: "timeDisplay", align: "tl", x: 10, y: 7},
-                        
+
                         {name: "fullScreenButton", align: "tr", x: 10, y: 10},
                         {name: "volume", align: "tr", x: 10, y: 10}
                     ]
                 }
             ]
-                
+
         });
         $("#poster").removeClass("living-before-tips living-end-tips living-cancel-tips no-living-tips ");
         var videoVolume = (null == pvstore.getItem("videoVolume") || pvstore.getItem("videoVolume") == "") ? 1 : pvstore.getItem("videoVolume");
@@ -179,7 +179,7 @@ function newPrismplayer(_sourceId,_source,_isLive,_autoplay){
         if(videoVolume != 1){
             player.setVolume(videoVolume);
         }
-        
+
         player.on("ready",function(){
             var _video = $("#JprismPlayer").find("video").get(0);
             document.onkeydown = function(e){
@@ -225,13 +225,13 @@ function newPrismplayer(_sourceId,_source,_isLive,_autoplay){
               }
             }
         });
-        
+
         player.on("play",function(){
             $("#poster").hide();
             $hornId.addClass("play");
         });
         player.on("click",function(e){
-        
+
           var _video = $("#JprismPlayer").find("video").get(0);
           var target  = $(e.target);
           if(target.closest(".prism-controlbar").length == 0){
@@ -241,7 +241,7 @@ function newPrismplayer(_sourceId,_source,_isLive,_autoplay){
                 player.pause();
             }
           }
-        
+
         }).on("dblclick",function(e){
           var _video = $("#JprismPlayer").find("video").get(0);
           var target  = $(e.target);
@@ -265,7 +265,7 @@ function newPrismplayer(_sourceId,_source,_isLive,_autoplay){
             $("#poster").hide();
             player.play();
         });
-    
+
 }
 </script>
 <script type="text/javascript" src="//page.pearvideo.com/webres/v4/js/mainVideo.js?v=4.51"></script>
@@ -619,8 +619,8 @@ $(document).ready(function(){
 </div>
 <div id="popup_box" style="display:none;"></div>
 <script type="text/javascript">
-document.onkeydown=function(event){ 
-  var e = event || window.event || arguments.callee.caller.arguments[0]; 
+document.onkeydown=function(event){
+  var e = event || window.event || arguments.callee.caller.arguments[0];
   if(e && e.keyCode==27){
     if($(".pop-dialog").length > 0 && $("#msgDetail").length == 0 && $("#j-income-explain-box").length == 0){
       $(".pop-dialog").slideUp().siblings(".pop-overlay").fadeOut(function(){
@@ -629,17 +629,17 @@ document.onkeydown=function(event){
     }
     $("#popup_box").empty();
     $("body").removeClass("openbarshow pad-style pop-bd");
-  } 
+  }
 };
 try{
-  setHeadRedMark();	
+  setHeadRedMark();
 }catch(e){}
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
   hm.src = "https://hm.baidu.com/hm.js?9707bc8d5f6bba210e7218b8496f076a";
   hm.async = true;
-  var s = document.getElementsByTagName("script")[0]; 
+  var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();
 var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260553744'%3E%3C/span%3E%3Cscript async src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1260553744' type='text/javascript'%3E%3C/script%3E"));

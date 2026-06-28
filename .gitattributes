@@ -1,0 +1,32 @@
+# Normalize line endings for our own source to LF (matches .editorconfig).
+# Git auto-detects text vs binary; text files are stored as LF in the repo and
+# checked out as LF in the working tree.
+* text=auto eol=lf
+
+# --- Vendored third-party libraries: keep byte-for-byte (do not touch EOLs) ---
+video-url-parser/bs/** -text
+video-url-parser/js/jquery-3.4.1.min.js -text
+video-url-parser/js/jquery-ui.js -text
+video-url-parser/js/MD5.js -text
+video-url-parser/js/m_inc.js -text
+video-url-parser/css/jquery-ui.css -text
+*.min.js -text
+*.min.css -text
+
+# --- Captured HTML test fixtures: data files, LF-normalized but exempt from
+# whitespace linting (their internal indentation mirrors real-world pages) ---
+video-url-parser/test/data/** -whitespace
+
+# --- Build output (also gitignored) ---
+video-url-parser/dist/** -text
+
+# --- Binary assets (no EOL handling, no text diff) ---
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary

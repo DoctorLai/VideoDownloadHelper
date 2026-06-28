@@ -32,6 +32,8 @@ class ParseVideo {
             "weibo.com": ParseVideo.parse_weibo_com,
             "xiaokaxiu.com": ParseVideo.parse_xiaokaxiu_com,
             "facebook.com": ParseVideo.parse_facebook_video,
+            "dailymotion.com": ParseVideo.parse_dailymotion_com,
+            "vimeo.com": ParseVideo.parse_vimeo_com,
         };
         const vKeys = Object.keys(handler);
         for (let i = 0; i < vKeys.length; ++i) {
@@ -57,6 +59,16 @@ class ParseVideo {
         }
         // get the <video src> from the html
         video_url = ParseVideo.parse_video_tag_in_html(this.url, this.html);
+        if (video_url !== null) {
+            return video_url;
+        }
+        // get the <source src> children of <video>/<audio> tags
+        video_url = ParseVideo.extract_all_source_tags(this.url, this.html);
+        if (video_url !== null) {
+            return video_url;
+        }
+        // get any HLS (.m3u8) playlist URLs embedded in the page
+        video_url = ParseVideo.extract_all_m3u8_urls(this.url, this.html);
         if (video_url !== null) {
             return video_url;
         }
@@ -267,6 +279,88 @@ class ParseVideo {
             const url = FixURL(found[2]);
             if (ValidURL(url)) {
                 video_url.push(url);
+            }
+            found = re.exec(html);
+        }
+        video_url = video_url.uniq();
+        return video_url.length === 0 ? null : video_url.length === 1 ? video_url[0] : video_url;
+    }
+
+    // parse dailymotion.com video e.g. https://www.dailymotion.com/video/x2bu0q2
+    static parse_dailymotion_com(url, html) {
+        let video_url = [];
+        // modern HLS manifest referenced inside the player metadata JSON
+        // e.g. {"type":"application/x-mpegURL","url":"https:\/\/...\/x2bu0q2.m3u8"}
+        let re = /"type"\s*:\s*"application\/x-mpegURL"\s*,\s*"url"\s*:\s*"(https?:[^"]+)"/gi;
+        let found = re.exec(html);
+        while (found !== null) {
+            const tmp_url = FixURL(found[1]);
+            if (ValidURL(tmp_url)) {
+                video_url.push(tmp_url);
+            }
+            found = re.exec(html);
+        }
+        // legacy progressive MP4 streams e.g. "stream_h264_hd_url":"https:\/\/...mp4"
+        re = /"stream_h264[a-z0-9_]*_url"\s*:\s*"(https?:[^"]+)"/gi;
+        found = re.exec(html);
+        while (found !== null) {
+            const tmp_url = FixURL(found[1]);
+            if (ValidURL(tmp_url)) {
+                video_url.push(tmp_url);
+            }
+            found = re.exec(html);
+        }
+        video_url = video_url.uniq();
+        return video_url.length === 0 ? null : video_url.length === 1 ? video_url[0] : video_url;
+    }
+
+    // parse vimeo.com video e.g. https://vimeo.com/151712690
+    static parse_vimeo_com(url, html) {
+        let video_url = [];
+        // progressive MP4 renditions inside the player config JSON
+        // e.g. "progressive":[{...,"url":"https://...mp4",...}]
+        const block = /"progressive"\s*:\s*\[([\s\S]*?)\]/i.exec(html);
+        if (block !== null) {
+            const re = /"url"\s*:\s*(["'])(https?:[^"']+?\.mp4[^"']*)\1/gi;
+            let found = re.exec(block[1]);
+            while (found !== null) {
+                const tmp_url = FixURL(found[2]);
+                if (ValidURL(tmp_url)) {
+                    video_url.push(tmp_url);
+                }
+                found = re.exec(block[1]);
+            }
+        }
+        video_url = video_url.uniq();
+        return video_url.length === 0 ? null : video_url.length === 1 ? video_url[0] : video_url;
+    }
+
+    // extract <source src="..."> children of <video>/<audio> elements
+    // e.g. <video><source src="https://cdn.example.com/a.mp4" type="video/mp4"></video>
+    static extract_all_source_tags(url, html) {
+        const re = /<source\b[^>]*?\ssrc\s*=\s*(["'])(https?:\/\/[^"']+)\1/gi;
+        let found = re.exec(html);
+        let video_url = [];
+        while (found !== null) {
+            const tmp_url = FixURL(found[2]);
+            if (ValidURL(tmp_url)) {
+                video_url.push(tmp_url);
+            }
+            found = re.exec(html);
+        }
+        video_url = video_url.uniq();
+        return video_url.length === 0 ? null : video_url.length === 1 ? video_url[0] : video_url;
+    }
+
+    // extract HLS playlist (.m3u8) URLs embedded anywhere in the html / inline JSON
+    static extract_all_m3u8_urls(url, html) {
+        const re = /(https?:[^\s'"<>,]+\.m3u8[^\s'"<>,]*)/gi;
+        let found = re.exec(html);
+        let video_url = [];
+        while (found !== null) {
+            const tmp_url = FixURL(found[1]);
+            if (ValidURL(tmp_url)) {
+                video_url.push(tmp_url);
             }
             found = re.exec(html);
         }

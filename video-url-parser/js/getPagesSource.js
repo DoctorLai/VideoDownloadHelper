@@ -2,11 +2,11 @@ const { steemit_domains, max_url_length } = require( '../js/constants' ) ;
 const { extractDomain, FixURL, ValidURL, getParameterByName } = require( '../js/functions' )  ;
 const { ParseVideo } = require( '../js/parsevideo' ) ;
 
-(function() {     
+(function() {
     "use strict";
 
     console.log("Loaded getPageSource.js");
-    
+
     // defines a known failed URLs so we can skip and try next method
     const FAILED_URLS = [
         "https://staticxx.facebook.com/common/referer_frame.php"
@@ -17,7 +17,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
 
     // no youtube.com video please.
     if (domain.includes("youtube.com")) {
-        return; 
+        return;
     }
 
     const html = document.documentElement.outerHTML;
@@ -30,7 +30,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
             // http://91p*rn.com/view_video.php?viewkey=8c78f3bad2f4b346ba9a&page=&viewtype=&category=
 
             let re = /VID=([0-9]+)/gi;
-            let found = re.exec(html);                        
+            let found = re.exec(html);
             let video_url_arr = [];
 
             function CheckError(response) {
@@ -44,10 +44,10 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
             function handle91(baseURL) {
                 while (found != null) {
                     for (let i = 0; i <= 150; ++ i) {
-                        let tmp_url = baseURL + found[1] + "/" + found[1] + i + ".ts";                
+                        let tmp_url = baseURL + found[1] + "/" + found[1] + i + ".ts";
                         tmp_url = FixURL(tmp_url);
-                        video_url_arr.push(tmp_url);    
-                    }   
+                        video_url_arr.push(tmp_url);
+                    }
                     video_url = video_url_arr[0];
                     break;
                 }
@@ -55,13 +55,13 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                     chrome.runtime.sendMessage({
                         action: "getSource",
                         source: JSON.stringify(video_url_arr)
-                    });                          
+                    });
                 } else {
                     chrome.runtime.sendMessage({
                         action: "getSource",
                         source: JSON.stringify(FixURL(video_url))
-                    });                              
-                }                
+                    });
+                }
             }
 
             fetch("https://str.justyy.workers.dev/91base/")
@@ -71,15 +71,15 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
             }).catch((error) => {
                 handle91("https://cdn77.91p49.com/m3u8/");
             });
-        }        
+        }
     }
 
     // Simple Video Parser
     let SimpleVidoeParser = new ParseVideo(pageurl, html);
-    video_url = SimpleVidoeParser.Parse();    
-    if (ValidURL(video_url)) {    
+    video_url = SimpleVidoeParser.Parse();
+    if (ValidURL(video_url)) {
         if (typeof video_url === "string") {
-            // embeded URL is not a real video url                        
+            // embeded URL is not a real video url
             if (video_url.includes("/embed/")) {
                 $.ajax({
                     type: "GET",
@@ -88,27 +88,27 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                     success: function(data) {
                         // now we have the sub HTML
                         SimpleVidoeParser = new ParseVideo(video_url, data);
-                        video_url = SimpleVidoeParser.Parse();                           
+                        video_url = SimpleVidoeParser.Parse();
                         chrome.runtime.sendMessage({
                             action: "getSource",
                             source: JSON.stringify(video_url)
-                        });   
-                        return;                                             
+                        });
+                        return;
                     },
                     error: function(request, status, error) {
-                        
+
                     },
                     complete: function(data) {
 
-                    }             
-                });                
+                    }
+                });
             }
         }
         if (!FAILED_URLS.includes(video_url)) {
             chrome.runtime.sendMessage({
                 action: "getSource",
                 source: JSON.stringify(video_url)
-            });        
+            });
             return;
         }
     }
@@ -118,7 +118,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
         if (!ValidURL(video_url)) {
             video_dom = document.querySelector("div.tumblr_video_container>iframe");
             if (video_dom) {
-                video_url = video_dom.getAttribute("src"); 
+                video_url = video_dom.getAttribute("src");
                 if (ValidURL(video_url)) {
                     let url1 = video_url;
                     video_url = "";
@@ -135,15 +135,15 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                                         action: "getSource",
                                         source: JSON.stringify(FixURL(video_url))
                                     });
-                                }                            
+                                }
                             }
                         },
                         error: function(request, status, error) {
-                            
+
                         },
                         complete: function(data) {
 
-                        }             
+                        }
                     });
                 }
             }
@@ -160,7 +160,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
         if (!ValidURL(video_url)) {
             video_dom = document.querySelector("div[node-type='common_video_player']");
             if (video_dom) {
-                let src = video_dom.getAttribute("action-data"); 
+                let src = video_dom.getAttribute("action-data");
                 if (src.length > 10) {
                     src = getParameterByName("video_src", src);
                     if (src.length > 0) {
@@ -168,7 +168,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                     }
                     if (ValidURL(src)) {
                         if (src.includes("ssig=") && src.includes("Expires=")) {
-                            video_url = src;                            
+                            video_url = src;
                         }
                     }
                 }
@@ -188,7 +188,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
 
     // http://imgur.com/gallery/S8ZZWHB
     if (domain.includes("imgur.com")) {
-        if (!ValidURL(video_url)) { 
+        if (!ValidURL(video_url)) {
             video_dom = document.querySelector("source[type='video/mp4']");
             if (video_dom) {
                 video_url = video_dom.getAttribute("src");
@@ -198,8 +198,8 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
             video_dom = document.querySelector("meta[name='twitter:player:stream']");
             if (video_dom) {
                 video_url = video_dom.getAttribute("content");
-            }                    
-        }        
+            }
+        }
     }
 
     // https://steemit.com/cn/@justyy/i-got-my-phd-degree-at-the-age-of-25-video-25
@@ -207,9 +207,9 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
         if (!ValidURL(video_url)) {
             video_dom = document.querySelector("div.videoWrapper>iframe");
             if (video_dom) {
-                video_url = video_dom.getAttribute("src"); 
+                video_url = video_dom.getAttribute("src");
             }
-        }        
+        }
     }
 
     // https://d.tube/#!/v/movingroovin/7gdlydh0
@@ -217,7 +217,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
         if (!ValidURL(video_url)) {
             video_dom = document.querySelector("div.embed>iframe");
             if (video_dom) {
-                video_url = video_dom.getAttribute("src"); 
+                video_url = video_dom.getAttribute("src");
                 if (ValidURL(video_url)) {
                     let url1 = video_url;
                     $.ajax({
@@ -233,19 +233,19 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                                         action: "getSource",
                                         source: JSON.stringify(FixURL(video_url))
                                     });
-                                }                            
+                                }
                             }
                         },
                         error: function(request, status, error) {
-                            
+
                         },
                         complete: function(data) {
 
-                        }             
+                        }
                     });
-                }                   
-            }         
-        }        
+                }
+            }
+        }
     }
 
     // http://m.miaopai.com/show/channel/rjHGk~4TM7hNz~lg81-uZQ__
@@ -265,14 +265,14 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                     }
                 }
             }
-        }                
-    }    
+        }
+    }
 
     // https://www.facebook.com/zhihua.lai/videos/10150166829094739/
     // https://www.facebook.com/jkforum.net/videos/1446868685325245/
     // https:\/\/video-lht6-1.xx.fbcdn.net\/v\/t43.1792-2\/16462856_1831043770510348_1355160244581302272_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InN2ZV9oZCJ9&oh=77bce2793ab8bbb9d67c31fca836cc65&oe=5895F4AC
     if (domain.includes("facebook.com")) {
-        if (!ValidURL(video_url)) { 
+        if (!ValidURL(video_url)) {
             let re = /['"]?hd_src_no_ratelimit['"]?: *(['"])(https?:[^\s'",]+)\1,/ig;
             let found = re.exec(html);
             while (found != null) {
@@ -281,7 +281,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                     break;
                 }
                 found = re.exec(html);
-            } 
+            }
         }
         if (!ValidURL(video_url)) {
             let re = /['"]?hd_src['"]?: *(['"])(https?:[^\s'",]+)\1,/ig;
@@ -292,9 +292,9 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                     break;
                 }
                 found = re.exec(html);
-            }             
+            }
         }
-        if (!ValidURL(video_url)) { 
+        if (!ValidURL(video_url)) {
             let re = /['"]?sd_src_no_ratelimit['"]?: *(['"])(https?:[^\s'",]+)\1,/ig;
             let found = re.exec(html);
             while (found != null) {
@@ -314,8 +314,8 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                     break;
                 }
                 found = re.exec(html);
-            }             
-        }        
+            }
+        }
     }
 
     // http://www.v1.cn/2017-05-10/2533977.shtml
@@ -323,7 +323,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
         if (!ValidURL(video_url)) {
             video_dom = document.querySelector("param[name='Flashlets']");
             if (video_dom) {
-                let tmp = video_dom.getAttribute("value");   
+                let tmp = video_dom.getAttribute("value");
                 if (tmp.length) {
                     let re = /videoUrl=(.*)/i;
                     let found = re.exec(tmp);
@@ -334,8 +334,8 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                     }
                 }
             }
-        }                
-    }       
+        }
+    }
 
     // http://www.meipai.com/media/596371059
     if (domain.includes("meipai.com")) {
@@ -371,7 +371,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                 }
 
                 function substr(param1, param2) {
-                    let loc3 = param1.substring(0, parseInt(param2[0]));                    
+                    let loc3 = param1.substring(0, parseInt(param2[0]));
                     let loc4 = param1.substring(parseInt(param2[0]), parseInt(param2[0]) + parseInt(param2[1]));
                     return loc3 + param1.substring(parseInt(param2[0])).replace(loc4, "");
                 }
@@ -387,11 +387,11 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
 
                 let str4 = substr(dict2['str'], dict3['pre']);
 
-                tmp = atob(substr(str4, getPos(str4, dict3['tail'])));                
+                tmp = atob(substr(str4, getPos(str4, dict3['tail'])));
 
                 if (ValidURL(tmp)) {
-                    video_url = tmp;                
-                }                
+                    video_url = tmp;
+                }
             }
         }
     }
@@ -408,34 +408,34 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                     url: video_url,
                     success: function(data) {
                         let re = /,"url":"([^"\']+)"/gi;
-                        let found = re.exec(data);                        
+                        let found = re.exec(data);
                         let video_url_arr = [];
                         while (found != null) {
                             let tmp_url = FixURL(found[1]);
                             if (ValidURL(tmp_url)) {
-                                video_url_arr.push(tmp_url);    
-                            }                            
+                                video_url_arr.push(tmp_url);
+                            }
                             found = re.exec(data);
                         }
                         if (video_url_arr.length > 0) {
                             chrome.runtime.sendMessage({
                                 action: "getSource",
                                 source: JSON.stringify(video_url_arr)
-                            });                          
+                            });
                         } else {
                             chrome.runtime.sendMessage({
                                 action: "getSource",
                                 source: JSON.stringify(FixURL(video_url))
-                            });                              
+                            });
                         }
-                    },                    
+                    },
                     error: function(request, status, error) {
-                        
+
                     },
                     complete: function(data) {
 
-                    }             
-                });                
+                    }
+                });
             }
         }
     }
@@ -444,110 +444,110 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
     if (domain.includes("ted.com")) {
         if (!ValidURL(video_url)) {
             let re = /{"uri":"([^"\']+)"/gi;
-            let found = re.exec(html);                        
+            let found = re.exec(html);
             let video_url_arr = [];
             while (found != null) {
                 let tmp_url = FixURL(found[1]);
                 if (ValidURL(tmp_url)) {
-                    video_url_arr.push(tmp_url);    
-                }                            
+                    video_url_arr.push(tmp_url);
+                }
                 found = re.exec(html);
             }
             if (video_url_arr.length > 0) {
                 chrome.runtime.sendMessage({
                     action: "getSource",
                     source: JSON.stringify(video_url_arr)
-                });                          
+                });
             } else {
                 chrome.runtime.sendMessage({
                     action: "getSource",
                     source: JSON.stringify(FixURL(video_url))
-                });                              
+                });
             }
         }
-    }    
+    }
 
     // http://www.pearvideo.com/video_1050733
     if (domain.includes("pearvideo.com")) {
         if (!ValidURL(video_url)) {
             let re = /srcUrl="([^"\']+)"/gi;
-            let found = re.exec(html);                        
+            let found = re.exec(html);
             let video_url_arr = [];
             while (found != null) {
                 let tmp_url = FixURL(found[1]);
                 if (ValidURL(tmp_url)) {
-                    video_url_arr.push(tmp_url);    
-                }                            
+                    video_url_arr.push(tmp_url);
+                }
                 found = re.exec(html);
             }
             if (video_url_arr.length > 0) {
                 chrome.runtime.sendMessage({
                     action: "getSource",
                     source: JSON.stringify(video_url_arr)
-                });                          
+                });
             } else {
                 chrome.runtime.sendMessage({
                     action: "getSource",
                     source: JSON.stringify(FixURL(video_url))
-                });                              
+                });
             }
         }
-    }    
+    }
 
     // https://v.xiaokaxiu.com/v/fhX23JOcSbVEJOQ9LFKtOP2WBkeP1AA-.html
     if (domain.includes("xiaokaxiu.com")) {
         if (!ValidURL(video_url)) {
             // http://gslb.miaopai.com/stream/fhX23JOcSbVEJOQ9LFKtOP2WBkeP1AA-_m.jpg
             let re = /player.swf\?scid=([^"\'&]+)/gi;
-            let found = re.exec(html);                        
+            let found = re.exec(html);
             let video_url_arr = [];
             while (found != null) {
                 let tmp_url = "http://gslb.miaopai.com/stream/" + found[1] + ".mp4";
                 tmp_url = FixURL(tmp_url);
                 if (ValidURL(tmp_url)) {
-                    video_url_arr.push(tmp_url);    
+                    video_url_arr.push(tmp_url);
                     break;
-                }                            
+                }
                 found = re.exec(html);
             }
             if (video_url_arr.length > 0) {
                 chrome.runtime.sendMessage({
                     action: "getSource",
                     source: JSON.stringify(video_url_arr)
-                });                          
+                });
             } else {
                 chrome.runtime.sendMessage({
                     action: "getSource",
                     source: JSON.stringify(FixURL(video_url))
-                });                              
+                });
             }
         }
-    }        
+    }
 
     ///////////////////////////////////////////   try something in general /////////////////////////////////////////////////
 
     if (!ValidURL(video_url)) {
         video_dom = document.querySelector("video#player-html5");
         if (video_dom) {
-            let src = video_dom.getAttribute("src"); 
+            let src = video_dom.getAttribute("src");
             if (src.length > 10) {
                 src = decodeURIComponent(src);
                 if (ValidURL(src)) {
-                    video_url = src;                            
+                    video_url = src;
                 }
             }
         }
-    }     
-    
+    }
+
     // https://which0.r.worldssl.net/video/embed/119838?player=hola&v=1&vip=0&mobile=0
     // https://which0.r.worldssl.net/videos/1/119838/119838.240p.m3u8?v=1.1
     if (!ValidURL(video_url)) {
         video_dom = document.querySelector("div#player-wrapper>iframe");
         if (video_dom) {
-            video_url = video_dom.getAttribute("src");             
+            video_url = video_dom.getAttribute("src");
             if (ValidURL(video_url)) {
                 let url1 = video_url;
-                video_url = "";                
+                video_url = "";
                 $.ajax({
                     type: "GET",
                     dataType: "html",
@@ -555,7 +555,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                     success: function(data) {
                         let dom = $(data).find("source");
                         if (dom) {
-                            video_url = dom.attr('src');                             
+                            video_url = dom.attr('src');
                             if (ValidURL(video_url)) {
                                 video_url = video_url.replace(".m3u8", ".ts");
                                 chrome.runtime.sendMessage({
@@ -563,17 +563,17 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                                     source: JSON.stringify(FixURL(video_url))
                                 });
                             }
-                        }  
+                        }
                         if (!ValidURL(video_url)) {
                             let re = /src:\s*\"(.*)\"/i;
                             let found = re.exec(data);
-                            if (found != null) {                                
-                                video_url = found[1];                                
+                            if (found != null) {
+                                video_url = found[1];
                                 video_url = video_url.replace(".m3u8", ".ts");
                                 chrome.runtime.sendMessage({
                                     action: "getSource",
                                     source: JSON.stringify(FixURL(video_url))
-                                });                                
+                                });
                             }
                         }
                         // https://which2.r.worldssl.net/videos/0/76346/76346.240p.ts?v=1.1
@@ -598,19 +598,19 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                                 chrome.runtime.sendMessage({
                                     action: "getSource",
                                     source: JSON.stringify(FixURL(video_url))
-                                });                                  
-                            }                            
+                                });
+                            }
                         }
-                    },       
+                    },
                 });
             }
         }
-    }     
+    }
 
     if (!ValidURL(video_url)) {
         video_dom = document.querySelector("div#player-wrapper>iframe");
         if (video_dom) {
-            video_url = video_dom.getAttribute("src"); 
+            video_url = video_dom.getAttribute("src");
             if (ValidURL(video_url)) {
                 let url1 = video_url;
                 video_url = "";
@@ -628,9 +628,9 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                                     action: "getSource",
                                     source: JSON.stringify(FixURL(video_url))
                                 });
-                            }                            
+                            }
                         }
-                        if (!ValidURL(video_url)) {    
+                        if (!ValidURL(video_url)) {
                             let re = /src:\s*\"(.*)\"/i;
                             let found = re.exec(data);
                             if (found != null) {
@@ -639,14 +639,14 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                                 chrome.runtime.sendMessage({
                                     action: "getSource",
                                     source: JSON.stringify(FixURL(video_url))
-                                });                                
+                                });
                             }
                         }
-                    },       
+                    },
                 });
             }
         }
-    }         
+    }
 
     if ((!domain.includes("dailymotion.com")) && (!domain.includes("youtube.com"))) {
         // instagram
@@ -655,7 +655,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
             if (video_dom) {
                 video_url = video_dom.getAttribute("content");
             }
-        }    
+        }
 
         if (!ValidURL(video_url)) {
             video_dom = document.querySelector("meta[property='og:video']");
@@ -670,7 +670,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
             if (video_dom) {
                 video_url = video_dom.getAttribute("content");
             }
-        } 
+        }
 
         // https://www.kuaishou.com/photo/83855155/1570965204
         if (!ValidURL(video_url)) {
@@ -678,19 +678,19 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
             if (video_dom) {
                 video_url = video_dom.getAttribute("content");
             }
-        } 
+        }
 
         if (!ValidURL(video_url)) {
             video_dom = document.querySelector("meta[property*='video']");
             if (video_dom) {
                 video_url = video_dom.getAttribute("content");
             }
-        }     
+        }
 
         if (!ValidURL(video_url)) {
             video_dom = document.querySelector("source[type='video/mp4']");
             if (video_dom) {
-                video_url = video_dom.getAttribute("src");   
+                video_url = video_dom.getAttribute("src");
             }
         }
 
@@ -709,16 +709,16 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
         if (!ValidURL(video_url)) {
             video_dom = document.querySelector("video");
             if (video_dom) {
-                video_url = video_dom.getAttribute("src");   
+                video_url = video_dom.getAttribute("src");
             }
-        } 
+        }
     }
 
     // http://91.91p17.space/view_video.php?viewkey=a4ff8ca2a1da8d03fd7d
     if (!ValidURL(video_url)) {
         video_dom = document.querySelector("source[type='video/mp4']");
         if (video_dom) {
-            video_url = video_dom.getAttribute("src");   
+            video_url = video_dom.getAttribute("src");
         }
     }
 
@@ -743,7 +743,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
             let re = /[hsl]dUrl=[\"\']([^\"\']+)[\'\"]/ig;
             let found = re.exec(html);
             while (found != null) {
-                let tmp_url = FixURL(found[1]); 
+                let tmp_url = FixURL(found[1]);
                 if (ValidURL(tmp_url)) {
                     tmp.push(tmp_url);
                 }
@@ -753,9 +753,9 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                 chrome.runtime.sendMessage({
                     action: "getSource",
                     source: JSON.stringify(tmp)
-                });                
+                });
             }
-        }         
+        }
 
         // http://www.dailymotion.com/video/x2bu0q2_alejandro-fernandez-tengo-ganas-de-ti-ft-christina-aguilera_music
         if (domain.includes("dailymotion.com")) {
@@ -763,7 +763,7 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
             let re = /mp4[\'\"],[\'\"]url[\'\"]:[\'\"]([^\"\']+)[\'\"]/ig;
             let found = re.exec(html);
             while (found != null) {
-                let tmp_url = FixURL(found[1]); 
+                let tmp_url = FixURL(found[1]);
                 if (ValidURL(tmp_url)) {
                     tmp.push(tmp_url);
                 }
@@ -773,13 +773,13 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                 chrome.runtime.sendMessage({
                     action: "getSource",
                     source: JSON.stringify(tmp)
-                });                
+                });
             }
-        }   
+        }
 
         // sniffer!
         if (chrome.devtools) { // only available within a devltools page
-            chrome.devtools.network.onRequestFinished.addListener( 
+            chrome.devtools.network.onRequestFinished.addListener(
                 function(request) {
                     // 100 kb
                     if (request.response.bodySize > 100 * 1024) {
@@ -790,10 +790,10 @@ const { ParseVideo } = require( '../js/parsevideo' ) ;
                         chrome.runtime.sendMessage({
                             action: "getSource",
                             source: JSON.stringify(FixURL(request.request.url))
-                        });                        
+                        });
                     }
                 }
-            );         
+            );
         }
     //}
 })();

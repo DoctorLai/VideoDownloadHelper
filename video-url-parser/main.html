@@ -12,25 +12,25 @@
     <script src="lang/es-sp.js" ></script>
     <script src="lang/fr-fr.js" ></script>
     <script src="lang/it-it.js" ></script>
-    <script src="lang/nl-nl.js" ></script>    
-    <script src="lang/ru-ru.js" ></script>    
-    <script src="lang/ro-ro.js" ></script>    
-    <script src="lang/pl-pl.js" ></script>    
-    <script src="lang/pt-br.js" ></script>    
-    <script src="lang/tr-tr.js" ></script>    
+    <script src="lang/nl-nl.js" ></script>
+    <script src="lang/ru-ru.js" ></script>
+    <script src="lang/ro-ro.js" ></script>
+    <script src="lang/pl-pl.js" ></script>
+    <script src="lang/pt-br.js" ></script>
+    <script src="lang/tr-tr.js" ></script>
     <script src="js/jquery-3.4.1.min.js" ></script>
     <script src="js/constants.js" ></script>
     <script src="js/functions.js" ></script>
     <script src="js/MD5.js" ></script>
     <link rel="stylesheet" href="bs/css/bootstrap.min.css">
-    <script src="bs/js/bootstrap.min.js" ></script>    
+    <script src="bs/js/bootstrap.min.js" ></script>
     <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="js/jquery-ui.js" ></script>
-    <script src="js/translate.js" ></script>    
+    <script src="js/translate.js" ></script>
     <script src="js/video.js" ></script>
-    <script src="js/popup.js" ></script>    
-    <script src="js/background.js" ></script>    
+    <script src="js/popup.js" ></script>
+    <script src="js/background.js" ></script>
 </head>
 
 <body>
@@ -61,7 +61,7 @@
                 <option value="fr-fr">français</option>
                 <option value="nl-nl">Nederlands</option>
                 <option value="es-sp">Español</option>
-                <option value="it-it">italiano</option>          
+                <option value="it-it">italiano</option>
                 <option value="ru-ru">русский</option>
                 <option value="de-de">Deutsche</option>
                 <option value="ro-ro">Română</option>
@@ -69,6 +69,8 @@
                 <option value="pt-br">Português</option>
                 <option value="tr-tr">Türk</option>
             </select>
+            <h4 id="text_dark_mode">Dark Mode</h4>
+            <label class="vdh-check"><input type="checkbox" id="dark"> <span id="text_dark_desc">Enable dark theme</span></label>
             <h4 id="text_vip_server_api_key">VIP Server API Key (No Youtube)</h4>
             <input type='password' id='key' name='key' placeholder="$10 / Month" class="form-control">
             <div id="vip_desc" style='font-style:italic'>VIP allows using remote server video parser API.</div>
@@ -76,7 +78,7 @@
         </div>
         <div id="tabs-log">
             <h4><span id='proudly_brought_to_you_by'>Proudly brought to you by</span> @justyy (<a target=_blank id='report_bugs' href="https://steakovercooked.com/Contact.Mail?title=Video+Downloader">Report Bugs</a>)
-            </h4>          
+            </h4>
             <h5>
                <!--<a target=_blank href="https://github.com/DoctorLai/VideoDownloadHelper"><B><span id='source_code'>Source Code</span></B>: https://github.com/DoctorLai/VideoDownloadHelper</a>-->
             </h5>
@@ -88,18 +90,19 @@
             &nbsp;
             <a target=_blank href='https://helloacm.com/out/vultr2'><img title='Free $100 VPS' src='images/vultr.jpg' class='banner'></a>
             &nbsp;
-            <a target=_blank href='https://helloacm.com/out/linode'><img title='Free $20 VPS' src='images/linode.jpg' class='banner'></a>            
+            <a target=_blank href='https://helloacm.com/out/linode'><img title='Free $20 VPS' src='images/linode.jpg' class='banner'></a>
             &nbsp;
-            <a target=_blank href='https://helloacm.com/out/do'><img title='Free $100 VPS' src='images/digitalocean.jpg' class='banner'></a>                
-        </div>        
+            <a target=_blank href='https://helloacm.com/out/do'><img title='Free $100 VPS' src='images/digitalocean.jpg' class='banner'></a>
+        </div>
         <div id='vpsdiv' style='text-align:center'>
             <a href="https://helloacm.com/out/buymecoffee" target="_blank"><img src="images/lato-blue.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a> <BR/>
             <I><span id='vpspromotion' style='color:gray'>VPS Promotions</span></I>
             <B>
             <a target=_blank href='https://helloacm.com/out/vultr2'>Vultr ($100)</a> | <a target=_blank href='https://helloacm.com/out/linode'>Linode ($20)</a> | <a target=_blank href='https://helloacm.com/out/do'>Digital Ocean ($100)</a> | <a target=_blank href='https://helloacm.com/out/atlantic'>Atlantic ($15)</a>
             </B>
-        </div>        
+        </div>
     </div>
+    <div id="vdh-toast"></div>
 </body>
 
 </html>
