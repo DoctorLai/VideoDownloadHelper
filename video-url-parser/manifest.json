@@ -3,7 +3,7 @@
   "name": "Simple Video Download Helper",
   "short_name": "Video Download Helper",
   "default_locale": "en",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "action": {
     "default_icon": "icon.png",
     "default_title": "Video Download Helper (Doesnt work on Youtube)",
@@ -27,7 +27,7 @@
       "extension_ids": ["ilcdiicigjaccgipndigcenjieedjohj"]
     }
   ],
-  "permissions": ["activeTab", "storage", "scripting"],
+  "permissions": ["activeTab", "storage", "scripting", "downloads", "contextMenus"],
   "host_permissions": ["https://uploadbeta.com/api/*", "https://video.justyy.workers.dev/api/*"],
   "background": {
     "service_worker": "js/background.js",

@@ -32,8 +32,14 @@ websites. Built and maintained by [@justyy](https://justyy.com/).
 ## Features
 
 - One-click detection of downloadable video URLs on the current page.
-- Site-specific parsers plus generic fallbacks (`og:video` meta tags, `<video>` tags, and embedded
-  `video_url` / `mp4` references).
+- **One-click download** of detected videos, audio and images via the browser's download manager,
+  plus **Copy**, **Download All** and **Copy All** actions.
+- **Right-click context menu** to download a video/audio element directly, or find videos on the
+  current page.
+- A **toolbar badge** showing how many media URLs were detected on the page.
+- **Dark mode** for the popup.
+- Site-specific parsers plus generic fallbacks (`og:video` meta tags, `<video>` and `<source>`
+  tags, HLS `.m3u8` playlists, and embedded `video_url` / `mp4` references).
 - Zero runtime dependencies — the parser is plain, dependency-free JavaScript.
 - Built on Chrome Extension **Manifest V3**.
 
@@ -51,9 +57,11 @@ extraction strategies for everything else:
 | weibo.com       | `https://www.weibo.com/<uid>/<id>`                   |
 | xiaokaxiu.com   | `https://v.xiaokaxiu.com/v/<id>.html`                |
 | facebook.com    | `https://www.facebook.com/<user>/videos/<id>/`       |
+| dailymotion.com | `https://www.dailymotion.com/video/<id>`             |
+| vimeo.com       | `https://vimeo.com/<id>`                             |
 
-Generic fallbacks also recognise `og:video` headers, HTML `<video src>` tags, and embedded
-`video_url` / `mp4` URLs.
+Generic fallbacks also recognise `og:video` headers, HTML `<video src>` and `<source src>` tags,
+HLS `.m3u8` playlists, and embedded `video_url` / `mp4` URLs.
 
 See [tested URLs](video-url-parser/tested-urls.txt) for verified pages and
 [the wishlist](video-url-parser/todo-urls.txt) for sites we would like to support next.
@@ -67,8 +75,17 @@ Install the published (cut-down) version directly:
 
 ### Load the unpacked extension
 
-1. Download a [release archive](https://github.com/DoctorLai/VideoDownloadHelper/releases) or build
-   the bundle yourself (see [Development](#development)).
+The content-script bundle (`video-url-parser/dist/dist.min.js`) is produced by the build and is
+**not** committed to the repository, so build it before loading:
+
+1. Install dependencies and build the bundle:
+
+   ```bash
+   cd video-url-parser
+   npm install
+   npm run build
+   ```
+
 2. Open `chrome://extensions` and enable **Developer mode**.
 3. Click **Load unpacked** and select the `video-url-parser/` folder.
 

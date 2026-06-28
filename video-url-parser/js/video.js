@@ -15,11 +15,12 @@ const saveSettings = (showMsg = true) => {
     settings['lang'] = $('select#lang').val();
     settings['key'] = $('input#key').val().trim();
     settings['m3u8'] = m3u8_url;
-    chrome.storage.sync.set({ 
+    settings['dark'] = $('input#dark').is(':checked');
+    chrome.storage.sync.set({
         video_downloader_settings: settings
     }, function() {
         if (showMsg) {
-            alert(get_text('alert_save'));
+            vdhToast(get_text('alert_save'));
         }
     });
 };
@@ -32,7 +33,7 @@ const logit = (dom, msg, showtime = true) => {
     const s = dom.val();
     if (showtime) {
         const d = new Date();
-        const n = d.toLocaleTimeString();            
+        const n = d.toLocaleTimeString();
         dom.val((s + "\n" + n + ": " + msg).trim());
     } else {
         dom.val((s + "\n" + msg).trim());
@@ -60,41 +61,142 @@ const callAPI = (key, url) => {
             logit($('textarea#about'), 'key error: ' + key);
             reject("error " + key);
         });
-    });     
+    });
+}
+
+// page title of the active tab, used to suggest download filenames
+let vdhPageTitle = "";
+
+// escape a string for safe inclusion inside single-quoted HTML attributes/text
+function vdhEscapeHtml(s) {
+    return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
+
+// media/file extensions we offer a one-click Download button for
+const VDH_DOWNLOADABLE_EXT = [
+    "mp4", "webm", "m4v", "mov", "mkv", "avi", "flv", "ts", "m3u8", "mpd",
+    "mp3", "m4a", "aac", "ogg", "oga", "wav", "flac",
+    "jpg", "jpeg", "png", "gif", "webp", "bmp", "svg"
+];
+
+// true when the URL points at a concrete media/file we can download directly
+function vdhIsDownloadable(url) {
+    if (typeof url !== "string") {
+        return false;
+    }
+    return VDH_DOWNLOADABLE_EXT.includes(getFileExtension(url));
+}
+
+// show a short, auto-dismissing toast message in the popup
+function vdhToast(msg) {
+    const t = $("#vdh-toast");
+    if (!msg || t.length === 0) {
+        return;
+    }
+    t.text(msg).stop(true, true).fadeIn(120).delay(1300).fadeOut(450);
+}
+
+// copy text to the clipboard with user feedback
+function vdhCopy(text) {
+    if (!text) {
+        return;
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function() {
+            vdhToast(get_text("copied", "Copied!"));
+        }, function() {
+            vdhToast(get_text("copy_failed", "Copy failed"));
+        });
+    } else {
+        vdhToast(get_text("copy_failed", "Copy failed"));
+    }
+}
+
+// download a single URL with chrome.downloads, falling back to a new tab if the
+// browser blocks the programmatic download
+function vdhDownload(url, index) {
+    if (!url) {
+        return;
+    }
+    if (typeof chrome !== "undefined" && chrome.downloads && chrome.downloads.download) {
+        const filename = suggestFilename(url, vdhPageTitle, typeof index === "number" ? index : -1);
+        chrome.downloads.download({ url: url, filename: filename }, function() {
+            if (chrome.runtime && chrome.runtime.lastError) {
+                window.open(url, "_blank");
+            }
+        });
+    } else {
+        window.open(url, "_blank");
+    }
+}
+
+// build a single <li> with the link plus Download/Copy action buttons
+function vdhMediaItem(url, index) {
+    const safe = vdhEscapeHtml(url);
+    const shown = vdhEscapeHtml(url.TrimToLength(max_url_length));
+    let s = "<li><a target=_blank rel=nofollow href='" + safe + "'>" + shown + "</a> ";
+    if (vdhIsDownloadable(url)) {
+        s += "<button type='button' class='vdh-btn vdh-dl' data-url='" + safe + "' data-index='" + index + "'>" +
+            vdhEscapeHtml(get_text("download", "Download")) + "</button> ";
+    }
+    s += "<button type='button' class='vdh-btn vdh-copy' data-url='" + safe + "'>" +
+        vdhEscapeHtml(get_text("copy", "Copy")) + "</button></li>";
+    return s;
+}
+
+// render a titled list of media URLs with per-item and bulk action buttons
+function vdhRenderList(titleKey, urls) {
+    const list = (urls || []).filter(function(u) {
+        return typeof u === "string" && u.length > 0;
+    });
+    const title = get_text(titleKey, titleKey);
+    const anyDownloadable = list.some(vdhIsDownloadable);
+    let s = "<h3>" + title + "</h3>";
+    s += "<div class='vdh-toolbar'>";
+    if (anyDownloadable) {
+        s += "<button type='button' class='vdh-btn' id='vdh-dl-all'>" +
+            vdhEscapeHtml(get_text("download_all", "Download All")) + "</button> ";
+    }
+    s += "<button type='button' class='vdh-btn' id='vdh-copy-all'>" +
+        vdhEscapeHtml(get_text("copy_all", "Copy All")) + "</button>";
+    s += "</div><ol>";
+    for (let i = 0; i < list.length; ++i) {
+        s += vdhMediaItem(list[i], i);
+    }
+    s += "</ol>";
+    return s;
 }
 
 // display video url
 function setUrlOffline(url, url2 = '') {
-    if (url.includes("weibomiaopai.com")) { // alternative 
-        $('div#down').html("<h3>" + get_text("videos_list") + "</h3><ul><li><a target=_blank rel=nofollow href='" + url + "'>" + "<i><font color=gray>" + url + "</font></i></a></li></ul>");
+    if (url.includes("weibomiaopai.com")) { // alternative
+        $('div#down').html(vdhRenderList("videos_list", [url]));
         const key = $('input#key').val().trim();
         if (key) {
             callAPI(key, url2).then((video) => {
                 if ((video != null) && (video.constructor == Array)) {
                     setUrlOfflineArray(video);
                 } else {
-                    $('div#down').html("<h3>" + get_text("videos_list") + "</h3><ul><li><a target=_blank rel=nofollow href='" + video + "'>" + video + "</a></li></ul>");
+                    $('div#down').html(vdhRenderList("videos_list", [video]));
                 }
             });
         }
     } else {
-        $('div#down').html("<h3>" + get_text("videos_list") + "</h3><ul><li><a target=_blank rel=nofollow href='" + url + "'>" + url + "</a></li></ul>");
-    }    
+        $('div#down').html(vdhRenderList("videos_list", [url]));
+    }
 }
 
 // display more than 1 video urls
 function setUrlOfflineArray(urls) {
-    const urls_length = urls.length;
-    let s = "<h3>"+ get_text("videos_list") + "</h3>";
-    s += "<ol>";
-    for (let i = 0; i < urls_length; ++i) {
-        s += "<li><a target=_blank rel=nofollow href='" + urls[i] + "'>" + urls[i].TrimToLength(max_url_length) + "</a></li>";
-    }
-    s += "</ol>";
-    $('div#down').html(s);
+    $('div#down').html(vdhRenderList("videos_list", urls));
 }
 
-document.addEventListener('DOMContentLoaded', async function() {   
+document.addEventListener('DOMContentLoaded', async function() {
     // init tabs
     $(function() {
         $( "#tabs" ).tabs();
@@ -113,11 +215,15 @@ document.addEventListener('DOMContentLoaded', async function() {
             if (key) {
                 $("input#key").val(key);
             }
+            if (settings['dark']) {
+                $("body").addClass("vdh-dark");
+                $("input#dark").prop("checked", true);
+            }
         } else {
             // first time set default parameters
         }
         // about
-        const manifest = chrome.runtime.getManifest();    
+        const manifest = chrome.runtime.getManifest();
         const app_name = manifest.name + " v" + manifest.version;
         // version number
         $('textarea#about').val(get_text('application') + ': ' + app_name + '\n' + get_text('chrome_version') + ': ' + getChromeVersion());
@@ -129,8 +235,42 @@ document.addEventListener('DOMContentLoaded', async function() {
     $('button#setting_save_btn').click(function() {
         saveSettings();
         // translate
-        ui_translate();        
-    });  
+        ui_translate();
+    });
+
+    // dark mode toggle
+    $('input#dark').change(function() {
+        if ($(this).is(':checked')) {
+            $('body').addClass('vdh-dark');
+        } else {
+            $('body').removeClass('vdh-dark');
+        }
+        saveSettings(false);
+    });
+
+    // delegated actions for the dynamically-rendered media lists
+    $('#down').on('click', '.vdh-dl', function() {
+        const idx = parseInt($(this).attr('data-index'), 10);
+        vdhDownload($(this).attr('data-url'), isNaN(idx) ? -1 : idx);
+    });
+    $('#down').on('click', '.vdh-copy', function() {
+        vdhCopy($(this).attr('data-url'));
+    });
+    $('#down').on('click', '#vdh-dl-all', function() {
+        $('#down ol li a').each(function(i) {
+            const href = $(this).attr('href');
+            if (vdhIsDownloadable(href)) {
+                vdhDownload(href, i);
+            }
+        });
+    });
+    $('#down').on('click', '#vdh-copy-all', function() {
+        const urls = [];
+        $('#down ol li a').each(function() {
+            urls.push($(this).attr('href'));
+        });
+        vdhCopy(urls.join("\n"));
+    });
 
     // expand m3u8 video list
     const process_m3u8 = (url) => {
@@ -172,12 +312,13 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     let pageurl = '';
     let tab = await getCurrentTab();
-    
+    vdhPageTitle = (tab && tab.title) ? tab.title : "";
+
     //chrome.tabs.query({ currentWindow: true, active: true }, (tab) => {
     if (true) {
         pageurl = tab.url;
 
-        let domain = extractDomain(pageurl).toLowerCase();        
+        let domain = extractDomain(pageurl).toLowerCase();
         if (!domain.includes('youtube.com')) {
             let s;
             if (["zh-cn", "zh-tw"].includes($('select#lang').val())) {
@@ -245,13 +386,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     if (tmp.length > 0) {
                         // remove duplicate
                         tmp = tmp.uniq();
-                        let s = "<h3>" + get_text("images_list") + "</h3>";
-                        s += "<ol>";
-                        for (let i = 0; i < tmp.length; ++i) {
-                            s += "<li><a target=_blank href='" + tmp[i] + "'>" + tmp[i] + "</a>";
-                        }
-                        s += "</ol>";
-                        $('div#down').html(s);
+                        $('div#down').html(vdhRenderList("images_list", tmp));
                     }
                 },
                 error: function(request, status, error) {},
@@ -265,7 +400,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 open("https://slowapi.com/merge-videos-files/");
             } else {
                 open("https://slowapi.com/merge-videos/");
-            }            
+            }
         });
 
         $("#vid").click(function() {
@@ -299,24 +434,9 @@ document.addEventListener('DOMContentLoaded', async function() {
                         found = re.exec(data);
                     }
                     const w_url = "https://weibomiaopai.com/download-video-parser.php?url=" + encodeURIComponent(pageurl);
-                    if (tmp.length > 0) {
-                        // remove duplicate
-                        tmp = tmp.uniq();
-                        let s = "<h3>" + get_text("videos_list") + "</h3>";                        
-                        s += "<ol>";
-                        s += "<li><a target=_blank href='" + w_url + "'>" + w_url + "</a>";
-                        for (let i = 0; i < tmp.length; ++i) {
-                            s += "<li><a target=_blank href='" + tmp[i] + "'>" + tmp[i] + "</a>";
-                        }
-                        s += "</ol>";
-                        $('div#down').html(s);
-                    } else {
-                        let s = "<h3>" + get_text("videos_list") + "</h3>";
-                        s += "<ol>";                        
-                        s += "<li><a target=_blank href='" + w_url + "'>" + w_url + "</a>";
-                        s += "</ol>";
-                        $('div#down').html(s);
-                    }
+                    tmp = tmp.uniq();
+                    tmp.unshift(w_url);
+                    $('div#down').html(vdhRenderList("videos_list", tmp));
                 },
                 error: function(request, status, error) {},
                 complete: function(data) {}
@@ -355,13 +475,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     }
                     if (tmp.length > 0) {
                         tmp = tmp.uniq();
-                        let s = "<h3>" + get_text("links_list") + "</h3>";
-                        s += "<ol>";
-                        for (let i = 0; i < tmp.length; ++i) {
-                            s += "<li><a target=_blank href='" + tmp[i] + "'>" + tmp[i] + "</a>";
-                        }
-                        s += "</ol>";
-                        $('div#down').html(s);
+                        $('div#down').html(vdhRenderList("links_list", tmp));
                     }
                 },
                 error: function(request, status, error) {},
@@ -369,7 +483,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             });
         });
     };
-    
+
     // get video url from getPageSource.js
     chrome.runtime.onMessage.addListener(function(request, sender) {
         if (request.action == "getSource") {
@@ -396,6 +510,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     fetch(url).then((response) => {
         return response.text().then(function(text) {
             $('textarea#about').val($('textarea#about').val() + "\n****Tested URLs****:\n" + text);
-        });        
+        });
     });
 }, false);

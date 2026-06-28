@@ -27,5 +27,13 @@ const translation_nl_nl = {
 	'api_finished': 'API Finished',
 	'calling': 'Calling',
 	'proudly_brought_to_you_by': 'Ontwikkeld door',
-	'freevps': 'Cloud VPS Promotions'
+	'freevps': 'Cloud VPS Promotions',
+	'download': 'Downloaden',
+	'copy': 'Kopiëren',
+	'download_all': 'Alles downloaden',
+	'copy_all': 'Alles kopiëren',
+	'copied': 'Gekopieerd!',
+	'copy_failed': 'Kopiëren mislukt',
+	'dark_mode': 'Donkere modus',
+	'dark_desc': 'Donker thema inschakelen'
 };

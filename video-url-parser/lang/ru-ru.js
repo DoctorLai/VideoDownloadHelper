@@ -27,5 +27,13 @@ const translation_ru_ru = {
 	'api_finished': 'API Finished',
 	'calling': 'Calling',
 	'proudly_brought_to_you_by ':' Разработано ',
-	'freevps': 'Акции в облаке VPS'
+	'freevps': 'Акции в облаке VPS',
+	'download': 'Скачать',
+	'copy': 'Копировать',
+	'download_all': 'Скачать все',
+	'copy_all': 'Копировать все',
+	'copied': 'Скопировано!',
+	'copy_failed': 'Не удалось скопировать',
+	'dark_mode': 'Темная тема',
+	'dark_desc': 'Включить темную тему'
 };

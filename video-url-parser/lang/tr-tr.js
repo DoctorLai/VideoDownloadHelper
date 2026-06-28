@@ -27,5 +27,13 @@ const translation_tr_tr = {
 	'api_finished': 'API Tamamlandı',
 	'calling': 'Calling',
 	'proudly_brought_to_you_by': 'Geliştiren',
-	'freevps': 'Cloud VPS Promosyonları'
+	'freevps': 'Cloud VPS Promosyonları',
+	'download': 'İndir',
+	'copy': 'Kopyala',
+	'download_all': 'Tümünü indir',
+	'copy_all': 'Tümünü kopyala',
+	'copied': 'Kopyalandı!',
+	'copy_failed': 'Kopyalama başarısız',
+	'dark_mode': 'Koyu mod',
+	'dark_desc': 'Koyu temayı etkinleştir'
 };

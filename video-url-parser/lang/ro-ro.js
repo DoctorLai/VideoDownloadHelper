@@ -27,5 +27,13 @@ const translation_ro_ro = {
 	'api_finished': 'API-ul terminat',
 	'calling': 'Apelare',
 	'proudly_brought_to_you_by': 'Dezvoltat de',
-	'freevps': 'Promoții cloud VPS'
+	'freevps': 'Promoții cloud VPS',
+	'download': 'Descarcă',
+	'copy': 'Copiază',
+	'download_all': 'Descarcă tot',
+	'copy_all': 'Copiază tot',
+	'copied': 'Copiat!',
+	'copy_failed': 'Copierea a eșuat',
+	'dark_mode': 'Mod întunecat',
+	'dark_desc': 'Activează tema întunecată'
 };
