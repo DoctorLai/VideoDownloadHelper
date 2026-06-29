@@ -4,6 +4,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen.svg)](https://nodejs.org/)
 [![Manifest](https://img.shields.io/badge/manifest-v3-blue.svg)](video-url-parser/manifest.json)
+[![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](video-url-parser/.prettierrc.json)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ilcdiicigjaccgipndigcenjieedjohj.svg)](https://chrome.google.com/webstore/detail/simple-video-download-hel/ilcdiicigjaccgipndigcenjieedjohj)
+[![Users](https://img.shields.io/chrome-web-store/users/ilcdiicigjaccgipndigcenjieedjohj.svg)](https://chrome.google.com/webstore/detail/simple-video-download-hel/ilcdiicigjaccgipndigcenjieedjohj)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#contributing)
 
 A lightweight browser extension that helps you find and download videos from a number of supported
