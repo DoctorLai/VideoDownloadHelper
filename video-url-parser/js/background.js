@@ -31,7 +31,12 @@
         return true;
     };
 
-    if (chrome && chrome.tabs && chrome.tabs.query && chrome.scripting && chrome.scripting.executeScript) {
+    // Only inject from an extension page (the popup), where opening it is the
+    // user gesture that grants `activeTab`. Running this in the service worker
+    // (no `window`) has no user gesture, so executeScript would throw
+    // "Cannot access contents of the page. Extension manifest must request
+    // permission..." (or "Cannot access a chrome:// URL" on internal pages).
+    if (typeof window !== "undefined" && chrome && chrome.tabs && chrome.tabs.query && chrome.scripting && chrome.scripting.executeScript) {
         let tab = await getCurrentTab();
         console.log(`Current Tab is ${JSON.stringify(tab)}`);
         if (tab && tab.id != null && canInjectIntoUrl(tab.url)) {
