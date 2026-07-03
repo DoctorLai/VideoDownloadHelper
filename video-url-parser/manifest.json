@@ -3,11 +3,19 @@
   "name": "Simple Video Download Helper",
   "short_name": "Video Download Helper",
   "default_locale": "en",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "action": {
     "default_icon": "icon.png",
     "default_title": "Video Download Helper (Doesnt work on Youtube)",
     "default_popup": "main.html"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+V"
+      },
+      "description": "Open Video Download Helper"
+    }
   },
   "offline_enabled": true,
   "author": "justyy<dr.zhihua.lai@gmail.com>",

@@ -7,6 +7,7 @@ const translation_de_de = {
 	'text_vip_server_api_key': 'VIP Server API Key (No Youtube)',
 	'vip_desc': 'VIP ermöglicht die Verwendung der Remote-Server-Video-Parser-API.',
 	'youtube_notice': 'Bitte beachten Sie (NO YOUTUBE): Google erlaubt kein Verhalten, das das Herunterladen von YouTube-Videos unterstützt oder ermutigt, und daher unterstützt dieses Plugin YouTube nicht mehr.',
+	'restricted_page_notice': 'Diese Seite wird nicht unterstützt. Bitte öffnen Sie eine normale Webseite (http/https) und öffnen Sie die Erweiterung erneut.',
 	'video_downloader': 'Video Downloader',
 	'not_found': 'Bisher nichts gefunden :(',
 	'videos': 'Videos',

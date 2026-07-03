@@ -14,10 +14,32 @@
     // and extension pages (e.g. the popup), not in a content-script context.
     // This file is also declared as a content script, so guard before using
     // them to avoid throwing when injected into a page.
-    if (chrome && chrome.tabs && chrome.tabs.query && chrome.scripting && chrome.scripting.executeScript) {
+    // Chrome also blocks content-script injection on browser-internal pages
+    // (chrome://, edge://, about:, view-source:, ...) and the Web Store, so only
+    // inject into http(s) pages to avoid "Cannot access a chrome:// URL" errors.
+    const canInjectIntoUrl = (url) => {
+        if (!url || typeof url !== "string") {
+            return false;
+        }
+        const u = url.toLowerCase();
+        if (!(u.startsWith("http://") || u.startsWith("https://"))) {
+            return false;
+        }
+        if (u.startsWith("https://chrome.google.com/webstore") || u.startsWith("https://chromewebstore.google.com")) {
+            return false;
+        }
+        return true;
+    };
+
+    // Only inject from an extension page (the popup), where opening it is the
+    // user gesture that grants `activeTab`. Running this in the service worker
+    // (no `window`) has no user gesture, so executeScript would throw
+    // "Cannot access contents of the page. Extension manifest must request
+    // permission..." (or "Cannot access a chrome:// URL" on internal pages).
+    if (typeof window !== "undefined" && chrome && chrome.tabs && chrome.tabs.query && chrome.scripting && chrome.scripting.executeScript) {
         let tab = await getCurrentTab();
         console.log(`Current Tab is ${JSON.stringify(tab)}`);
-        if (tab && tab.id != null) {
+        if (tab && tab.id != null && canInjectIntoUrl(tab.url)) {
             chrome.scripting.executeScript({
                 target: { tabId: tab.id },
                 files: ["./js/jquery-3.4.1.min.js", "./dist/dist.min.js"]

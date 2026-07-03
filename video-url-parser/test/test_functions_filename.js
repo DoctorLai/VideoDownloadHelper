@@ -3,7 +3,7 @@
 "use strict";
 
 const { assert } = require("chai");
-const { getFileExtension, sanitizeFilename, suggestFilename } = require("../js/functions");
+const { getFileExtension, sanitizeFilename, suggestFilename, inferMediaExtension } = require("../js/functions");
 
 describe("getFileExtension", function () {
     it("returns the lowercased extension of a simple URL", function () {
@@ -29,6 +29,9 @@ describe("getFileExtension", function () {
     });
     it("returns an empty string for a non-string", function () {
         assert.equal(getFileExtension(42), "");
+    });
+    it("handles a bare filename with no path separator", function () {
+        assert.equal(getFileExtension("video.MP4"), "mp4");
     });
 });
 
@@ -68,5 +71,41 @@ describe("suggestFilename", function () {
     });
     it("ignores a negative index", function () {
         assert.equal(suggestFilename("https://cdn.example.com/a.mp4", "Title", -1), "Title.mp4");
+    });
+    it("keeps a known media extension found in a query parameter", function () {
+        assert.equal(suggestFilename("https://cdn.example.com/get.php?file=p.png", "Pic"), "Pic.png");
+    });
+    it("keeps a known media extension when extra path segments follow the file", function () {
+        assert.equal(suggestFilename("https://cdn.example.com/i/photo.jpg/large", "Pic"), "Pic.jpg");
+    });
+    it("still keeps a non-media extension for other downloads", function () {
+        assert.equal(suggestFilename("https://cdn.example.com/report.pdf", "Doc"), "Doc.pdf");
+    });
+});
+
+describe("inferMediaExtension", function () {
+    it("returns a known image extension from a simple URL", function () {
+        assert.equal(inferMediaExtension("https://cdn.example.com/photo.jpg"), "jpg");
+    });
+    it("returns a known video extension, ignoring case and query string", function () {
+        assert.equal(inferMediaExtension("https://cdn.example.com/clip.MP4?token=1"), "mp4");
+    });
+    it("infers the extension from a query parameter", function () {
+        assert.equal(inferMediaExtension("https://cdn.example.com/get.php?file=photo.png"), "png");
+    });
+    it("infers the extension when extra path segments follow the file", function () {
+        assert.equal(inferMediaExtension("https://cdn.example.com/image.jpg/large"), "jpg");
+    });
+    it("does not infer an extension from the host name", function () {
+        assert.equal(inferMediaExtension("https://jpg.example.com/watch"), "");
+    });
+    it("returns an empty string for a non-media extension", function () {
+        assert.equal(inferMediaExtension("https://cdn.example.com/report.pdf"), "");
+    });
+    it("returns an empty string when there is no known extension", function () {
+        assert.equal(inferMediaExtension("https://cdn.example.com/watch?v=abc"), "");
+    });
+    it("returns an empty string for null", function () {
+        assert.equal(inferMediaExtension(null), "");
     });
 });

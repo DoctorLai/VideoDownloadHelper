@@ -218,8 +218,90 @@ const suggestFilename = (url, title, index) => {
     if (typeof index === "number" && index >= 0) {
         base += "-" + (index + 1);
     }
-    const ext = getFileExtension(url);
+    const ext = inferMediaExtension(url) || getFileExtension(url);
     return ext ? base + "." + ext : base;
+};
+
+// --- media type detection -------------------------------------------------
+// Known downloadable file extensions grouped by media kind. Centralised here
+// so the parser, the popup UI and the tests share a single source of truth.
+const VIDEO_EXTENSIONS = ["mp4", "m4v", "webm", "mkv", "mov", "ogv", "flv", "ts", "mpd", "m3u8", "3gp", "avi", "wmv"];
+const AUDIO_EXTENSIONS = ["mp3", "m4a", "aac", "ogg", "oga", "opus", "flac", "wav"];
+const IMAGE_EXTENSIONS = ["jpg", "jpeg", "png", "gif", "webp", "bmp", "svg", "avif", "ico"];
+
+// classify a URL as "video", "audio", "image" or "" (unknown) by its extension.
+const getMediaType = (url) => {
+    const ext = getFileExtension(url);
+    if (!ext) {
+        return "";
+    }
+    if (VIDEO_EXTENSIONS.includes(ext)) {
+        return "video";
+    }
+    if (AUDIO_EXTENSIONS.includes(ext)) {
+        return "audio";
+    }
+    if (IMAGE_EXTENSIONS.includes(ext)) {
+        return "image";
+    }
+    return "";
+};
+
+const isVideoUrl = (url) => getMediaType(url) === "video";
+const isAudioUrl = (url) => getMediaType(url) === "audio";
+const isImageUrl = (url) => getMediaType(url) === "image";
+
+// true when the URL points at a concrete media file we can download directly.
+const isDownloadableMediaUrl = (url) => getMediaType(url) !== "";
+
+// infer a KNOWN media file extension (jpg, png, mp4, ...) from a URL so a
+// downloaded image/video keeps a sensible extension. Prefers the clean path
+// extension when it is a known media type; otherwise scans the path/query (never
+// the host, to avoid matching a domain like "jpg.com") for the last known media
+// extension, e.g. ".../get?file=clip.mp4" or ".../photo.jpg/large". Returns ""
+// when no known image/video/audio extension can be found.
+const inferMediaExtension = (url) => {
+    if (!url || typeof url !== "string") {
+        return "";
+    }
+    const known = VIDEO_EXTENSIONS.concat(AUDIO_EXTENSIONS, IMAGE_EXTENSIONS);
+    const pathExt = getFileExtension(url);
+    if (known.includes(pathExt)) {
+        return pathExt;
+    }
+    let rest = url.toLowerCase();
+    const scheme = rest.indexOf("://");
+    if (scheme !== -1) {
+        const afterScheme = rest.substring(scheme + 3);
+        const firstSlash = afterScheme.indexOf("/");
+        rest = firstSlash === -1 ? "" : afterScheme.substring(firstSlash);
+    }
+    const re = new RegExp("\\.(" + known.join("|") + ")(?![a-z0-9])", "g");
+    let best = "";
+    let match;
+    while ((match = re.exec(rest)) !== null) {
+        best = match[1];
+    }
+    return best;
+};
+
+// URLs the popup cannot fetch from or inject a content script into: browser
+// internal pages (chrome://, edge://, about:, view-source:, file://, data:, ...)
+// and the Chrome Web Store / extension gallery, where Chrome always blocks
+// injection. Used to show a friendly notice instead of throwing
+// "Cannot access a chrome:// URL" / "Not allowed to load local resource".
+const isRestrictedUrl = (url) => {
+    if (!url || typeof url !== "string") {
+        return true;
+    }
+    const u = url.toLowerCase();
+    if (!(u.startsWith("http://") || u.startsWith("https://"))) {
+        return true;
+    }
+    if (u.startsWith("https://chrome.google.com/webstore") || u.startsWith("https://chromewebstore.google.com")) {
+        return true;
+    }
+    return false;
 };
 
 if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
@@ -238,5 +320,15 @@ if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
         getFileExtension,
         sanitizeFilename,
         suggestFilename,
+        VIDEO_EXTENSIONS,
+        AUDIO_EXTENSIONS,
+        IMAGE_EXTENSIONS,
+        getMediaType,
+        isVideoUrl,
+        isAudioUrl,
+        isImageUrl,
+        isDownloadableMediaUrl,
+        inferMediaExtension,
+        isRestrictedUrl,
     };
 }

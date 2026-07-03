@@ -1,6 +1,6 @@
 {
   "name": "video-download-helper",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "private": true,
   "description": "Repository root for the Simple Video Download Helper browser extension. The extension and its tooling live in the video-url-parser/ directory; the scripts below simply delegate there so they can be run from the repository root.",
   "scripts": {
