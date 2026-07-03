@@ -75,6 +75,12 @@ npm run build              # produces dist/dist.min.js (not committed)
 Then open `chrome://extensions`, enable **Developer mode**, click
 **Load unpacked** and select the `video-url-parser/` folder.
 
+To create the Chrome Web Store zip package instead, run:
+
+```bash
+npm run package            # writes simple-video-download-helper-<version>.zip at the repo root
+```
+
 ## Available Scripts
 
 Run these from the repository root **or** from `video-url-parser/`:
@@ -88,6 +94,7 @@ Run these from the repository root **or** from `video-url-parser/`:
 | `npm run format`       | Format the codebase with Prettier.                |
 | `npm run format:check` | Verify formatting without writing changes.        |
 | `npm run build`        | Produce the production bundle.                     |
+| `npm run package`      | Build and create the extension zip at the repo root. |
 | `npm run check`        | Run lint, format check, coverage and build.       |
 
 **Before opening a pull request, please make sure `npm run check` passes.**

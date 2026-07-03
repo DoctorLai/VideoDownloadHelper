@@ -183,6 +183,12 @@ npm run dev        # development build
 npm run watch      # rebuild on change
 ```
 
+Create the Chrome Web Store zip package at the repository root:
+
+```bash
+npm run package
+```
+
 ## Available scripts
 
 The scripts below can be run from the repository root **or** from the `video-url-parser/` directory
@@ -198,6 +204,7 @@ The scripts below can be run from the repository root **or** from the `video-url
 | `npm run format:check`  | Verify formatting without writing changes.           |
 | `npm run check`         | Run lint, format check, coverage and build together. |
 | `npm run build`         | Produce the production bundle.                        |
+| `npm run package`       | Build and create the extension zip at the repo root. |
 
 ## Testing & coverage
 
