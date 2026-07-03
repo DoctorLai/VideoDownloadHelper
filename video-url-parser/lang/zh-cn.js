@@ -7,6 +7,7 @@ const translation_simplified_chinese = {
 	'text_vip_server_api_key': 'VIP服务器API密钥 (No Youtube)',
 	'vip_desc': 'VIP允许使用远程服务器视频解析器API。',
 	'youtube_notice': '请注意（不支持YOUTUBE）：Google不允许任何支持或鼓励下载YouTube视频的行为，因此此插件不再支持YouTube。',
+	'restricted_page_notice': '此页面不受支持。请打开正常的网页（http/https）后重新打开扩展程序。',
 	'video_downloader': '视频下载',
 	'not_found': '对不起，没有找到。:(',
 	'videos': '视频',

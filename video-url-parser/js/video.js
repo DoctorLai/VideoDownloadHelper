@@ -319,8 +319,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (restricted) {
             // Browser-internal / restricted pages (chrome://, the Web Store, ...)
             // cannot be read or injected into, so page scanning is unavailable.
-            $('div#down').html("<BR/>" + "<blockquote>" + get_text('restricted_page_notice', "This page isn't supported. Open a normal web page (http/https) and reopen the extension.") + "</blockquote>");
-            $('button#merger').hide();
+            $('div#down').html("<BR/>" + "<blockquote>" + get_text('restricted_page_notice', "This page is not supported. Please open a normal web page (http/https) and reopen the extension.") + "</blockquote>");
+            // $('button#merger').hide();
             $('button#links').hide();
             $('button#pic').hide();
             $('button#vid').hide();
@@ -336,13 +336,13 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         } else {
             $('div#down').html("<BR/>" + "<blockquote>" + get_text('youtube_notice') + "</blockquote>");
-            $('button#merger').hide();
-            $('button#m3u8').hide();
+            // $('button#merger').hide();
+            // $('button#m3u8').hide();
             $('button#links').hide();
             $('button#pic').hide();
             $('button#vid').hide();
-            $('#text_setting').hide();
-            $('#text_log').hide();
+            // $('#text_setting').hide();
+            // $('#text_log').hide();
         }
 
         $("#m3u8").click(function() {

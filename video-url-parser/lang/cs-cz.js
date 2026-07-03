@@ -7,6 +7,7 @@ const translation_cs_cz = {
 	'text_vip_server_api_key': 'Klíč API serveru VIP (bez YouTube)',
 	'vip_desc': 'VIP umožňuje používat API vzdáleného serveru pro analýzu videa.',
 	'youtube_notice': 'Upozornění (BEZ YOUTUBE): Google nepovoluje žádné chování, které podporuje nebo podněcuje stahování videí z youtube, a proto toto rozšíření youtube již nepodporuje.',
+	'restricted_page_notice': 'Tato stránka není podporována. Otevřete běžnou webovou stránku (http/https) a znovu otevřete rozšíření.',
 	'video_downloader': 'Stahovač videí',
 	'not_found': 'Zatím nic nenalezeno :(',
 	'videos': 'Videa',

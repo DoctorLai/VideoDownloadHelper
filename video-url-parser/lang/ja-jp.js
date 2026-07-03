@@ -7,6 +7,7 @@ const translation_ja_jp = {
 	'text_vip_server_api_key': 'VIPサーバーAPIキー (YouTube非対応)',
 	'vip_desc': 'VIPを使うとリモートサーバーの動画解析APIを利用できます。',
 	'youtube_notice': 'ご注意ください（YouTube非対応）：GoogleはYouTube動画のダウンロードを支援または推奨する行為を許可していないため、このプラグインはYouTubeをサポートしていません。',
+	'restricted_page_notice': 'このページはサポートされていません。通常のウェブページ（http/https）を開いてから、拡張機能をもう一度開いてください。',
 	'video_downloader': '動画ダウンローダー',
 	'not_found': '今のところ何も見つかりません :(',
 	'videos': '動画',

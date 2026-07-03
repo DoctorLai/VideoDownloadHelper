@@ -7,6 +7,7 @@ const translation_tr_tr = {
 	'text_vip_server_api_key': 'VIP Sunucu API Anahtarı (No Youtube)',
 	'vip_desc': 'VIP uzak sunucu video ayrıştırıcı API\'sının kullanılmasına izin veriyor.',
 	'youtube_notice': 'Lütfen dikkat (YOUTUBE YOK): Google, youtube videolarının indirilmesini destekleyen veya teşvik eden herhangi bir davranışa izin vermez ve bu nedenle bu eklenti artık youtube\'u desteklemez.',
+	'restricted_page_notice': 'Bu sayfa desteklenmiyor. Lütfen normal bir web sayfası (http/https) açın ve uzantıyı yeniden açın.',
 	'video_downloader': 'Video İndirici',
 	'not_found': 'Şimdiye kadar hiçbir şey bulunamadı :(',
 	'videos': 'Videolar',

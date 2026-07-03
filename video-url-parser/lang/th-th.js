@@ -7,6 +7,7 @@ const translation_th_th = {
 	'text_vip_server_api_key': 'คีย์ API เซิร์ฟเวอร์ VIP (ไม่รองรับ Youtube)',
 	'vip_desc': 'VIP อนุญาตให้ใช้ API ตัวแยกวิดีโอบนเซิร์ฟเวอร์ระยะไกล',
 	'youtube_notice': 'โปรดทราบ (ไม่รองรับ YOUTUBE): Google ไม่อนุญาตพฤติกรรมใด ๆ ที่สนับสนุนหรือส่งเสริมการดาวน์โหลดวิดีโอ youtube ดังนั้นส่วนขยายนี้จึงไม่รองรับ youtube อีกต่อไป',
+	'restricted_page_notice': 'ไม่รองรับหน้านี้ โปรดเปิดหน้าเว็บปกติ (http/https) แล้วเปิดส่วนขยายอีกครั้ง',
 	'video_downloader': 'ตัวดาวน์โหลดวิดีโอ',
 	'not_found': 'ยังไม่พบสิ่งใด :(',
 	'videos': 'วิดีโอ',

@@ -7,6 +7,7 @@ const translation_fr_fr = {
 	'text_vip_server_api_key': 'Clé API du serveur VIP (No Youtube)',
 	'vip_desc': 'VIP autorise l\'utilisation de l\'API de l\'analyseur vidéo du serveur distant.',
 	'youtube_notice': 'Veuillez noter (PAS DE YOUTUBE): Google n\'autorise aucun comportement qui prend en charge ou encourage le téléchargement de vidéos youtube et donc ce plugin ne prend plus en charge youtube.',
+	'restricted_page_notice': 'Cette page n\'est pas prise en charge. Veuillez ouvrir une page web normale (http/https) puis rouvrir l\'extension.',
 	'video_downloader': 'Video Downloader',
 	'not_found': 'Rien trouvé jusqu\'à présent :(',
 	'videos': 'Vidéos',

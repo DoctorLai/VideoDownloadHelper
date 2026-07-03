@@ -7,6 +7,7 @@ const translation_id_id = {
 	'text_vip_server_api_key': 'Kunci API Server VIP (Tanpa Youtube)',
 	'vip_desc': 'VIP memungkinkan penggunaan API pengurai video server jarak jauh.',
 	'youtube_notice': 'Harap diperhatikan (TANPA YOUTUBE): Google tidak mengizinkan perilaku apa pun yang mendukung atau mendorong pengunduhan video youtube, sehingga plugin ini tidak lagi mendukung youtube.',
+	'restricted_page_notice': 'Halaman ini tidak didukung. Silakan buka halaman web biasa (http/https) lalu buka kembali ekstensi.',
 	'video_downloader': 'Pengunduh Video',
 	'not_found': 'Belum ada yang ditemukan :(',
 	'videos': 'Video',

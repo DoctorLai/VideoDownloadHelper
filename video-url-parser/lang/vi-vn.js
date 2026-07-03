@@ -7,6 +7,7 @@ const translation_vi_vn = {
 	'text_vip_server_api_key': 'Khóa API máy chủ VIP (Không hỗ trợ Youtube)',
 	'vip_desc': 'VIP cho phép sử dụng API phân tích video trên máy chủ từ xa.',
 	'youtube_notice': 'Xin lưu ý (KHÔNG HỖ TRỢ YOUTUBE): Google không cho phép bất kỳ hành vi nào hỗ trợ hoặc khuyến khích việc tải video youtube, do đó tiện ích này không còn hỗ trợ youtube.',
+	'restricted_page_notice': 'Trang này không được hỗ trợ. Vui lòng mở một trang web thông thường (http/https) và mở lại tiện ích mở rộng.',
 	'video_downloader': 'Trình tải video',
 	'not_found': 'Chưa tìm thấy gì :(',
 	'videos': 'Video',

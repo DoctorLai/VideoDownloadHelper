@@ -7,6 +7,7 @@ const translation_ko_kr = {
 	'text_vip_server_api_key': 'VIP 서버 API 키 (YouTube 미지원)',
 	'vip_desc': 'VIP를 사용하면 원격 서버 동영상 파서 API를 이용할 수 있습니다.',
 	'youtube_notice': '참고하세요 (YOUTUBE 미지원): Google은 YouTube 동영상 다운로드를 지원하거나 권장하는 행위를 허용하지 않으므로 이 플러그인은 더 이상 YouTube를 지원하지 않습니다.',
+	'restricted_page_notice': '이 페이지는 지원되지 않습니다. 일반 웹 페이지(http/https)를 연 후 확장 프로그램을 다시 열어 주세요.',
 	'video_downloader': '동영상 다운로더',
 	'not_found': '아직 아무것도 찾지 못했습니다 :(',
 	'videos': '동영상',

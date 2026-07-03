@@ -7,6 +7,7 @@ const translation_hi_in = {
 	'text_vip_server_api_key': 'VIP सर्वर API कुंजी (YouTube नहीं)',
 	'vip_desc': 'VIP दूरस्थ सर्वर वीडियो पार्सर API का उपयोग करने की अनुमति देता है।',
 	'youtube_notice': 'कृपया ध्यान दें (YOUTUBE नहीं): Google YouTube वीडियो डाउनलोड करने का समर्थन या प्रोत्साहन करने वाले किसी भी व्यवहार की अनुमति नहीं देता, इसलिए यह प्लगइन अब YouTube का समर्थन नहीं करता।',
+	'restricted_page_notice': 'यह पृष्ठ समर्थित नहीं है। कृपया एक सामान्य वेब पेज (http/https) खोलें और एक्सटेंशन को फिर से खोलें।',
 	'video_downloader': 'वीडियो डाउनलोडर',
 	'not_found': 'अब तक कुछ नहीं मिला :(',
 	'videos': 'वीडियो',

@@ -7,6 +7,7 @@ const translation_sv_se = {
 	'text_vip_server_api_key': 'VIP-serverns API-nyckel (ingen Youtube)',
 	'vip_desc': 'VIP gör det möjligt att använda fjärrserverns API för videotolkning.',
 	'youtube_notice': 'Observera (INGEN YOUTUBE): Google tillåter inte något beteende som stöder eller uppmuntrar nedladdning av youtube-videor, och därför stöder detta tillägg inte längre youtube.',
+	'restricted_page_notice': 'Den här sidan stöds inte. Öppna en vanlig webbsida (http/https) och öppna tillägget igen.',
 	'video_downloader': 'Videonedladdare',
 	'not_found': 'Inget hittat ännu :(',
 	'videos': 'Videor',

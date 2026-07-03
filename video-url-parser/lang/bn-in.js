@@ -7,6 +7,7 @@ const translation_bn_in = {
 	'text_vip_server_api_key': 'VIP সার্ভার API কী (YouTube নয়)',
 	'vip_desc': 'VIP দূরবর্তী সার্ভার ভিডিও পার্সার API ব্যবহারের অনুমতি দেয়।',
 	'youtube_notice': 'অনুগ্রহ করে লক্ষ্য করুন (YOUTUBE নয়): Google YouTube ভিডিও ডাউনলোড সমর্থন বা উৎসাহিত করে এমন কোনো আচরণ অনুমোদন করে না, তাই এই প্লাগইনটি আর YouTube সমর্থন করে না।',
+	'restricted_page_notice': 'এই পৃষ্ঠাটি সমর্থিত নয়। অনুগ্রহ করে একটি সাধারণ ওয়েব পেজ (http/https) খুলুন এবং এক্সটেনশনটি আবার খুলুন।',
 	'video_downloader': 'ভিডিও ডাউনলোডার',
 	'not_found': 'এখন পর্যন্ত কিছু পাওয়া যায়নি :(',
 	'videos': 'ভিডিও',

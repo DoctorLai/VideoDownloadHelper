@@ -7,6 +7,7 @@ const translation_nl_nl = {
 	'text_vip_server_api_key': 'VIP Server API Key (No Youtube)',
 	'vip_desc': 'VIP maakt het gebruik van externe servervideopars-API mogelijk.',
 	'youtube_notice': 'Let op (GEEN YOUTUBE): Google staat geen gedrag toe dat het downloaden van YouTube-video\'s ondersteunt of aanmoedigt en daarom ondersteunt deze plug-in YouTube niet meer.',
+	'restricted_page_notice': 'Deze pagina wordt niet ondersteund. Open een normale webpagina (http/https) en open de extensie opnieuw.',
 	'video_downloader': 'Video Downloader',
 	'not_found': 'Tot nu toe niets gevonden :(',
 	'videos': 'Videos',
