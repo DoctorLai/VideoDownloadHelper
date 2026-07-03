@@ -130,7 +130,7 @@ function vdhDownload(url, index) {
 }
 
 // build a single <li> with the link plus Download/Copy action buttons
-function vdhMediaItem(url, index) {
+function vdhMediaItem(url, index, forceDownload) {
     const safe = vdhEscapeHtml(url);
     const shown = vdhEscapeHtml(url.TrimToLength(max_url_length));
     const type = getMediaType(url);
@@ -138,7 +138,7 @@ function vdhMediaItem(url, index) {
     if (type) {
         s += "<span class='vdh-tag vdh-tag-" + type + "'>" + type + "</span> ";
     }
-    if (vdhIsDownloadable(url)) {
+    if (forceDownload || vdhIsDownloadable(url)) {
         s += "<button type='button' class='vdh-btn vdh-dl' data-url='" + safe + "' data-index='" + index + "'>" +
             vdhEscapeHtml(get_text("download", "Download")) + "</button> ";
     }
@@ -148,12 +148,12 @@ function vdhMediaItem(url, index) {
 }
 
 // render a titled list of media URLs with per-item and bulk action buttons
-function vdhRenderList(titleKey, urls) {
+function vdhRenderList(titleKey, urls, forceDownload) {
     const list = (urls || []).filter(function(u) {
         return typeof u === "string" && u.length > 0;
     });
     const title = get_text(titleKey, titleKey);
-    const anyDownloadable = list.some(vdhIsDownloadable);
+    const anyDownloadable = forceDownload || list.some(vdhIsDownloadable);
     let s = "<h3>" + title + (list.length ? " (" + list.length + ")" : "") + "</h3>";
     s += "<div class='vdh-toolbar'>";
     if (anyDownloadable) {
@@ -164,7 +164,7 @@ function vdhRenderList(titleKey, urls) {
         vdhEscapeHtml(get_text("copy_all", "Copy All")) + "</button>";
     s += "</div><ol>";
     for (let i = 0; i < list.length; ++i) {
-        s += vdhMediaItem(list[i], i);
+        s += vdhMediaItem(list[i], i, forceDownload);
     }
     s += "</ol>";
     return s;
@@ -255,11 +255,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         vdhCopy($(this).attr('data-url'));
     });
     $('#down').on('click', '#vdh-dl-all', function() {
-        $('#down ol li a').each(function(i) {
-            const href = $(this).attr('href');
-            if (vdhIsDownloadable(href)) {
-                vdhDownload(href, i);
-            }
+        $('#down ol li .vdh-dl').each(function() {
+            const idx = parseInt($(this).attr('data-index'), 10);
+            vdhDownload($(this).attr('data-url'), isNaN(idx) ? -1 : idx);
         });
     });
     $('#down').on('click', '#vdh-copy-all', function() {
@@ -316,8 +314,17 @@ document.addEventListener('DOMContentLoaded', async function() {
     if (true) {
         pageurl = tab.url;
 
-        let domain = extractDomain(pageurl).toLowerCase();
-        if (!domain.includes('youtube.com')) {
+        const restricted = isRestrictedUrl(pageurl);
+        let domain = restricted ? "" : extractDomain(pageurl).toLowerCase();
+        if (restricted) {
+            // Browser-internal / restricted pages (chrome://, the Web Store, ...)
+            // cannot be read or injected into, so page scanning is unavailable.
+            $('div#down').html("<BR/>" + "<blockquote>" + get_text('restricted_page_notice', "This page isn't supported. Open a normal web page (http/https) and reopen the extension.") + "</blockquote>");
+            $('button#merger').hide();
+            $('button#links').hide();
+            $('button#pic').hide();
+            $('button#vid').hide();
+        } else if (!domain.includes('youtube.com')) {
             let s;
             if (["zh-cn", "zh-tw"].includes($('select#lang').val())) {
                 s = 'https://weibomiaopai.com/?url=' + encodeURIComponent(pageurl);
@@ -384,7 +391,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     if (tmp.length > 0) {
                         // remove duplicate
                         tmp = tmp.uniq();
-                        $('div#down').html(vdhRenderList("images_list", tmp));
+                        $('div#down').html(vdhRenderList("images_list", tmp, true));
                     }
                 },
                 error: function(request, status, error) {},
@@ -434,7 +441,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     const w_url = "https://weibomiaopai.com/download-video-parser.php?url=" + encodeURIComponent(pageurl);
                     tmp = tmp.uniq();
                     tmp.unshift(w_url);
-                    $('div#down').html(vdhRenderList("videos_list", tmp));
+                    $('div#down').html(vdhRenderList("videos_list", tmp, true));
                 },
                 error: function(request, status, error) {},
                 complete: function(data) {}
@@ -473,7 +480,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     }
                     if (tmp.length > 0) {
                         tmp = tmp.uniq();
-                        $('div#down').html(vdhRenderList("links_list", tmp));
+                        $('div#down').html(vdhRenderList("links_list", tmp, true));
                     }
                 },
                 error: function(request, status, error) {},

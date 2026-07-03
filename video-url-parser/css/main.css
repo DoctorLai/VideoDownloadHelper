@@ -17,19 +17,29 @@ pre {
 
 /* Action buttons rendered next to detected media */
 .vdh-btn {
-	margin-left: 4px;
-	margin-bottom: 2px;
-	padding: 1px 8px;
+	display: inline-block;
+	box-sizing: border-box;
+	min-width: 88px;
+	margin: 0 0 4px 4px;
+	padding: 3px 10px;
 	font-size: 12px;
 	line-height: 18px;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
 	cursor: pointer;
 	border: 1px solid #adadad;
-	border-radius: 3px;
+	border-radius: 4px;
 	background: #f5f5f5;
 	color: #222;
+	transition: background 0.15s ease, border-color 0.15s ease;
 }
 .vdh-btn:hover {
 	background: #e2e2e2;
+	border-color: #8c8c8c;
+}
+.vdh-btn:active {
+	background: #d5d5d5;
 }
 .vdh-toolbar {
 	margin: 6px 0;
@@ -86,14 +96,75 @@ body.vdh-dark {
 body.vdh-dark a {
 	color: #6cb6ff;
 }
+/* jQuery UI tabs container + panels (were white) */
+body.vdh-dark .ui-widget-content {
+	background: #1e1e1e;
+	color: #ddd;
+	border-color: #444;
+}
+/* jQuery UI tab strip */
+body.vdh-dark .ui-widget-header {
+	background: #262626;
+	color: #ddd;
+	border-color: #444;
+}
+/* inactive tab buttons */
+body.vdh-dark .ui-state-default,
+body.vdh-dark .ui-widget-content .ui-state-default,
+body.vdh-dark .ui-widget-header .ui-state-default {
+	background: #2f2f2f;
+	border-color: #444;
+	color: #ddd;
+}
+body.vdh-dark .ui-state-default a,
+body.vdh-dark .ui-state-default a:link,
+body.vdh-dark .ui-state-default a:visited {
+	color: #ddd;
+}
+/* active tab keeps readable white text on its accent background */
+body.vdh-dark .ui-tabs-nav .ui-state-active a,
+body.vdh-dark .ui-tabs-nav .ui-state-active a:link,
+body.vdh-dark .ui-tabs-nav .ui-state-active a:visited {
+	color: #fff;
+}
+/* hovered/focused tab buttons */
+body.vdh-dark .ui-state-hover,
+body.vdh-dark .ui-widget-content .ui-state-hover,
+body.vdh-dark .ui-widget-header .ui-state-hover,
+body.vdh-dark .ui-state-focus,
+body.vdh-dark .ui-widget-content .ui-state-focus,
+body.vdh-dark .ui-widget-header .ui-state-focus {
+	background: #3a3a3a;
+	border-color: #555;
+	color: #fff;
+}
+body.vdh-dark .ui-state-hover a,
+body.vdh-dark .ui-state-focus a {
+	color: #fff;
+}
+/* form fields + bootstrap controls */
 body.vdh-dark #down,
 body.vdh-dark textarea,
 body.vdh-dark input,
-body.vdh-dark select {
+body.vdh-dark select,
+body.vdh-dark .form-control {
 	background: #2a2a2a;
 	color: #ddd;
 	border-color: #444;
 }
+body.vdh-dark .form-control::placeholder {
+	color: #999;
+}
+/* toolbar bootstrap buttons (Merge keeps its inline colors) */
+body.vdh-dark button.form-control {
+	background: #2f2f2f;
+	color: #ddd;
+	border-color: #444;
+}
+body.vdh-dark button.form-control:hover {
+	background: #3a3a3a;
+}
+/* action buttons */
 body.vdh-dark .vdh-btn {
 	background: #3a3a3a;
 	color: #eee;
@@ -101,4 +172,9 @@ body.vdh-dark .vdh-btn {
 }
 body.vdh-dark .vdh-btn:hover {
 	background: #4a4a4a;
+	border-color: #666;
+}
+body.vdh-dark blockquote {
+	color: #ddd;
+	border-color: #444;
 }

@@ -15,6 +15,7 @@ const {
     getChromeVersion,
     getLocalIPs,
     bglog,
+    isRestrictedUrl,
 } = require("../js/functions");
 
 describe("String.prototype.TrimToLength", function () {
@@ -26,6 +27,36 @@ describe("String.prototype.TrimToLength", function () {
     });
     it("truncates and appends an ellipsis when longer than the limit", function () {
         assert.equal("hello world".TrimToLength(5), "hello...");
+    });
+});
+
+describe("isRestrictedUrl", function () {
+    it("allows a normal http URL", function () {
+        assert.equal(isRestrictedUrl("http://example.com/page"), false);
+    });
+    it("allows a normal https URL", function () {
+        assert.equal(isRestrictedUrl("https://example.com/watch?v=1"), false);
+    });
+    it("blocks chrome:// pages", function () {
+        assert.equal(isRestrictedUrl("chrome://extensions/"), true);
+    });
+    it("blocks about: pages", function () {
+        assert.equal(isRestrictedUrl("about:blank"), true);
+    });
+    it("blocks file:// URLs", function () {
+        assert.equal(isRestrictedUrl("file:///C:/tmp/x.html"), true);
+    });
+    it("blocks the new Chrome Web Store", function () {
+        assert.equal(isRestrictedUrl("https://chromewebstore.google.com/detail/abc"), true);
+    });
+    it("blocks the legacy Web Store URL", function () {
+        assert.equal(isRestrictedUrl("https://chrome.google.com/webstore/detail/abc"), true);
+    });
+    it("treats an empty string as restricted", function () {
+        assert.equal(isRestrictedUrl(""), true);
+    });
+    it("treats null as restricted", function () {
+        assert.equal(isRestrictedUrl(null), true);
     });
 });
 
