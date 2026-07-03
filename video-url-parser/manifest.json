@@ -9,6 +9,14 @@
     "default_title": "Video Download Helper (Doesnt work on Youtube)",
     "default_popup": "main.html"
   },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+V"
+      },
+      "description": "Open Video Download Helper"
+    }
+  },
   "offline_enabled": true,
   "author": "justyy<dr.zhihua.lai@gmail.com>",
   "icons": {

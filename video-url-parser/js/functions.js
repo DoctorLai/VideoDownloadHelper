@@ -222,6 +222,38 @@ const suggestFilename = (url, title, index) => {
     return ext ? base + "." + ext : base;
 };
 
+// --- media type detection -------------------------------------------------
+// Known downloadable file extensions grouped by media kind. Centralised here
+// so the parser, the popup UI and the tests share a single source of truth.
+const VIDEO_EXTENSIONS = ["mp4", "m4v", "webm", "mkv", "mov", "ogv", "flv", "ts", "mpd", "m3u8", "3gp", "avi", "wmv"];
+const AUDIO_EXTENSIONS = ["mp3", "m4a", "aac", "ogg", "oga", "opus", "flac", "wav"];
+const IMAGE_EXTENSIONS = ["jpg", "jpeg", "png", "gif", "webp", "bmp", "svg", "avif", "ico"];
+
+// classify a URL as "video", "audio", "image" or "" (unknown) by its extension.
+const getMediaType = (url) => {
+    const ext = getFileExtension(url);
+    if (!ext) {
+        return "";
+    }
+    if (VIDEO_EXTENSIONS.includes(ext)) {
+        return "video";
+    }
+    if (AUDIO_EXTENSIONS.includes(ext)) {
+        return "audio";
+    }
+    if (IMAGE_EXTENSIONS.includes(ext)) {
+        return "image";
+    }
+    return "";
+};
+
+const isVideoUrl = (url) => getMediaType(url) === "video";
+const isAudioUrl = (url) => getMediaType(url) === "audio";
+const isImageUrl = (url) => getMediaType(url) === "image";
+
+// true when the URL points at a concrete media file we can download directly.
+const isDownloadableMediaUrl = (url) => getMediaType(url) !== "";
+
 if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
     module.exports = {
         getChromeVersion,
@@ -238,5 +270,13 @@ if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
         getFileExtension,
         sanitizeFilename,
         suggestFilename,
+        VIDEO_EXTENSIONS,
+        AUDIO_EXTENSIONS,
+        IMAGE_EXTENSIONS,
+        getMediaType,
+        isVideoUrl,
+        isAudioUrl,
+        isImageUrl,
+        isDownloadableMediaUrl,
     };
 }

@@ -47,6 +47,18 @@ const get_lang = () => {
         case 'pl-pl': return (translation_pl_pl);
         case 'ro-ro': return (translation_ro_ro);
         case 'tr-tr': return (translation_tr_tr);
+        case 'ja-jp': return (translation_ja_jp);
+        case 'ko-kr': return (translation_ko_kr);
+        case 'ar-sa': return (translation_ar_sa);
+        case 'hi-in': return (translation_hi_in);
+        case 'bn-in': return (translation_bn_in);
+        case 'id-id': return (translation_id_id);
+        case 'vi-vn': return (translation_vi_vn);
+        case 'th-th': return (translation_th_th);
+        case 'uk-ua': return (translation_uk_ua);
+        case 'cs-cz': return (translation_cs_cz);
+        case 'el-gr': return (translation_el_gr);
+        case 'sv-se': return (translation_sv_se);
     }
 }
 

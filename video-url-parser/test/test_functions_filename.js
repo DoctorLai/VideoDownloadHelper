@@ -30,6 +30,9 @@ describe("getFileExtension", function () {
     it("returns an empty string for a non-string", function () {
         assert.equal(getFileExtension(42), "");
     });
+    it("handles a bare filename with no path separator", function () {
+        assert.equal(getFileExtension("video.MP4"), "mp4");
+    });
 });
 
 describe("sanitizeFilename", function () {

@@ -40,6 +40,29 @@ pre {
 	font-weight: normal;
 }
 
+/* Media type tags */
+.vdh-tag {
+	display: inline-block;
+	padding: 0 6px;
+	margin-left: 4px;
+	font-size: 10px;
+	line-height: 16px;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	border-radius: 3px;
+	color: #fff;
+	vertical-align: middle;
+}
+.vdh-tag-video {
+	background: #d9534f;
+}
+.vdh-tag-audio {
+	background: #5cb85c;
+}
+.vdh-tag-image {
+	background: #428bca;
+}
+
 /* Toast notification */
 #vdh-toast {
 	display: none;

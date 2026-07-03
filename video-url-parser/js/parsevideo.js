@@ -9,7 +9,7 @@
  */
 /* eslint-disable no-useless-escape */
 
-const { ValidURL, extractDomain, FixURL } = require("../js/functions");
+const { ValidURL, extractDomain, FixURL, VIDEO_EXTENSIONS, AUDIO_EXTENSIONS } = require("../js/functions");
 
 class ParseVideo {
     constructor(url, html = "") {
@@ -69,6 +69,12 @@ class ParseVideo {
         }
         // get any HLS (.m3u8) playlist URLs embedded in the page
         video_url = ParseVideo.extract_all_m3u8_urls(this.url, this.html);
+        if (video_url !== null) {
+            return video_url;
+        }
+        // last resort: any direct links to downloadable media files (mp4, webm,
+        // mkv, mov, mp3, ...) found anywhere in the page
+        video_url = ParseVideo.extract_all_media_urls(this.url, this.html);
         if (video_url !== null) {
             return video_url;
         }
@@ -355,6 +361,34 @@ class ParseVideo {
     // extract HLS playlist (.m3u8) URLs embedded anywhere in the html / inline JSON
     static extract_all_m3u8_urls(url, html) {
         const re = /(https?:[^\s'"<>,]+\.m3u8[^\s'"<>,]*)/gi;
+        let found = re.exec(html);
+        let video_url = [];
+        while (found !== null) {
+            const tmp_url = FixURL(found[1]);
+            if (ValidURL(tmp_url)) {
+                video_url.push(tmp_url);
+            }
+            found = re.exec(html);
+        }
+        video_url = video_url.uniq();
+        return video_url.length === 0 ? null : video_url.length === 1 ? video_url[0] : video_url;
+    }
+
+    // extract direct links to downloadable media files (mp4, webm, mkv, mov,
+    // mp3, ...) embedded anywhere in the html. This is the broadest fallback and
+    // runs last so it only fires when the structured extractors above find
+    // nothing. The extension list is shared with functions.js so new formats
+    // only need to be added in one place. A path separator is required after the
+    // host so a domain label like "sub.mov.example.com" is not mistaken for a
+    // media file. ".m3u8" has its own dedicated extractor and is excluded here.
+    static extract_all_media_urls(url, html) {
+        const exts = VIDEO_EXTENSIONS.concat(AUDIO_EXTENSIONS).filter((e) => e !== "m3u8");
+        const re = new RegExp(
+            "(https?://[^\\s'\"<>,()\\\\]+/[^\\s'\"<>,()\\\\]+\\.(?:" +
+                exts.join("|") +
+                ")(?:[?#][^\\s'\"<>,()\\\\]*)?)",
+            "gi"
+        );
         let found = re.exec(html);
         let video_url = [];
         while (found !== null) {

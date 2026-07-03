@@ -77,19 +77,13 @@ function vdhEscapeHtml(s) {
         .replace(/'/g, "&#39;");
 }
 
-// media/file extensions we offer a one-click Download button for
-const VDH_DOWNLOADABLE_EXT = [
-    "mp4", "webm", "m4v", "mov", "mkv", "avi", "flv", "ts", "m3u8", "mpd",
-    "mp3", "m4a", "aac", "ogg", "oga", "wav", "flac",
-    "jpg", "jpeg", "png", "gif", "webp", "bmp", "svg"
-];
-
-// true when the URL points at a concrete media/file we can download directly
+// true when the URL points at a concrete media/file we can download directly.
+// Delegates to the shared classifier in functions.js (loaded before this file).
 function vdhIsDownloadable(url) {
     if (typeof url !== "string") {
         return false;
     }
-    return VDH_DOWNLOADABLE_EXT.includes(getFileExtension(url));
+    return isDownloadableMediaUrl(url);
 }
 
 // show a short, auto-dismissing toast message in the popup
@@ -139,7 +133,11 @@ function vdhDownload(url, index) {
 function vdhMediaItem(url, index) {
     const safe = vdhEscapeHtml(url);
     const shown = vdhEscapeHtml(url.TrimToLength(max_url_length));
+    const type = getMediaType(url);
     let s = "<li><a target=_blank rel=nofollow href='" + safe + "'>" + shown + "</a> ";
+    if (type) {
+        s += "<span class='vdh-tag vdh-tag-" + type + "'>" + type + "</span> ";
+    }
     if (vdhIsDownloadable(url)) {
         s += "<button type='button' class='vdh-btn vdh-dl' data-url='" + safe + "' data-index='" + index + "'>" +
             vdhEscapeHtml(get_text("download", "Download")) + "</button> ";
@@ -156,7 +154,7 @@ function vdhRenderList(titleKey, urls) {
     });
     const title = get_text(titleKey, titleKey);
     const anyDownloadable = list.some(vdhIsDownloadable);
-    let s = "<h3>" + title + "</h3>";
+    let s = "<h3>" + title + (list.length ? " (" + list.length + ")" : "") + "</h3>";
     s += "<div class='vdh-toolbar'>";
     if (anyDownloadable) {
         s += "<button type='button' class='vdh-btn' id='vdh-dl-all'>" +
