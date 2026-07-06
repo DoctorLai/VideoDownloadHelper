@@ -8,16 +8,16 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@eslint/js": "^9.15.0",
-    "adm-zip": "^0.5.16",
-    "chai": "^4.5.0",
-    "eslint": "^9.15.0",
-    "globals": "^15.12.0",
-    "mocha": "^10.8.2",
+    "@eslint/js": "^10.0.1",
+    "adm-zip": "^0.5.18",
+    "chai": "^6.2.2",
+    "eslint": "^10.6.0",
+    "globals": "^17.7.0",
+    "mocha": "^11.7.6",
     "nyc": "^18.0.0",
-    "prettier": "^3.4.1",
-    "webpack": "^5.97.1",
-    "webpack-cli": "^5.1.4"
+    "prettier": "^3.9.4",
+    "webpack": "^5.108.4",
+    "webpack-cli": "^7.2.1"
   },
   "scripts": {
     "test": "mocha",
