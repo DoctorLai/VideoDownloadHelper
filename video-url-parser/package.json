@@ -9,7 +9,7 @@
   "dependencies": {},
   "devDependencies": {
     "@eslint/js": "^9.15.0",
-    "adm-zip": "^0.5.16",
+    "adm-zip": "^0.6.0",
     "chai": "^4.5.0",
     "eslint": "^9.15.0",
     "globals": "^15.12.0",
